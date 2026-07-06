@@ -1,16 +1,8 @@
-# DARSim
-
-<p align="center">
 ![DARSim Logo](DARSimLogo.png)
-</p>
 
-<p align="center">
-  Delft Advanced Reservoir Simulator (TU Delft)
-</p>
+Delft Advanced Reservoir Simulator (TU Delft)
 
-<p align="center">
-  Reservoir simulation framework for CCS and hydrogen storage in porous media
-</p>
+Reservoir simulation framework for CCS and hydrogen storage in porous media
 
 ---
 
