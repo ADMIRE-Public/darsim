@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="$Version: $ tree v2.0.2 (c) 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro $">
+ <title>Tools Tree</title>
+ <style type="text/css">
+  BODY { font-family : monospace, sans-serif;  color: black;}
+  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}
+  A:visited { text-decoration : none; margin : 0px; padding : 0px;}
+  A:link    { text-decoration : none; margin : 0px; padding : 0px;}
+  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}
+  A:active  { margin : 0px; padding : 0px;}
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  }
+  .FIFO  { color: purple; }
+  .CHAR  { color: yellow; }
+  .DIR   { color: blue;   }
+  .BLOCK { color: yellow; }
+  .LINK  { color: aqua;   }
+  .SOCK  { color: fuchsia;}
+  .EXEC  { color: green;  }
+ .comment-box {
+    width: calc(100% - 40px); /* Full width minus padding */
+    margin: 0 auto; /* Center the box */
+    padding: 20px; /* Padding on all sides */
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text for contrast */
+    border-radius: 5px; /* Optional: rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    padding: 20px; /* Container padding */
+}
+	</style>
+</head>
+<body>
+		 <div class="container">
+	<h1>Tools Tree</h1><p>
+	<div class="comment-box">
+<p>
+	<code> tools </code> contains a colection of in-house made or thrid party tools that are used in DARSim.	 
+	<p>
+			 </div>
+	<br>			 
+	<a href="tools.html">tools</a><br>
+	├── <a href="computational_geometry/">computational_geometry</a><br>
+	│   ├── <a href="computational_geometry/calc_area_convex_polygon2d.m">calc_area_convex_polygon2d.m</a><br>
+	│   ├── <a href="computational_geometry/calc_area_triangle_heron.m">calc_area_triangle_heron.m</a><br>
+	│   ├── <a href="computational_geometry/calc_area_triang_using_coords.m">calc_area_triang_using_coords.m</a><br>
+	│   ├── <a href="computational_geometry/calc_normals_from_points.m">calc_normals_from_points.m</a><br>
+	│   ├── <a href="computational_geometry/check_point_in_polygon.m">check_point_in_polygon.m</a><br>
+	│   ├── <a href="computational_geometry/find_distance_node_to_row_faces.m">find_distance_node_to_row_faces.m</a><br>
+	│   ├── <a href="computational_geometry/find_dotproduct_frac_normal_faces_normal.m">find_dotproduct_frac_normal_faces_normal.m</a><br>
+	│   ├── <a href="computational_geometry/find_opposite_volume.m">find_opposite_volume.m</a><br>
+	│   ├── <a href="computational_geometry/find_proj_face2.m">find_proj_face2.m</a><br>
+	│   ├── <a href="computational_geometry/find_proj_face.m">find_proj_face.m</a><br>
+	│   ├── <a href="computational_geometry/halfvecnorml2.m">halfvecnorml2.m</a><br>
+	│   ├── <a href="computational_geometry/interval_intersection.m">interval_intersection.m</a><br>
+	│   ├── <a href="computational_geometry/is_above_2d.m">is_above_2d.m</a><br>
+	│   ├── <a href="computational_geometry/is_split.m">is_split.m</a><br>
+	│   ├── <a href="computational_geometry/point_plane_intersection.m">point_plane_intersection.m</a><br>
+	│   ├── <a href="computational_geometry/points_in_cylinder.m">points_in_cylinder.m</a><br>
+	│   ├── <a href="computational_geometry/proj_coplanar_coords_on_xy.m">proj_coplanar_coords_on_xy.m</a><br>
+	│   ├── <a href="computational_geometry/project_to_xy.m">project_to_xy.m</a><br>
+	│   ├── <a href="computational_geometry/rotate_plane_to_z.m">rotate_plane_to_z.m</a><br>
+	│   ├── <a href="computational_geometry/rotate_to_xy_plane.m">rotate_to_xy_plane.m</a><br>
+	│   ├── <a href="computational_geometry/rotate_to_z_axis_vec.m">rotate_to_z_axis_vec.m</a><br>
+	│   ├── <a href="computational_geometry/semi_plane_check.m">semi_plane_check.m</a><br>
+	│   └── <a href="computational_geometry/semi_plane_value.m">semi_plane_value.m</a><br>
+	├── <a href="python_tools/">python_tools</a><br>
+	│   ├── <a href="python_tools/msh-converter.py">msh-converter.py</a><br>
+	│   ├── <a href="python_tools/__pycache__/">__pycache__</a><br>
+	│   │   ├── <a href="python_tools/__pycache__/start_gmsh.cpython-39.pyc">start_gmsh.cpython-39.pyc</a><br>
+	│   │   └── <a href="python_tools/__pycache__/startup.cpython-39.pyc">startup.cpython-39.pyc</a><br>
+	│   ├── <a href="python_tools/start_gmsh.py">start_gmsh.py</a><br>
+	│   └── <a href="python_tools/startup.py">startup.py</a><br>
+	├── <a href="third-party/">third-party</a><br>
+	│   ├── <a href="third-party/DataHash_20190519/">DataHash_20190519</a><br>
+	│   │   ├── <a href="third-party/DataHash_20190519/DataHash.m">DataHash.m</a><br>
+	│   │   └── <a href="third-party/DataHash_20190519/license.txt">license.txt</a><br>
+	│   ├── <a href="third-party/gmsh/">gmsh</a><br>
+	│   │   ├── <a href="third-party/gmsh/gmsh_scripts/">gmsh_scripts</a><br>
+	│   │   │   ├── <a href="third-party/gmsh/gmsh_scripts/fractures2D.py">fractures2D.py</a><br>
+	│   │   │   ├── <a href="third-party/gmsh/gmsh_scripts/fractures3D.py">fractures3D.py</a><br>
+	│   │   │   ├── <a href="third-party/gmsh/gmsh_scripts/hexes.py">hexes.py</a><br>
+	│   │   │   ├── <a href="third-party/gmsh/gmsh_scripts/prisms.py">prisms.py</a><br>
+	│   │   │   └── <a href="third-party/gmsh/gmsh_scripts/tets.py">tets.py</a><br>
+	│   │   ├── <a href="third-party/gmsh/gmshToMRST.m">gmshToMRST.m</a><br>
+	│   │   ├── <a href="third-party/gmsh/plotGmsh.m">plotGmsh.m</a><br>
+	│   │   └── <a href="third-party/gmsh/README">README</a><br>
+	│   └── <a href="third-party/gmsh-wrapper/">gmsh-wrapper</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="third-party/gmsh-wrapper/MshRead.m">MshRead.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="third-party/gmsh-wrapper/thirdparty-code.txt">thirdparty-code.txt</a><br>
+	├── <a href="utilities/">utilities</a><br>
+	│   ├── <a href="utilities/cellArrayToMixed.m">cellArrayToMixed.m</a><br>
+	│   ├── <a href="utilities/combineStructs.m">combineStructs.m</a><br>
+	│   ├── <a href="utilities/convert_to_unstructured.m">convert_to_unstructured.m</a><br>
+	│   ├── <a href="utilities/create_matlablink.m">create_matlablink.m</a><br>
+	│   ├── <a href="utilities/create_multiple_range.m">create_multiple_range.m</a><br>
+	│   ├── <a href="utilities/create_orded_zero_mat.m">create_orded_zero_mat.m</a><br>
+	│   ├── <a href="utilities/create_weblink.m">create_weblink.m</a><br>
+	│   ├── <a href="utilities/define_simulator_path.m">define_simulator_path.m</a><br>
+	│   ├── <a href="utilities/displayFile.m">displayFile.m</a><br>
+	│   ├── <a href="utilities/face_average.m">face_average.m</a><br>
+	│   ├── <a href="utilities/findTwoLowestRowWise.m">findTwoLowestRowWise.m</a><br>
+	│   ├── <a href="utilities/find_uint.m">find_uint.m</a><br>
+	│   ├── <a href="utilities/generate_defaultKeyValues.m">generate_defaultKeyValues.m</a><br>
+	│   ├── <a href="utilities/get_variable.m">get_variable.m</a><br>
+	│   ├── <a href="utilities/input_type_evaluate.m">input_type_evaluate.m</a><br>
+	│   ├── <a href="utilities/isStructEmpty.m">isStructEmpty.m</a><br>
+	│   ├── <a href="utilities/manage_extension.m">manage_extension.m</a><br>
+	│   ├── <a href="utilities/mrsttovtk.m">mrsttovtk.m</a><br>
+	│   ├── <a href="utilities/read_blueprint_fields.m">read_blueprint_fields.m</a><br>
+	│   ├── <a href="utilities/read_file_to_cell_array.m">read_file_to_cell_array.m</a><br>
+	│   ├── <a href="utilities/read_table.m">read_table.m</a><br>
+	│   ├── <a href="utilities/read_table.mat">read_table.mat</a><br>
+	│   ├── <a href="utilities/read_to_cell.m">read_to_cell.m</a><br>
+	│   ├── <a href="utilities/retrieve_field_from_cell.m">retrieve_field_from_cell.m</a><br>
+	│   ├── <a href="utilities/start_diary.m">start_diary.m</a><br>
+	│   └── <a href="utilities/unpack_collumn.m">unpack_collumn.m</a><br>
+	└── <a href="vectorization_utilities/">vectorization_utilities</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/compare_signs.m">compare_signs.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/create_matedgezero.m">create_matedgezero.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/determiant_2x2_vec.m">determiant_2x2_vec.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/mapped_jagged_array.m">mapped_jagged_array.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/matprod1dvec.m">matprod1dvec.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/matvecprod1dvec.m">matvecprod1dvec.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/reduced_jagged_array.m">reduced_jagged_array.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/reshape_jagged_array_in_matrix.m">reshape_jagged_array_in_matrix.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/reshape_jagged_matrix_in_flat_array.m">reshape_jagged_matrix_in_flat_array.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/sparse_to_full_zeromat.m">sparse_to_full_zeromat.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/sparse_to_zero_ind_mat.m">sparse_to_zero_ind_mat.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="vectorization_utilities/transpose1dvec.m">transpose1dvec.m</a><br>
+	&nbsp;&nbsp;&nbsp; └── <a href="vectorization_utilities/vec_compare.m">vec_compare.m</a><br>
+	</div>
+			 <br><br>
+</body>
+</html>

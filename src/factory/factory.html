@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="$Version: $ tree v2.0.2 (c) 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro $">
+ <title>factoryn Tree</title>
+ <style type="text/css">
+  BODY { font-family : monospace, sans-serif;  color: black;}
+  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}
+  A:visited { text-decoration : none; margin : 0px; padding : 0px;}
+  A:link    { text-decoration : none; margin : 0px; padding : 0px;}
+  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}
+  A:active  { margin : 0px; padding : 0px;}
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  }
+  .FIFO  { color: purple; }
+  .CHAR  { color: yellow; }
+  .DIR   { color: blue;   }
+  .BLOCK { color: yellow; }
+  .LINK  { color: aqua;   }
+  .SOCK  { color: fuchsia;}
+  .EXEC  { color: green;  }
+ .comment-box {
+    width: calc(100% - 40px); /* Full width minus padding */
+    margin: 0 auto; /* Center the box */
+    padding: 20px; /* Padding on all sides */
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text for contrast */
+    border-radius: 5px; /* Optional: rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    padding: 20px; /* Container padding */
+}	 
+ </style>
+</head>
+<body>
+ <div class="container">
+		<h1>factory tree</h1><p>
+	<div class="comment-box">
+   <p>The <code>factory</code> folder contains routines, functions, and classes used to instantiate objects of the <code>simulation_factory</code> class. Once initialized, the simulation factory object is responsible for creating <code>simulation</code> objects based on input file parameters.</p>
+
+<br>
+
+<p><code>discretization-factory</code> contains routines for constructing the flux approximation discretization component within the <code>simulation</code> object. These routines depend on the data structure that describes the mesh. The DARSim release includes a new module for unstructured grids, while the original Cartesian and CPG discretization versions reside in the <code>darsim_legacy</code> folder.</p>
+
+<br>
+
+<p><code>fluid-property-factory</code> contains routines for building the fluid model component of the <code>simulation</code> object.</p>
+
+<br>
+
+<p><code>mesh-factories</code> contains functions, classes, and routines for constructing the fracture network. Within this folder, the <code>fracture-factory</code> includes routines for building fracture geometry, fracture mesh, rock mesh, fracture mesh intersections, and specific routines for EDFM and pEDFM. The main control for these processes is handled by the <code>FractureFactory</code> class.</p>
+
+<br>
+
+<p><code>rock-mesh-factory</code> contains routines that build the data structure describing the rock matrix mesh. This data structure is added to the <code>simulation</code> object by the <code>simulation_factory</code>.</p> <br>
+
+<p><code>reservoir-property-factory</code> contains routines for building components that describe the physical properties of the reservoir.</p> <br>
+
+<p><code>visualization-factory</code> contains routines for creating visualizations of the simulation results. It incorporates legacy code from <code>darsim-legacy</code>.</p> <br>
+
+<p><code>well-property-factory</code> contains routines for constructing the wells within the simulation. It also utilizes legacy code located in <code>darsim-legacy</code>.</p>
+
+	 </div>	
+	<br>
+	<a href="factory.html">factory</a><br>
+	├── <a href="discretization-factory/">discretization-factory</a><br>
+	│   └── <a href="discretization-factory/unstructured-grid-discretization/">unstructured-grid-discretization</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="discretization-factory/unstructured-grid-discretization/unstructured_fracture_grid.m">unstructured_fracture_grid.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="discretization-factory/unstructured-grid-discretization/UnstructuredGrid_Discretization_model.m">UnstructuredGrid_Discretization_model.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="discretization-factory/unstructured-grid-discretization/unstructured_grid.m">unstructured_grid.m</a><br>
+	├── <a href="fluid-property-factory/">fluid-property-factory</a><br>
+	│   └── <a href="fluid-property-factory/build_FluidProperties.m">build_FluidProperties.m</a><br>
+	├── <a href="mesh-factories/">mesh-factories</a><br>
+	│   ├── <a href="mesh-factories/fracture-factory/">fracture-factory</a><br>
+	│   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/">edfm-pedfm-routines</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/calculate_avg_frac_d.m">calculate_avg_frac_d.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/calculate_int_area_edfm.m">calculate_int_area_edfm.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/calculate_vol_edge_intersection.m">calculate_vol_edge_intersection.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/compute_physical_prop_pedfm.m">compute_physical_prop_pedfm.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/create_frac_mesh_avg_dist.m">create_frac_mesh_avg_dist.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/create_pedfm_fracj_proj_list.m">create_pedfm_fracj_proj_list.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_all_projected_area.m">find_all_projected_area.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_distance_frac_to_frac_int.m">find_distance_frac_to_frac_int.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_pdefm_projection_faces_centroid_intersect.m">find_pdefm_projection_faces_centroid_intersect.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_pdefm_projections_area.m">find_pdefm_projections_area.m</a><br>
+	│   │   │   └── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_pedfm_edfm_int_area_geometric.m">find_pedfm_edfm_int_area_geometric.m</a><br>
+	│   │   │   └── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_pedfm_edfm_int_area_MC.m">find_pedfm_edfm_int_area_MC.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/edfm-pedfm-routines/find_projected_nodes_in_faces.m">find_projected_nodes_in_faces.m</a><br>
+	│   │   ├── <a href="mesh-factories/fracture-factory/FractureFactory.m">FractureFactory.m</a><br>
+	│   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/">fracture-fracture-intersection</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/FracRockMeshIntersection.m">FracRockMeshIntersection.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-geometry-intersection/">fracture-geometry-intersection</a><br>
+	│   │   │   │   └── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-geometry-intersection/PlaneIntersection.m">PlaneIntersection.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/">fracture-intersection-tools</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/calculate_fracture_average_distance_grid.m">calculate_fracture_average_distance_grid.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/calculate_fracture_average_distance_MC.m">calculate_fracture_average_distance_MC.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/compute_mesh_interval.m">compute_mesh_interval.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/create_3d_boundbox_alg2.m">create_3d_boundbox_alg2.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/create_3d_boundbox.m">create_3d_boundbox.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/create_avg_d_frac_structure.m">create_avg_d_frac_structure.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/create_subbboxes.m">create_subbboxes.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/generate_boundbox.m">generate_boundbox.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/generate_bound_box_vertices.m">generate_bound_box_vertices.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/generate_testpoint_parameters_grid.m">generate_testpoint_parameters_grid.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/generate_testpoint_parameters.m">generate_testpoint_parameters.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/generate_test_volume_sign_matrix.m">generate_test_volume_sign_matrix.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/identify_plane_crossed_volumes.m">identify_plane_crossed_volumes.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/in_between.m">in_between.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/in_fracture_bounding_box.m">in_fracture_bounding_box.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/in_planar_bounding_box.m">in_planar_bounding_box.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/in_planar_bounding_box_updated.m">in_planar_bounding_box_updated.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/is_in_vol3d.m">is_in_vol3d.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/uniform_vec_linspace.m">uniform_vec_linspace.m</a><br>
+	│   │   │   │   └── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-intersection-tools/vectorize_inpolygon.m">vectorize_inpolygon.m</a><br>
+	│   │   │   └── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-mesh-intersection/">fracture-mesh-intersection</a><br>
+	│   │   │   &nbsp;&nbsp;&nbsp; └── <a href="mesh-factories/fracture-factory/fracture-fracture-intersection/fracture-mesh-intersection/FracMeshIntersection.m">FracMeshIntersection.m</a><br>
+	│   │   ├── <a href="mesh-factories/fracture-factory/fracture-geometry-factory/">fracture-geometry-factory</a><br>
+	│   │   │   └── <a href="mesh-factories/fracture-factory/fracture-geometry-factory/FractureGeometryBuilder.m">FractureGeometryBuilder.m</a><br>
+	│   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/">fracture-mesh-builder</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/FractureMeshBuilder.m">FractureMeshBuilder.m</a><br>
+	│   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/fracture-tools/">fracture-tools</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/fracture-tools/classify_nodes_2d.m">classify_nodes_2d.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/fracture-tools/create_elem_face_adj1.m">create_elem_face_adj1.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/fracture-tools/is_between_nodes_2d.m">is_between_nodes_2d.m</a><br>
+	│   │   │   │   ├── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/fracture-tools/rotate_to_z_axis.m">rotate_to_z_axis.m</a><br>
+	│   │   │   │   └── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/fracture-tools/semi_plane_check_2d.m">semi_plane_check_2d.m</a><br>
+	│   │   │   └── <a href="mesh-factories/fracture-factory/fracture-mesh-builder/legacy_fracmatrix_generator.m">legacy_fracmatrix_generator.m</a><br>
+	│   │   └── <a href="mesh-factories/fracture-factory/scanfracture_data_uns.m">scanfracture_data_uns.m</a><br>
+	│   ├── <a href="mesh-factories/fracture-physics-physics/">fracture-physics-physics</a><br>
+	│   │   └── <a href="mesh-factories/fracture-physics-physics/build_FracturesProperties.m">build_FracturesProperties.m</a><br>
+	│   ├── <a href="mesh-factories/mesh-translation-layers/">mesh-translation-layers</a><br>
+	│   │   ├── <a href="mesh-factories/mesh-translation-layers/translate_newDarsim_to_oldDarsim_old.m">translate_newDarsim_to_oldDarsim_old.m</a><br>
+	│   │   └── <a href="mesh-factories/mesh-translation-layers/translate_newDarsim_to_oldDarsim.m">translate_newDarsim_to_oldDarsim.m</a><br>
+	│   └── <a href="mesh-factories/rock-mesh-factory/">rock-mesh-factory</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/build_mesh.m">build_mesh.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/conerpoint-data-structure/">conerpoint-data-structure</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="mesh-factories/rock-mesh-factory/conerpoint-data-structure/build_cornerpoint.m">build_cornerpoint.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/">unstructuredgrid-data-structure</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/create_elem_face_adj.m">create_elem_face_adj.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/create_unsbox.m">create_unsbox.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/">meshcore</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/mesh-core-examples/">mesh-core-examples</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/mesh-core-examples/example1.m">example1.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/mesh-core-examples/example2.m">example2.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/mesh-core-examples/exampleGenerateGrids.m">exampleGenerateGrids.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/MeshCore.m">MeshCore.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/mrst-routines/">mrst-routines</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/">py-code</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/custom_parsers.py">custom_parsers.py</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/gmsh_extract.py">gmsh_extract.py</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/load_parsers.py">load_parsers.py</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/mymod.py">mymod.py</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/__pycache__/">__pycache__</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/pyreload.m">pyreload.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/script.ipy">script.ipy</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   │   └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/py-code/startup.py">startup.py</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/README.md">README.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/startup.m">startup.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/">tools</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/">pseudo_vectools</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/mapped_jagged_array.m">mapped_jagged_array.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/reduced_jagged_array.m">reduced_jagged_array.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/reshape_jagged_array_in_matrix_linear.m">reshape_jagged_array_in_matrix_linear.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/reshape_jagged_array_in_matrix.m">reshape_jagged_array_in_matrix.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/reshape_jagged_matrix_in_flat_array.m">reshape_jagged_matrix_in_flat_array.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/meshcore/tools/pseudo_vectools/sparse_to_zero_ind_mat.m">sparse_to_zero_ind_mat.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a href="mesh-factories/rock-mesh-factory/unstructuredgrid-data-structure/translateMeshCore.m">translateMeshCore.m</a><br>
+	├── <a href="reservoir-properties-factory/">reservoir-properties-factory</a><br>
+	│   ├── <a href="reservoir-properties-factory/build_ReservoirProperties.m">build_ReservoirProperties.m</a><br>
+	│   └── <a href="reservoir-properties-factory/generate_permeability_field.m">generate_permeability_field.m</a><br>
+	├── <a href="simulation_factory.m">simulation_factory.m</a><br>
+	├── <a href="visualization-factory/">visualization-factory</a><br>
+	│   └── <a href="visualization-factory/build_visualization_tool.m">build_visualization_tool.m</a><br>
+	└── <a href="well-property-factory/">well-property-factory</a><br>
+	&nbsp;&nbsp;&nbsp; └── <a href="well-property-factory/build_well_info.m">build_well_info.m</a><br>
+	</div>
+	 <br><br>
+</body>
+</html>

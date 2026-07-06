@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="$Version: $ tree v2.0.2 (c) 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro $">
+ <title>darsim_legacy Tree</title>
+ <style type="text/css">
+  BODY { font-family : monospace, sans-serif;  color: black;}
+  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}
+  A:visited { text-decoration : none; margin : 0px; padding : 0px;}
+  A:link    { text-decoration : none; margin : 0px; padding : 0px;}
+  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}
+  A:active  { margin : 0px; padding : 0px;}
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  }
+  .FIFO  { color: purple; }
+  .CHAR  { color: yellow; }
+  .DIR   { color: blue;   }
+  .BLOCK { color: yellow; }
+  .LINK  { color: aqua;   }
+  .SOCK  { color: fuchsia;}
+  .EXEC  { color: green;  }
+	 .comment-box {
+    width: calc(100% - 40px); /* Full width minus padding */
+    margin: 0 auto; /* Center the box */
+    padding: 20px; /* Padding on all sides */
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text for contrast */
+    border-radius: 5px; /* Optional: rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    padding: 20px; /* Container padding */
+}
+ </style>
+</head>
+<body>
+	    <div class="container">
+	<h1>darsim_legacy</h1><p>
+<div class="comment-box">
+   <p>The <code>darsim_legacy</code> folder encompasses all the routines that were primarily developed for the older releases of DARSim. These routines include components such as the fluid model, formulation, grid description, coupling, non-linear solver, and more.</p> <br>
+    <p>We highlight the <code>writer</code> folder, which contains the routines to produce VTK files with the solution. Some modifications to these routines have been made to allow exporting the VTK files to unstructured grids.</p><br>
+    <p>Several routines within the <code>darsim_legacy</code> folder have been altered compared to the last release, but efforts have been made to keep them as close to the original versions as possible. The plan is to eventually migrate and refactor these codes, integrating them with the DARSim routines of the new release.</p>
+        </div>
+		<br>			
+	<a href="darsim_legacy.html">darsim_legacy</a><br>
+	├── <a href="ADMOperators/">ADMOperators</a><br>
+	│   ├── <a href="ADMOperators/adm_map.m">adm_map.m</a><br>
+	│   ├── <a href="ADMOperators/bf_updater_FAMS_geothermal.m">bf_updater_FAMS_geothermal.m</a><br>
+	│   ├── <a href="ADMOperators/bf_updater_FAMS.m">bf_updater_FAMS.m</a><br>
+	│   ├── <a href="ADMOperators/bf_updater.m">bf_updater.m</a><br>
+	│   ├── <a href="ADMOperators/bf_updater_ms_geothermal.m">bf_updater_ms_geothermal.m</a><br>
+	│   ├── <a href="ADMOperators/bf_updater_ms.m">bf_updater_ms.m</a><br>
+	│   ├── <a href="ADMOperators/operators_assembler_fim.m">operators_assembler_fim.m</a><br>
+	│   ├── <a href="ADMOperators/operators_assembler.m">operators_assembler.m</a><br>
+	│   ├── <a href="ADMOperators/operators_assembler_seq.m">operators_assembler_seq.m</a><br>
+	│   ├── <a href="ADMOperators/operators_handler_adm.m">operators_handler_adm.m</a><br>
+	│   ├── <a href="ADMOperators/operators_handler.m">operators_handler.m</a><br>
+	│   ├── <a href="ADMOperators/operators_handler_MMs.m">operators_handler_MMs.m</a><br>
+	│   ├── <a href="ADMOperators/prolongation_builder_constant.m">prolongation_builder_constant.m</a><br>
+	│   ├── <a href="ADMOperators/prolongation_builder.m">prolongation_builder.m</a><br>
+	│   ├── <a href="ADMOperators/prolongation_builder_MSHyperbolic.m">prolongation_builder_MSHyperbolic.m</a><br>
+	│   └── <a href="ADMOperators/prolongation_builder_MSPressure.m">prolongation_builder_MSPressure.m</a><br>
+	├── <a href="Builder/">Builder</a><br>
+	│   └── <a href="Builder/simulation_builder.m">simulation_builder.m</a><br>
+	├── <a href="CITests/">CITests</a><br>
+	│   └── <a href="CITests/RunTests.m">RunTests.m</a><br>
+	├── <a href="CornerPointGridGenerator/">CornerPointGridGenerator</a><br>
+	│   ├── <a href="CornerPointGridGenerator/DARSim2ConvertCartesianToCornerPointGrid.m">DARSim2ConvertCartesianToCornerPointGrid.m</a><br>
+	│   ├── <a href="CornerPointGridGenerator/DARSim2CornerPointGridInputDataGenerator.m">DARSim2CornerPointGridInputDataGenerator.m</a><br>
+	│   └── <a href="CornerPointGridGenerator/MRST_Functions/">MRST_Functions</a><br>
+	├── <a href="CouplingStrategies/">CouplingStrategies</a><br>
+	│   ├── <a href="CouplingStrategies/Coupling_Stats.m">Coupling_Stats.m</a><br>
+	│   ├── <a href="CouplingStrategies/Coupling_Strategy.m">Coupling_Strategy.m</a><br>
+	│   ├── <a href="CouplingStrategies/FIM_Stats.m">FIM_Stats.m</a><br>
+	│   ├── <a href="CouplingStrategies/FIM_Strategy.m">FIM_Strategy.m</a><br>
+	│   ├── <a href="CouplingStrategies/Sequential_Stats.m">Sequential_Stats.m</a><br>
+	│   ├── <a href="CouplingStrategies/Sequential_Strategy.m">Sequential_Strategy.m</a><br>
+	│   ├── <a href="CouplingStrategies/SinglePhase_Stats.m">SinglePhase_Stats.m</a><br>
+	│   ├── <a href="CouplingStrategies/SinglePhase_Strategy.m">SinglePhase_Strategy.m</a><br>
+	│   └── <a href="CouplingStrategies/TimeStepSelector/">TimeStepSelector</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="CouplingStrategies/TimeStepSelector/fixed_timestep_selector.m">fixed_timestep_selector.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="CouplingStrategies/TimeStepSelector/timestep_selector.m">timestep_selector.m</a><br>
+	├── <a href="darsim_legacy.html">darsim_legacy.html</a><br>
+	├── <a href="Discretizations/">Discretizations</a><br>
+	│   ├── <a href="Discretizations/ADMDiscretizationModel/">ADMDiscretizationModel</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/ADM_Discretization_model.m">ADM_Discretization_model.m</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/adm_grid_selector_delta2.m">adm_grid_selector_delta2.m</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/adm_grid_selector_delta.m">adm_grid_selector_delta.m</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/adm_grid_selector.m">adm_grid_selector.m</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/adm_grid_selector_residual.m">adm_grid_selector_residual.m</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/adm_grid_selector_temperature.m">adm_grid_selector_temperature.m</a><br>
+	│   │   ├── <a href="Discretizations/ADMDiscretizationModel/adm_grid_selector_time.m">adm_grid_selector_time.m</a><br>
+	│   │   └── <a href="Discretizations/ADMDiscretizationModel/grid_mapper.m">grid_mapper.m</a><br>
+	│   ├── <a href="Discretizations/Cartesian_Discretization_model.m">Cartesian_Discretization_model.m</a><br>
+	│   ├── <a href="Discretizations/CornerPointGrid_Discretization_model.m">CornerPointGrid_Discretization_model.m</a><br>
+	│   ├── <a href="Discretizations/Discretization_model.m">Discretization_model.m</a><br>
+	│   ├── <a href="Discretizations/FS_Discretization_model.m">FS_Discretization_model.m</a><br>
+	│   ├── <a href="Discretizations/Grids/">Grids</a><br>
+	│   │   ├── <a href="Discretizations/Grids/adm_grid.m">adm_grid.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/cartesian_grid.m">cartesian_grid.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/coarse_grid.m">coarse_grid.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/coarse_grid_unstructured.m">coarse_grid_unstructured.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/corner_point_grid.m">corner_point_grid.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/cross_connections.m">cross_connections.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/fractures_grid.m">fractures_grid.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/Geometry/">Geometry</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/cube_DARSim.m">cube_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/hexahedron_DARSim.m">hexahedron_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/hexahedron_MRST.m">hexahedron_MRST.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/lineInfinite_DARSim.m">lineInfinite_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/lineSegment_DARSim.m">lineSegment_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/planeInfinite_DARSim.m">planeInfinite_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/point_DARSim.m">point_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/polygon_DARSim.m">polygon_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/polyhedron_DARSim.m">polyhedron_DARSim.m</a><br>
+	│   │   │   ├── <a href="Discretizations/Grids/Geometry/rectangle_DARSim.m">rectangle_DARSim.m</a><br>
+	│   │   │   └── <a href="Discretizations/Grids/Geometry/tetragon_DARSim.m">tetragon_DARSim.m</a><br>
+	│   │   ├── <a href="Discretizations/Grids/grid_darsim.m">grid_darsim.m</a><br>
+	│   │   └── <a href="Discretizations/Grids/tetrahedral_grid.m">tetrahedral_grid.m</a><br>
+	│   ├── <a href="Discretizations/MatrixAssemblers/">MatrixAssemblers</a><br>
+	│   │   ├── <a href="Discretizations/MatrixAssemblers/matrix_assembler_geothermal.m">matrix_assembler_geothermal.m</a><br>
+	│   │   └── <a href="Discretizations/MatrixAssemblers/matrix_assembler.m">matrix_assembler.m</a><br>
+	│   ├── <a href="Discretizations/Multiscale_Discretization_model.m">Multiscale_Discretization_model.m</a><br>
+	│   └── <a href="Discretizations/TetrahedralGrid_Discretization_model.m">TetrahedralGrid_Discretization_model.m</a><br>
+	├── <a href="Drivers/">Drivers</a><br>
+	│   ├── <a href="Drivers/end_of_sim_evaluator_gascut.m">end_of_sim_evaluator_gascut.m</a><br>
+	│   ├── <a href="Drivers/end_of_sim_evaluator.m">end_of_sim_evaluator.m</a><br>
+	│   ├── <a href="Drivers/end_of_sim_evaluator_PVInjected.m">end_of_sim_evaluator_PVInjected.m</a><br>
+	│   ├── <a href="Drivers/end_of_sim_evaluator_totaltime.m">end_of_sim_evaluator_totaltime.m</a><br>
+	│   ├── <a href="Drivers/Reservoir_Simulation.m">Reservoir_Simulation.m</a><br>
+	│   ├── <a href="Drivers/Reservoir_Simulator.m">Reservoir_Simulator.m</a><br>
+	│   └── <a href="Drivers/TimeLoop_Driver.m">TimeLoop_Driver.m</a><br>
+	├── <a href="Fluid/">Fluid</a><br>
+	│   ├── <a href="Fluid/Capillarity/">Capillarity</a><br>
+	│   │   ├── <a href="Fluid/Capillarity/capillary_pressure_model.m">capillary_pressure_model.m</a><br>
+	│   │   ├── <a href="Fluid/Capillarity/capillary_pressure_model_table.m">capillary_pressure_model_table.m</a><br>
+	│   │   ├── <a href="Fluid/Capillarity/J_Function_model.m">J_Function_model.m</a><br>
+	│   │   └── <a href="Fluid/Capillarity/No_Pc_model.m">No_Pc_model.m</a><br>
+	│   ├── <a href="Fluid/Components/">Components</a><br>
+	│   │   ├── <a href="Fluid/Components/BO_gas_component.m">BO_gas_component.m</a><br>
+	│   │   ├── <a href="Fluid/Components/BO_oil_component.m">BO_oil_component.m</a><br>
+	│   │   └── <a href="Fluid/Components/component.m">component.m</a><br>
+	│   ├── <a href="Fluid/FlashCalculator/">FlashCalculator</a><br>
+	│   │   ├── <a href="Fluid/FlashCalculator/Kvalues_flash_calculator.m">Kvalues_flash_calculator.m</a><br>
+	│   │   ├── <a href="Fluid/FlashCalculator/Rachford_Rice_flash_calculator.m">Rachford_Rice_flash_calculator.m</a><br>
+	│   │   └── <a href="Fluid/FlashCalculator/Standard_flash_calculator.m">Standard_flash_calculator.m</a><br>
+	│   ├── <a href="Fluid/Fluid%20models/">Fluid models</a><br>
+	│   │   ├── <a href="Fluid/Fluid%20models/BO_fluid_model.m">BO_fluid_model.m</a><br>
+	│   │   ├── <a href="Fluid/Fluid%20models/Comp_fluid_model.m">Comp_fluid_model.m</a><br>
+	│   │   ├── <a href="Fluid/Fluid%20models/fluid_model.m">fluid_model.m</a><br>
+	│   │   ├── <a href="Fluid/Fluid%20models/Geothermal_Multiphase_fluid_model.m">Geothermal_Multiphase_fluid_model.m</a><br>
+	│   │   ├── <a href="Fluid/Fluid%20models/Geothermal_SinglePhase_fluid_model.m">Geothermal_SinglePhase_fluid_model.m</a><br>
+	│   │   ├── <a href="Fluid/Fluid%20models/Immiscible_fluid_model.m">Immiscible_fluid_model.m</a><br>
+	│   │   └── <a href="Fluid/Fluid%20models/single_phase_fluid_model.m">single_phase_fluid_model.m</a><br>
+	│   ├── <a href="Fluid/KvaluesCalculator/">KvaluesCalculator</a><br>
+	│   │   ├── <a href="Fluid/KvaluesCalculator/BO_Kvalues_calculator.m">BO_Kvalues_calculator.m</a><br>
+	│   │   ├── <a href="Fluid/KvaluesCalculator/Constant_Kvalues_calculator.m">Constant_Kvalues_calculator.m</a><br>
+	│   │   ├── <a href="Fluid/KvaluesCalculator/Kvalues_calculator.m">Kvalues_calculator.m</a><br>
+	│   │   ├── <a href="Fluid/KvaluesCalculator/Standing_Kvalues_calculator.m">Standing_Kvalues_calculator.m</a><br>
+	│   │   ├── <a href="Fluid/KvaluesCalculator/VO_Kvalues_calculator.m">VO_Kvalues_calculator.m</a><br>
+	│   │   └── <a href="Fluid/KvaluesCalculator/Wilson_Kvalues_calculator.m">Wilson_Kvalues_calculator.m</a><br>
+	│   ├── <a href="Fluid/Phases/">Phases</a><br>
+	│   │   ├── <a href="Fluid/Phases/BO_gas_phase.m">BO_gas_phase.m</a><br>
+	│   │   ├── <a href="Fluid/Phases/BO_oil_phase.m">BO_oil_phase.m</a><br>
+	│   │   ├── <a href="Fluid/Phases/comp_phase.m">comp_phase.m</a><br>
+	│   │   ├── <a href="Fluid/Phases/Geothermal_Multiphase_phase.m">Geothermal_Multiphase_phase.m</a><br>
+	│   │   ├── <a href="Fluid/Phases/Geothermal_SinglePhase_phase.m">Geothermal_SinglePhase_phase.m</a><br>
+	│   │   └── <a href="Fluid/Phases/phase.m">phase.m</a><br>
+	│   └── <a href="Fluid/RelativePermeability/">RelativePermeability</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Fluid/RelativePermeability/relperm_model_brookscorey.m">relperm_model_brookscorey.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Fluid/RelativePermeability/relperm_model_foam.m">relperm_model_foam.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Fluid/RelativePermeability/relperm_model_linear.m">relperm_model_linear.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Fluid/RelativePermeability/relperm_model.m">relperm_model.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Fluid/RelativePermeability/relperm_model_quadratic.m">relperm_model_quadratic.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="Fluid/RelativePermeability/relperm_model_table.m">relperm_model_table.m</a><br>
+	├── <a href="Formulations/">Formulations</a><br>
+	│   ├── <a href="Formulations/Compositional_formulation.m">Compositional_formulation.m</a><br>
+	│   ├── <a href="Formulations/formulation.m">formulation.m</a><br>
+	│   ├── <a href="Formulations/Geothermal_MultiPhase_formulation.m">Geothermal_MultiPhase_formulation.m</a><br>
+	│   ├── <a href="Formulations/Geothermal_SinglePhase_formulation.m">Geothermal_SinglePhase_formulation.m</a><br>
+	│   ├── <a href="Formulations/gravity_model.m">gravity_model.m</a><br>
+	│   ├── <a href="Formulations/Immiscible_formulation.m">Immiscible_formulation.m</a><br>
+	│   ├── <a href="Formulations/NaturalVar_formulation.m">NaturalVar_formulation.m</a><br>
+	│   ├── <a href="Formulations/OBL_formulation.m">OBL_formulation.m</a><br>
+	│   ├── <a href="Formulations/Overall_Composition_formulation.m">Overall_Composition_formulation.m</a><br>
+	│   └── <a href="Formulations/seq_formulation.m">seq_formulation.m</a><br>
+	├── <a href="FracturesGenerator/">FracturesGenerator</a><br>
+	│   ├── <a href="FracturesGenerator/DARSimFracGen.m">DARSimFracGen.m</a><br>
+	│   ├── <a href="FracturesGenerator/Functions/">Functions</a><br>
+	│   │   ├── <a href="FracturesGenerator/Functions/Index_Global_To_Local_3D.m">Index_Global_To_Local_3D.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Functions/Index_Local_To_Global_3D.m">Index_Local_To_Global_3D.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Functions/Obtain_Average_Distance_Plane_From_Tetrahedron.m">Obtain_Average_Distance_Plane_From_Tetrahedron.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Functions/Obtain_Tetrahedron_Polygon_Intersection.m">Obtain_Tetrahedron_Polygon_Intersection.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Functions/Rotate_Point_Around_Line_3D.m">Rotate_Point_Around_Line_3D.m</a><br>
+	│   │   └── <a href="FracturesGenerator/Functions/Triangle_Area_3D.m">Triangle_Area_3D.m</a><br>
+	│   ├── <a href="FracturesGenerator/Geometry/">Geometry</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/fracture_FracGen.m">fracture_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/fracturesGrid_FracGen.m">fracturesGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/geometry_CartesianGrid_FracGen.m">geometry_CartesianGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/geometry_CornerPointGrid_FracGen.m">geometry_CornerPointGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/geometry_FracGen.m">geometry_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/geometry_TetrahedralGrid_FracGen.m">geometry_TetrahedralGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/reservoir_CartesianGrid_FracGen.m">reservoir_CartesianGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/reservoir_CornerPointGrid_FracGen.m">reservoir_CornerPointGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/Geometry/reservoir_FracGen.m">reservoir_FracGen.m</a><br>
+	│   │   └── <a href="FracturesGenerator/Geometry/reservoir_TetrahedralGrid_FracGen.m">reservoir_TetrahedralGrid_FracGen.m</a><br>
+	│   ├── <a href="FracturesGenerator/IO/">IO</a><br>
+	│   │   ├── <a href="FracturesGenerator/IO/builder_FracGen.m">builder_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/IO/plotVTK_CarstesianGrid_FracGen.m">plotVTK_CarstesianGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/IO/plotVTK_CornerPointGrid_FracGen.m">plotVTK_CornerPointGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/IO/plotVTK_FracGen.m">plotVTK_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/IO/plotVTK_TetrahedralGrid_FracGen.m">plotVTK_TetrahedralGrid_FracGen.m</a><br>
+	│   │   ├── <a href="FracturesGenerator/IO/reader_FracGen.m">reader_FracGen.m</a><br>
+	│   │   └── <a href="FracturesGenerator/IO/writer_FracGen.m">writer_FracGen.m</a><br>
+	│   ├── <a href="FracturesGenerator/pEDFM_Generator.m">pEDFM_Generator.m</a><br>
+	│   └── <a href="FracturesGenerator/README.md">README.md</a><br>
+	├── <a href="Initializers/">Initializers</a><br>
+	│   ├── <a href="Initializers/Geothermal_MultiPhase_initializer.m">Geothermal_MultiPhase_initializer.m</a><br>
+	│   ├── <a href="Initializers/Geothermal_SinglePhase_initializer.m">Geothermal_SinglePhase_initializer.m</a><br>
+	│   ├── <a href="Initializers/initializer_hydrostatic.m">initializer_hydrostatic.m</a><br>
+	│   ├── <a href="Initializers/initializer.m">initializer.m</a><br>
+	│   └── <a href="Initializers/initializer_singlephase.m">initializer_singlephase.m</a><br>
+	├── <a href="LTS/">LTS</a><br>
+	│   ├── <a href="LTS/LTS_Adaptive_Sequential_Strategy.m">LTS_Adaptive_Sequential_Strategy.m</a><br>
+	│   ├── <a href="LTS/LTS_ADM_Adaptive_Sequential_Strategy.m">LTS_ADM_Adaptive_Sequential_Strategy.m</a><br>
+	│   ├── <a href="LTS/LTS_bc_enforcer_fim.m">LTS_bc_enforcer_fim.m</a><br>
+	│   ├── <a href="LTS/LTS_bc_enforcer.m">LTS_bc_enforcer.m</a><br>
+	│   ├── <a href="LTS/LTS_bc_enforcer_seq.m">LTS_bc_enforcer_seq.m</a><br>
+	│   ├── <a href="LTS/LTS_FIM_Stats.m">LTS_FIM_Stats.m</a><br>
+	│   ├── <a href="LTS/LTS_FIM_Strategy.m">LTS_FIM_Strategy.m</a><br>
+	│   ├── <a href="LTS/LTS_fim_system_builder.m">LTS_fim_system_builder.m</a><br>
+	│   ├── <a href="LTS/LTS_linear_solver_ADM.m">LTS_linear_solver_ADM.m</a><br>
+	│   ├── <a href="LTS/LTS_linear_solver.m">LTS_linear_solver.m</a><br>
+	│   ├── <a href="LTS/LTS_matrix_assembler.m">LTS_matrix_assembler.m</a><br>
+	│   ├── <a href="LTS/LTS_NL_Solver.m">LTS_NL_Solver.m</a><br>
+	│   ├── <a href="LTS/LTS_operators_assembler_seq.m">LTS_operators_assembler_seq.m</a><br>
+	│   ├── <a href="LTS/LTSPrint_TimeLoop_Driver.m">LTSPrint_TimeLoop_Driver.m</a><br>
+	│   ├── <a href="LTS/LTS_Run_Summary_ADM.m">LTS_Run_Summary_ADM.m</a><br>
+	│   ├── <a href="LTS/LTS_Sequential_Stats.m">LTS_Sequential_Stats.m</a><br>
+	│   ├── <a href="LTS/LTS_Sequential_Strategy.m">LTS_Sequential_Strategy.m</a><br>
+	│   ├── <a href="LTS/LTStransport_system_builder.m">LTStransport_system_builder.m</a><br>
+	│   └── <a href="LTS/RefCellsSelector.m">RefCellsSelector.m</a><br>
+	├── <a href="PremHomogenizer/">PremHomogenizer</a><br>
+	│   ├── <a href="PremHomogenizer/DARSim2PermHomogenizer.m">DARSim2PermHomogenizer.m</a><br>
+	│   └── <a href="PremHomogenizer/Functions/">Functions</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="PremHomogenizer/Functions/edge.m">edge.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="PremHomogenizer/Functions/EfectivePermTensor.m">EfectivePermTensor.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="PremHomogenizer/Functions/FunctionOnefull.m">FunctionOnefull.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="PremHomogenizer/Functions/Micro_Boundary.m">Micro_Boundary.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="PremHomogenizer/Functions/MicroSolver_FEM.m">MicroSolver_FEM.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="PremHomogenizer/Functions/Position_indicators.m">Position_indicators.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="PremHomogenizer/Functions/PreProcess_Identification.m">PreProcess_Identification.m</a><br>
+	├── <a href="ProductionSystem/">ProductionSystem</a><br>
+	│   ├── <a href="ProductionSystem/Fractures/">Fractures</a><br>
+	│   │   ├── <a href="ProductionSystem/Fractures/fracture.m">fracture.m</a><br>
+	│   │   └── <a href="ProductionSystem/Fractures/fracture_system.m">fracture_system.m</a><br>
+	│   ├── <a href="ProductionSystem/Production_System.m">Production_System.m</a><br>
+	│   ├── <a href="ProductionSystem/property.m">property.m</a><br>
+	│   ├── <a href="ProductionSystem/Reservoir/">Reservoir</a><br>
+	│   │   └── <a href="ProductionSystem/Reservoir/reservoir.m">reservoir.m</a><br>
+	│   ├── <a href="ProductionSystem/status.m">status.m</a><br>
+	│   └── <a href="ProductionSystem/Wells/">Wells</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="ProductionSystem/Wells/injector.m">injector.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="ProductionSystem/Wells/injector_pressure.m">injector_pressure.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="ProductionSystem/Wells/injector_rate.m">injector_rate.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="ProductionSystem/Wells/producer.m">producer.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="ProductionSystem/Wells/producer_pressure.m">producer_pressure.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="ProductionSystem/Wells/producer_rate.m">producer_rate.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="ProductionSystem/Wells/wells.m">wells.m</a><br>
+	├── <a href="Scripts/">Scripts</a><br>
+	│   ├── <a href="Scripts/AveragePerm.m">AveragePerm.m</a><br>
+	│   ├── <a href="Scripts/AverageSat.m">AverageSat.m</a><br>
+	│   ├── <a href="Scripts/ComputeAverageError.m">ComputeAverageError.m</a><br>
+	│   ├── <a href="Scripts/CreatePermFile.m">CreatePermFile.m</a><br>
+	│   ├── <a href="Scripts/Error2VTKFile.m">Error2VTKFile.m</a><br>
+	│   ├── <a href="Scripts/FractionalFlow.m">FractionalFlow.m</a><br>
+	│   ├── <a href="Scripts/PrePostProcessing/">PrePostProcessing</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/ADMNodes.m">ADMNodes.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/">CompADMPaper</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case1_Nodes.m">Case1_Nodes.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case1ProdCurves.m">Case1ProdCurves.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case4_Nodes.m">Case4_Nodes.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case4ProdCurves.m">Case4ProdCurves.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case5_Nodes.m">Case5_Nodes.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case5Nodes.m">Case5Nodes.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/Case5ProdCurves.m">Case5ProdCurves.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/ComputeAverageError.m">ComputeAverageError.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateCase5_Folders.m">GenerateCase5_Folders.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateCases_ADM_molar.m">GenerateCases_ADM_molar.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateCases_ADM_natural.m">GenerateCases_ADM_natural.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateCases_FS.m">GenerateCases_FS.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateErrorVTK.m">GenerateErrorVTK.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateNumOfCellsForLatex.m">GenerateNumOfCellsForLatex.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/CompADMPaper/GenerateProductionCurves.m">GenerateProductionCurves.m</a><br>
+	│   │   │   └── <a href="Scripts/PrePostProcessing/CompADMPaper/RescaleProdCurvesForLatex.m">RescaleProdCurvesForLatex.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/Create_EggModel_Perm.m">Create_EggModel_Perm.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/">ECMORPaper</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/ComparePerformance.m">ComparePerformance.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/EcmorErrorVsDS.m">EcmorErrorVsDS.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/EcmorNodesVsPv.m">EcmorNodesVsPv.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/ErrorComparison_1Level.m">ErrorComparison_1Level.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/ErrorComparison_1.m">ErrorComparison_1.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/ErrorComparison_2.m">ErrorComparison_2.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/ECMORPaper/ScalabilityAnalysis.m">ScalabilityAnalysis.m</a><br>
+	│   │   │   └── <a href="Scripts/PrePostProcessing/ECMORPaper/TablesForLatex.m">TablesForLatex.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/EggModelMakeCubic.m">EggModelMakeCubic.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/">FluidProp_Plots</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/BOFlash.m">BOFlash.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/FractionalFlowWithGravity.m">FractionalFlowWithGravity.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/PhaseBehaviourRR.m">PhaseBehaviourRR.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/PlotFlash.m">PlotFlash.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/PlotPcandDerivative.m">PlotPcandDerivative.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/RachfordRice.m">RachfordRice.m</a><br>
+	│   │   │   ├── <a href="Scripts/PrePostProcessing/FluidProp_Plots/SimpleFlashCalculator.m">SimpleFlashCalculator.m</a><br>
+	│   │   │   └── <a href="Scripts/PrePostProcessing/FluidProp_Plots/ThreeCompFlashDer.m">ThreeCompFlashDer.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/ModifyPerm.m">ModifyPerm.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/PlotProductionCurves.m">PlotProductionCurves.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/PrintScalar2VTK.m">PrintScalar2VTK.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/RefineEggModelPerm.m">RefineEggModelPerm.m</a><br>
+	│   │   ├── <a href="Scripts/PrePostProcessing/SPe10Permflip.m">SPe10Permflip.m</a><br>
+	│   │   └── <a href="Scripts/PrePostProcessing/VTKErrorFile.m">VTKErrorFile.m</a><br>
+	│   └── <a href="Scripts/ProduceErrorLTS.m">ProduceErrorLTS.m</a><br>
+	├── <a href="Solvers/">Solvers</a><br>
+	│   ├── <a href="Solvers/LinearSolvers/">LinearSolvers</a><br>
+	│   │   ├── <a href="Solvers/LinearSolvers/explicit_transport_solver.m">explicit_transport_solver.m</a><br>
+	│   │   ├── <a href="Solvers/LinearSolvers/incompressible_pressure_solver.m">incompressible_pressure_solver.m</a><br>
+	│   │   ├── <a href="Solvers/LinearSolvers/linear_solver_ADM.m">linear_solver_ADM.m</a><br>
+	│   │   ├── <a href="Solvers/LinearSolvers/linear_solver.m">linear_solver.m</a><br>
+	│   │   ├── <a href="Solvers/LinearSolvers/linear_solver_MMs.m">linear_solver_MMs.m</a><br>
+	│   │   └── <a href="Solvers/LinearSolvers/Preconditioners/">Preconditioners</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/LinearSolvers/Preconditioners/adm_preconditioner.m">adm_preconditioner.m</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; └── <a href="Solvers/LinearSolvers/Preconditioners/preconditioner.m">preconditioner.m</a><br>
+	│   └── <a href="Solvers/NonLinearSolvers/">NonLinearSolvers</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/">ConvergenceCheckers</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_ADM_geothermal_multiphase.m">convergence_checker_ADM_geothermal_multiphase.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_ADM_geothermal_singlephase.m">convergence_checker_ADM_geothermal_singlephase.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_ADM.m">convergence_checker_ADM.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_finescale_geothermal_multiphase.m">convergence_checker_finescale_geothermal_multiphase.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_finescale_geothermal_singlephase.m">convergence_checker_finescale_geothermal_singlephase.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_finescale.m">convergence_checker_finescale.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_finescale_molar.m">convergence_checker_finescale_molar.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_impes.m">convergence_checker_impes.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker.m">convergence_checker.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_outer.m">convergence_checker_outer.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_pressure.m">convergence_checker_pressure.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_transport.m">convergence_checker_transport.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/NL_Solver_geothermal.m">NL_Solver_geothermal.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/NL_Solver.m">NL_Solver.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/NormCalculator/">NormCalculator</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/NormCalculator/norm_calculator_compositional.m">norm_calculator_compositional.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/NormCalculator/norm_calculator_geothermal_multiphase.m">norm_calculator_geothermal_multiphase.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/NormCalculator/norm_calculator_geothermal_singlephase.m">norm_calculator_geothermal_singlephase.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="Solvers/NonLinearSolvers/NormCalculator/norm_calculator_immiscible.m">norm_calculator_immiscible.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="Solvers/NonLinearSolvers/NormCalculator/norm_calculator.m">norm_calculator.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/solution_chopper.m">solution_chopper.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="Solvers/NonLinearSolvers/SystemBuilders/">SystemBuilders</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/SystemBuilders/explicit_transport_system_builder.m">explicit_transport_system_builder.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/SystemBuilders/fim_system_builder.m">fim_system_builder.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/SystemBuilders/pressure_system_builder.m">pressure_system_builder.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="Solvers/NonLinearSolvers/SystemBuilders/system_builder.m">system_builder.m</a><br>
+	│   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a href="Solvers/NonLinearSolvers/SystemBuilders/transport_system_builder.m">transport_system_builder.m</a><br>
+	└── <a href="Writer/">Writer</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/Curve_Inj_Prod.m">Curve_Inj_Prod.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/output_writer_ADM.m">output_writer_ADM.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/output_writer_FS.m">output_writer_FS.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/output_writer.m">output_writer.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/output_writer_MMs.m">output_writer_MMs.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/Plotters/">Plotters</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Plotters/CornerPointGrid_VTK_Plotter.m">CornerPointGrid_VTK_Plotter.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Plotters/Matlab_Plotter_1D.m">Matlab_Plotter_1D.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Plotters/Matlab_Plotter_2D.m">Matlab_Plotter_2D.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Plotters/Plotter.m">Plotter.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Plotters/TetrahedralGrid_VTK_Plotter.m">TetrahedralGrid_VTK_Plotter.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Plotters/UnstructuredPointGrid_VTK_Plotter.m">UnstructuredPointGrid_VTK_Plotter.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   └── <a href="Writer/Plotters/VTK_Plotter.m">VTK_Plotter.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/Readers/">Readers</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Readers/reader_darsim2.m">reader_darsim2.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Readers/reader_eclipse.m">reader_eclipse.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a href="Writer/Readers/reader.m">reader.m</a><br>
+	&nbsp;&nbsp;&nbsp; │   └── <a href="Writer/Readers/reader_tetrahedral_grid_file.m">reader_tetrahedral_grid_file.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/Run_Summary_ADM.m">Run_Summary_ADM.m</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a href="Writer/Run_Summary.m">Run_Summary.m</a><br>
+	&nbsp;&nbsp;&nbsp; └── <a href="Writer/wells_data.m">wells_data.m</a><br>
+	</div>
+			<br><br>
+</body>
+</html>

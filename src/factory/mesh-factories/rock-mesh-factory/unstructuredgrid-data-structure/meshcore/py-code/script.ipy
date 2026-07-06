@@ -1,0 +1,7 @@
+%load_ext autoreload
+%autoreload 2
+
+import gmsh_extract
+file_mesh = "/mnt/sda1/projects/meshes/2d/netest.msh"
+mesh = gmsh_extract.GmshCore(file_mesh)
+
