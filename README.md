@@ -2,7 +2,7 @@
 
 Delft Advanced Reservoir Simulator (TU Delft)
 
-Reservoir simulation framework for CCS and hydrogen storage in porous media
+Reservoir simulation framework for CCS and UHS in geological porous media
 
 ---
 
@@ -89,6 +89,8 @@ DARSim includes a suite of example cases demonstrating various scenarios, such a
 - 3-component hydrogen storage systems
 - Fractured reservoir simulations
 
+---
+
 ### Documentation
 
 Please refer to the Documentions directory for full documentation. 
@@ -98,6 +100,8 @@ An overview of code organization and structure is provided in:
 ```matlab
 /src/code-organization.html
 ```
+
+---
 
 ### Planned Future Work
 
