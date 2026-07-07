@@ -64,11 +64,11 @@ DARSim("<path-to-simulation-files>", "<simulation-file-name.txt>")
 
 ### Example
 
-DARSim("examples/Case1", "Sim.txt")
+DARSim("examples/<example_name>", "Sim.txt")
 
 Each simulation requires at minimum:
 
-- A main simulation input file (e.g., Sim.txt as found in the include example problems)
+- A main simulation input file (e.g., Sim.txt as found in the included example problems)
 - A SimulatorSettings.txt file defining global simulation parameters
 
 ### Input and Output
@@ -76,6 +76,7 @@ Each simulation requires at minimum:
 - Simulation configuration files (TXT format)
 - Grid and geometry definitions
 - Fluid and rock property definitions
+- Boundary and initial conditions, including wells
 2. Outputs
 - VTK files for visualization
 - Results compatible with ParaView
@@ -93,22 +94,15 @@ DARSim includes a suite of example cases demonstrating various scenarios, such a
 
 ### Documentation
 
-Please refer to the Documentions directory for full documentation. 
+Please refer to the Documentation directory for full documentation. 
 
 An overview of code organization and structure is provided in:
 
 ```matlab
-/src/code-organization.html
+/documentation/code-organization.html
 ```
 
 ---
-
-### Planned Future Work
-
-- Expanded documentation and tutorials (in progress)
-- Updated video tutorials (planned by end of 2026)
-- Continued development of advanced physics models
-- Improved performance and scalability
 
 ### License and Usage Disclaimer
 
@@ -116,13 +110,13 @@ DARSim is provided for **research use only**.
 
 The authors and Delft University of Technology assume **no liability** for the use of this software or its results.
 
-### Authors List
+### Contributors List
 
 DARSim development team includes (but is not limited to):
 
-- Ryan Haagenson
 - Mengjie Zhao
 - Amin Masaghi Bonabi
+- Ryan Haagenson
 - Yuhang Wang
 - Artur Castiel de Souza
 - Mousa HosseiniMehr
