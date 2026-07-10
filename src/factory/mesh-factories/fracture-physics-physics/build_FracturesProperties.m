@@ -31,7 +31,7 @@ function FracturesProperties = build_FracturesProperties(blueprint, ...
         FracturesProperties.ReservoirADM.CoarseRatio] = ...
                                 split_adm_input(blueprint.ADM_RESERVOIR);
         frac_active = str2double(blueprint.FRAC(:,1));
-        FracturesProperties.NumOfFrac =sum(frac_active);
+        FracturesProperties.NumOfFrac =numel(frac_active);
         FracturesProperties.NumOfAllFracGrids = length(frac_active);
         FracturesProperties.FractureMatrix = fracfile_path{2};
         FracturesProperties.all_settings = blueprint;

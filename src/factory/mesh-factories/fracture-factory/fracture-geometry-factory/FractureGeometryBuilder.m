@@ -14,7 +14,7 @@ classdef FractureGeometryBuilder
     methods
         function obj = FractureGeometryBuilder(blueprint)
             obj.num_frac = ...
-                sum(cell2mat({blueprint.FracturesProperties.isActive})');
+                numel(cell2mat({blueprint.FracturesProperties.isActive})');
             obj.info = obj.build_info(blueprint);
             frac_tag = obj.classify_fracuture_building_method(blueprint);
             obj.fracs = obj.build_fractures(frac_tag, blueprint);

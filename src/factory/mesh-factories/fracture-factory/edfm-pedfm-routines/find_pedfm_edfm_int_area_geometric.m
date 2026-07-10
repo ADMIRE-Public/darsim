@@ -205,16 +205,15 @@ for iFrac = 1:nFrac
             % Remove any duplicates points in GlobalIntersectPolyVert
             GlobalPlaneIntPolyVert = ...
                 uniquetol(GlobalPlaneIntPolyVert,tol,'ByRows',true);
-
-            % Project intersection polygon vertices from global to local
-            LocalPlaneIntPolyVert = (R.' * ...
+            
+            if size(GlobalPlaneIntPolyVert,1) < 3
+                AreaIntersect = 0;
+            else
+                % Project intersection polygon verts from global to local
+                LocalPlaneIntPolyVert = (R.' * ...
                                      (GlobalPlaneIntPolyVert - ...
                                       FracCellCentroids(iFracCell,:)).').';
 
-            % Order polygon vertices CCW
-            if size(LocalPlaneIntPolyVert,1) < 3
-                AreaIntersect = 0;
-            else
                 K = convhull(LocalPlaneIntPolyVert(:,1), ...
                              LocalPlaneIntPolyVert(:,2));
                 LocalPlaneIntPolyVert = ...
