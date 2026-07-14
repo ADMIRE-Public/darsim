@@ -9,9 +9,6 @@
 							    DARSim  3.0 Matlab Simulator 
 ==================================================================================================
 
-==================================================================================================															
-Dr. Hadi Hajibeygi, Dr. Artur Castiel , Dr. Kishan Ramesh, Dr. Mousa HosseiniMehr, Dr. Yuhang Wang														
-==================================================================================================															
 Welcome to the DARSim Matlab simulator
 
 What is DARSim?

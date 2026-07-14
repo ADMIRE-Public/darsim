@@ -9,8 +9,6 @@ if isempty(varargin)
         flag_init = 1;
         clc
         displayFile("welcome.md")
-        displayFile("authors.md")
-        displayFile("repository.md")
     elseif flag_init == 1
         clc
         displayFile("resume.md");
