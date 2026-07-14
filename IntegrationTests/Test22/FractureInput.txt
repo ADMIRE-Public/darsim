@@ -1,0 +1,73 @@
+--DARSim2FraGen: INPUT file
+
+--Type of Generator(either "EDFM" or "pEDFM")
+TYPE
+	pEDFM
+
+--Dimension of Domain (either "2D" or "3D")
+DOMAIN
+    3D
+
+--Size of the reservoir in m (Length, Width, Thickness)
+DIMENS
+ 	100
+	100
+	100
+	
+--Grid Discretization ("CartesianGrid" or "CornerPointGrid")
+--To include the CornerPointGrid input data, add the name of the input file in the line below the "CornerPointGrid" keyword.
+--To include the CornerPointGrid permeability/porosity input data, add the name of the input corresponding file in the line under the previous.
+GRID_DISCRETIZATION
+	CartesianGrid
+
+--GRID Nx//Ny//Nz
+SPECGRID
+	10
+	10
+	10
+	
+--ADM Status for Reservoir: Activation(0,1), Level(1,2,etc.), Coarsening Ratio along x,y,z
+ADM_RESERVOIR
+	0
+	2
+	[3,3,1]
+
+UNSTRUCTURED_FRACTURE_MESH
+false
+
+EDFM_METHOD
+geometric
+	
+FRACTURE_NUM_POINTS        
+500
+
+FRACTURE_AVERAGE_DISTANCE_REFINEMENT         
+50	
+	
+FRACTURE_BOUNDING_BOX         
+1	
+	
+--Comparison Accuracy (The level of accuracy in comparing two values or in zero comparison)
+CompareAccuracy
+    1e-10
+
+--Fractures Properties
+    // Activation (0,1)                              % Whether fracture is used (1) or not (0)
+	// Central Coordination [x;y;z]                  % The coordinate of the central point of fracture plate
+	// Length [m]                                    % The length of fracture plate (distance along x before rotaion)
+	// Width [m]                                     % The width of fracture plate (distance along y before rotation)
+	// Rotation Angle Along Z [deg]                  % Angle of rotation along the z-axis while the fracture is first completely horizontal (on xy plane -- right hand rule rotation)
+	// Rotation Angle Along Central Length [deg]     % Angle of rotation along the central length axis (x-axis) that is connecting the center of both lengths of fracture together (left hand rule rotation)
+	// Rotation Angle Along Central Width [deg]      % Angle of rotation along the central width axis (y-axis) that is connecting the center of both widths of fracture together (left hand rule rotation)
+	// Grid Resolution Ratio [-]                     % The ratio between the fracture and reservoir grid resolution. If it is less than 1, the fracture gridding is coarser than matrix and if it is more than 1, fracture gridding is finer than matrix
+	// Grid Number Along Length [-]                  % The manual grid numbers of the fracture plate along its length (ignoring Grid Resolution Ratio)
+	// Grid Number Along Width [-]                   % The manual grid numbers of the fracture plate along its width (ignoring Grid Resolution Ratio)
+	// Aperture [m]                                  % The aperture of fracture plate
+	// Porosity [-]                                  % The porosity of fracture plate
+	// Permeability [m^2]                            % Permeability of fracture plate
+	// ADM Configuration                             % Activation(0,1) , Level(1,2,etc.) , Coarsening Ratio along Length , Coarsening Ratio along Width
+	// Cornor Points [ x1,x2,x3;y1,y2,y3;z1;z2;z3 ]  % The coordinates of three corners defining the fracture plate (can be used as an alternative way of positioning the fracture)
+FRAC_START
+      1 , [50 ; 50; 49] , 50 , 50 , 0 , 135 , 0 , NaN , 4 , 4 , 5e-3 , 1.0 , 1.0e-10 , [0,2,5,1] , [ NaN,NaN,NaN ; NaN,NaN,NaN ; NaN,NaN,NaN ] , 01        
+FRAC_END
+--END OF DECK

@@ -1,0 +1,50 @@
+SetFactory("OpenCASCADE");
+
+// Global cube dimensions
+L = 100;
+
+// Create main cube
+Box(1) = {0, 0, 0, L, L, L};
+
+// Split cube into 8 sub-cubes by inserting 3 cutting planes
+// Plane at x = 50
+Plane Surface(100) = {}; // dummy surface
+Extrude {0,0,1} {
+  Surface{100};
+  Layers{1};
+  Recombine;
+}
+CutPlaneX = 50;
+Plane{200} = {1, 0, 0, -CutPlaneX};
+
+// Plane at y = 50
+CutPlaneY = 50;
+Plane{201} = {0, 1, 0, -CutPlaneY};
+
+// Plane at z = 50
+CutPlaneZ = 50;
+Plane{202} = {0, 0, 1, -CutPlaneZ};
+
+// Fragment the solid with the planes → produce 8 subcubes
+Fragment{ Volume{1}; }{ Plane{200,201,202}; }
+
+// ---------------------------------------------------------
+// MESH CONTROL
+// ---------------------------------------------------------
+
+// Use Gmsh’s built-in hex → 5 tet subdivision
+Mesh.SubdivisionAlgorithm = 2;  // 2 = split each hex into 5 tetrahedra
+
+// Ensure we get a hex mesh first (2×2×2)
+Mesh.Algorithm3D = 3;   // Frontal hexahedral
+Transfinite Volume "*"; // Apply transfinite to all volumes
+Transfinite Surface "*";
+
+// Optionally control resolution on each subcube edge
+Mesh.SizeFactor = 1;
+
+// Generate tetrahedral mesh
+Mesh 3;
+
+// Optional: define a physical volume for export
+Physical Volume("Cube") = Volume "*";

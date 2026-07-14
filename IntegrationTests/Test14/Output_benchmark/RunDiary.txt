@@ -1,0 +1,740 @@
+WARNING: Fields PERMEABILITY_CONTRAST_MEAN,PERMEABILITY_CONTRAST_ORDER,INCLUDE_ROCK_PROPERTIES not found.
+WARNING: Fields SCHEDULE,COMPOSITION not found.
+WARNING: Fields INITIAL_STATE not found.
+[Warning: No lookup table was provided for relative permeability. The
+default file 'LookupTable.txt' will be used.] 
+[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties>generate_RelPerm', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m', 49)" style="font-weight:bold">build_FluidProperties>generate_RelPerm</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m',49,0)">line 49</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m', 23)" style="font-weight:bold">build_FluidProperties</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m',23,0)">line 23</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory/translate_simulation_input', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m', 78)" style="font-weight:bold">darsim2_settings_factory/translate_simulation_input</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m',78,0)">line 78</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m', 25)" style="font-weight:bold">darsim2_settings_factory</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m',25,0)">line 25</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_darsim_settings', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/create_darsim_settings.m', 16)" style="font-weight:bold">create_darsim_settings</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/create_darsim_settings.m',16,0)">line 16</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m', 42)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m',42,0)">line 42</a>)] 
+##### Calculating the thermodynamics of H2-CH4-brine...
+##### Applicable pressure range: 10 - 500 [bar]
+##### You can change pressure range in Fluid/Components. 
+##### Final step: creating interpolations!
+##### Thermodynamics of H2-CH4-brine done!
+Started simple initialization
+Flash converged in 4 iterations. Error: 3.028594195678830e-24
+Initial conditions:
+Pressure: 250 bar
+Saturation: 0
+Temperature: 338.15 K
+---------------------------------------------------------
+
+
+Initialization took 0.015362 s
+
+
+BEGIN TIME-DEPENDENT SIMULATION
+SIMULATION OF PROBLEM IntegrationTest HAS STARTED.
+FORMATION CHARACTERISTICS:
+Reservoir geometry:
+Lx: 100 m
+Ly: 100 m
+Thickness:  140 m
+Total Grid Cells: 10 x 10 x 10 = 1000, Number of Active Cells: 1000
+---------------------------------------------------------
+Fluid Model:
+Type: Compositional
+N of phases: 2
+N of components:  3
+---------------------------------------------------------
+Total Simulation Time: 864000 seconds (10 days : 0 hrs : 0 mins : 0 sec)
+Maximum Allowed Time-steps: 20000
+Minimum Size of Time-step : 0.01
+Maximum Size of Time-step : 5
+Number of Reports         : 10
+---------------------------------------------------------
+Time-step 1: Initial time: 0 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 3.05706e-10
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 3.05706e+00
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 8.022053795728854e-18
+Iter 01-->   7.83696e-05       7.88190e-05       2.83874e-04       1.79529e-02   1.82981e-14   1.17810e-04   
+Flash converged in 3 iterations. Error: 7.339373454347802e-21
+Iter 02-->   7.83696e-05       7.83304e-05       1.55707e-06       3.51648e-06   1.00000e-08   3.53389e-08   
+-----------------------------------------------
+Final time: 0.01 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 1
+
+
+Time-step 2: Initial time: 0.01 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 6.45673e-09
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 6.45673e-01
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.249871491518241e-20
+Iter 01-->   2.94506e-10       9.13886e-06       2.77861e-04       7.52559e-03   2.35549e-12   2.35513e-04   
+Flash converged in 2 iterations. Error: 2.142712130829837e-13
+Iter 02-->   2.91963e-10       3.18558e-11       7.72762e-08       3.08087e-06   2.35476e-12   7.36700e-08   
+-----------------------------------------------
+Final time: 0.03 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 2
+
+
+Time-step 3: Initial time: 0.03 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.40341e-09
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 1.40341e-01
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.217219357388637e-20
+Iter 01-->   2.94328e-10       1.50447e-05       2.40777e-04       3.96976e-03   4.70952e-12   4.70773e-04   
+Flash converged in 2 iterations. Error: 5.988876095606619e-14
+Iter 02-->   2.91963e-10       1.22380e-10       1.17336e-07       3.10135e-06   4.70711e-12   2.42330e-07   
+-----------------------------------------------
+Final time: 0.07 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 3
+
+
+Time-step 4: Initial time: 0.07 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Initial Eq. 1 Residual Norm: 5.28746e-10
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 5.28746e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 9.383832322651315e-21
+Iter 01-->   4.27162e-09       1.53133e-03       6.63996e-02       4.37937e-03   9.41422e-12   9.40618e-04   
+Flash converged in 2 iterations. Error: 7.878233333722873e-14
+Iter 02-->   4.08320e-09       1.72571e-04       4.67793e-04       9.08824e-04   1.27376e-10   3.91928e-05   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 3456
+Initial Eq. 1 Residual Norm: 5.28746e-10
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 5.28746e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 7.845656453762656e-14
+Iter 01-->   2.94372e-10       1.47445e-05       2.41313e-04       2.48798e-03   4.70711e-12   4.70306e-04   
+Flash converged in 2 iterations. Error: 2.361218624139298e-14
+Iter 02-->   2.91963e-10       1.91190e-10       1.14880e-07       3.24259e-06   4.70478e-12   2.37248e-07   
+-----------------------------------------------
+Final time: 0.11 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 4
+
+
+Time-step 5: Initial time: 0.11 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 4.55093e-10
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 4.55093e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.168810408657356e-20
+Iter 01-->   3.76056e-09       1.42165e-03       1.31523e-01       2.10650e-03   4.70478e-12   4.69847e-04   
+Flash converged in 2 iterations. Error: 1.980172810950479e-14
+Iter 02-->   5.05359e-09       4.15342e-04       1.91866e-03       1.73319e-03   7.52370e-11   2.16872e-05   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 4.55093e-10
+Initial Eq. 2 Residual Norm: 2.91964e-02
+Initial Eq. 3 Residual Norm: 4.55093e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.975928377027131e-14
+Iter 01-->   1.00402e-09       3.51609e-04       7.03575e-02       1.12089e-03   2.35239e-12   2.34923e-04   
+Flash converged in 2 iterations. Error: 5.483189910846622e-15
+Iter 02-->   1.50936e-09       1.41346e-04       1.83878e-04       8.96722e-04   1.16390e-11   2.29195e-06   
+Flash converged in 2 iterations. Error: 7.428186516775416e-16
+Iter 03-->   1.48603e-09       3.71171e-06       6.71714e-04       1.05124e-05   1.20013e-11   9.27200e-07   
+Flash converged in 2 iterations. Error: 1.395575172056175e-19
+Iter 04-->   1.47771e-09       9.55714e-09       1.70301e-06       8.44358e-06   1.18917e-11   3.36154e-08   
+-----------------------------------------------
+Final time: 0.13 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 5
+
+
+Time-step 6: Initial time: 0.13 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 2.08254e-09
+Initial Eq. 2 Residual Norm: 2.87099e-02
+Initial Eq. 3 Residual Norm: 7.82011e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 6.418628872984662e-20
+Iter 01-->   5.84222e-09       4.23939e-04       3.07406e-03       2.63935e-03   4.03631e-11   2.22089e-04   
+Flash converged in 2 iterations. Error: 1.321192941303918e-14
+Iter 02-->   5.78053e-09       1.40320e-05       2.37247e-03       3.83130e-06   4.66054e-11   2.79820e-06   
+Flash converged in 2 iterations. Error: 5.165647088054161e-20
+Iter 03-->   5.73371e-09       1.56585e-07       2.61269e-05       2.90759e-05   4.59987e-11   1.80523e-07   
+-----------------------------------------------
+Final time: 0.15 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 6
+
+
+Time-step 7: Initial time: 0.15 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 8.09319e-09
+Initial Eq. 2 Residual Norm: 2.70124e-02
+Initial Eq. 3 Residual Norm: 1.80284e-01
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 7.270309852812618e-19
+Iter 01-->   1.14119e-08       1.20368e-04       4.54915e-04       2.08001e-03   1.94661e-10   3.98080e-04   
+Flash converged in 2 iterations. Error: 1.997719026669859e-14
+Iter 02-->   1.14261e-08       1.07490e-05       1.15644e-03       1.59235e-05   1.81564e-10   1.51447e-06   
+Flash converged in 2 iterations. Error: 2.840039948782965e-19
+Iter 03-->   1.13923e-08       1.62095e-07       1.73385e-05       1.45942e-05   1.80518e-10   3.05740e-07   
+-----------------------------------------------
+Final time: 0.19 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 7
+
+
+Time-step 8: Initial time: 0.19 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Initial Eq. 1 Residual Norm: 1.47689e-08
+Initial Eq. 2 Residual Norm: 2.46809e-02
+Initial Eq. 3 Residual Norm: 1.65738e-01
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.658207526364361e-19
+Iter 01-->   1.78996e-08       3.27892e-04       1.94778e-04       3.24636e-03   6.06433e-10   6.70511e-04   
+Flash converged in 2 iterations. Error: 4.963221639981826e-14
+Iter 02-->   1.79927e-08       1.50563e-05       1.18209e-03       2.74485e-05   5.51484e-10   7.26551e-06   
+Flash converged in 2 iterations. Error: 7.799713233265096e-19
+Iter 03-->   1.79466e-08       2.15154e-07       1.57198e-05       1.54646e-05   5.48265e-10   9.45827e-07   
+-----------------------------------------------
+Final time: 0.27 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 8
+
+
+Time-step 9: Initial time: 0.27 days
+dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 2.25121e-08
+Initial Eq. 2 Residual Norm: 2.14256e-02
+Initial Eq. 3 Residual Norm: 1.39008e-01
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.602190797785280e-19
+Iter 01-->   2.33964e-08       6.35171e-04       2.88245e-04       4.23564e-03   1.47576e-09   1.00881e-03   
+Flash converged in 2 iterations. Error: 8.331775561611401e-14
+Iter 02-->   2.37072e-08       1.81499e-05       1.07389e-03       4.38525e-05   1.33519e-09   2.32439e-05   
+Flash converged in 2 iterations. Error: 1.820687774264735e-18
+Iter 03-->   2.36584e-08       2.82300e-07       1.30095e-05       1.49897e-05   1.32651e-09   2.34910e-06   
+-----------------------------------------------
+Final time: 0.43 days, dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+end of time-step 9
+
+
+Time-step 10: Initial time: 0.43 days
+dt= 27648 sec (0 days : 7 hrs : 40 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 2.92213e-08
+Initial Eq. 2 Residual Norm: 1.81313e-02
+Initial Eq. 3 Residual Norm: 1.03910e-01
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.792004413627274e-19
+Iter 01-->   2.83534e-08       5.76053e-03       4.58682e-02       4.09085e-03   2.81113e-09   1.57745e-03   
+Flash converged in 2 iterations. Error: 7.697957302677935e-14
+Iter 02-->   2.65015e-08       1.73489e-04       9.57359e-04       4.83531e-04   2.56226e-09   4.15553e-04   
+Flash converged in 2 iterations. Error: 3.483279661901373e-16
+Iter 03-->   2.63799e-08       2.33190e-06       8.93319e-05       5.90683e-06   2.53394e-09   1.20666e-05   
+-----------------------------------------------
+Final time: 0.75 days, dt= 27648 sec (0 days : 7 hrs : 40 mins : 48 sec)
+end of time-step 10
+
+
+Time-step 11: Initial time: 0.75 days
+dt= 21600 sec (0 days : 6 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 2.94834e-08
+Initial Eq. 2 Residual Norm: 1.51347e-02
+Initial Eq. 3 Residual Norm: 7.34473e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.420806851933987e-20
+Iter 01-->   2.66758e-08       1.65149e-03       1.45264e-02       2.11457e-03   2.17209e-09   8.23135e-04   
+Flash converged in 2 iterations. Error: 1.730615109196016e-14
+Iter 02-->   2.66699e-08       2.10634e-05       5.84156e-04       1.52054e-04   2.14093e-09   9.68407e-05   
+Flash converged in 2 iterations. Error: 3.344535532828554e-17
+Iter 03-->   2.66295e-08       7.63123e-07       4.50177e-05       1.04938e-05   2.13093e-09   2.52628e-06   
+-----------------------------------------------
+Final time: 1 days, dt= 21600 sec (0 days : 6 hrs : 0 mins : 0 sec)
+end of time-step 11
+
+
+Printing solution to file at  1 days
+
+
+Time-step 12: Initial time: 1 days
+dt= 43200 sec (0 days : 12 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 2.97262e-08
+Initial Eq. 2 Residual Norm: 1.29879e-02
+Initial Eq. 3 Residual Norm: 7.09772e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 9.799445569738452e-20
+Iter 01-->   3.10363e-08       3.51537e-03       1.88785e-02       1.44937e-03   3.55578e-09   1.42796e-03   
+Flash converged in 2 iterations. Error: 9.429898358801343e-15
+Iter 02-->   2.73174e-08       4.56995e-05       2.78891e-04       1.85727e-04   3.54225e-09   3.09985e-04   
+Flash converged in 2 iterations. Error: 5.896793425591522e-17
+Iter 03-->   2.72955e-08       9.49665e-07       3.00790e-05       3.82687e-06   3.53538e-09   4.19869e-06   
+-----------------------------------------------
+Final time: 1.5 days, dt= 43200 sec (0 days : 12 hrs : 0 mins : 0 sec)
+end of time-step 12
+
+
+Time-step 13: Initial time: 1.5 days
+dt= 43200 sec (0 days : 12 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 3.04469e-08
+Initial Eq. 2 Residual Norm: 1.13150e-02
+Initial Eq. 3 Residual Norm: 5.35825e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.349618237889084e-20
+Iter 01-->   3.45647e-08       6.91850e-03       4.16823e-02       6.13967e-04   3.51647e-09   1.42895e-03   
+Flash converged in 2 iterations. Error: 1.176415882786525e-15
+Iter 02-->   2.63974e-08       1.85432e-04       6.73812e-04       3.49710e-04   3.53197e-09   6.72709e-04   
+Flash converged in 2 iterations. Error: 1.983168488685418e-16
+Iter 03-->   2.63661e-08       1.90671e-06       6.36363e-05       5.22273e-06   3.53076e-09   1.74538e-05   
+-----------------------------------------------
+Final time: 2 days, dt= 43200 sec (0 days : 12 hrs : 0 mins : 0 sec)
+end of time-step 13
+
+
+Printing solution to file at  2 days
+
+
+Time-step 14: Initial time: 2 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 3.07113e-08
+Initial Eq. 2 Residual Norm: 9.50188e-03
+Initial Eq. 3 Residual Norm: 4.99009e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.240721439352640e-19
+Iter 01-->   6.30330e-08       1.50902e-02       4.54260e-02       4.24404e-04   6.98274e-09   2.67486e-03   
+Flash converged in 2 iterations. Error: 1.468685584624640e-16
+Iter 02-->   2.73929e-08       3.66307e-04       1.26944e-03       4.32915e-04   5.23301e-09   1.27044e-03   
+Flash converged in 2 iterations. Error: 4.473129529274642e-16
+Iter 03-->   2.73889e-08       3.19812e-06       5.30214e-05       1.32444e-05   5.19310e-09   3.48942e-05   
+-----------------------------------------------
+Final time: 3 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 14
+
+
+Printing solution to file at  3 days
+
+
+Time-step 15: Initial time: 3 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 3.05321e-08
+Initial Eq. 2 Residual Norm: 8.15592e-03
+Initial Eq. 3 Residual Norm: 3.54310e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 5.535562196142413e-19
+Iter 01-->   5.95795e-08       1.28147e-02       3.95478e-02       4.07249e-04   7.15607e-09   2.40036e-03   
+Flash converged in 2 iterations. Error: 2.560916536661369e-16
+Iter 02-->   2.71703e-08       2.76055e-04       9.54345e-04       3.98094e-04   5.77116e-09   1.35307e-03   
+Flash converged in 2 iterations. Error: 4.216718151051073e-16
+Iter 03-->   2.71618e-08       3.15863e-06       5.41699e-05       1.08565e-05   5.17683e-09   3.42573e-05   
+-----------------------------------------------
+Final time: 4 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 15
+
+
+Printing solution to file at  4 days
+
+
+Time-step 16: Initial time: 4 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 3.08716e-08
+Initial Eq. 2 Residual Norm: 7.24391e-03
+Initial Eq. 3 Residual Norm: 3.14432e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 3.972713056572206e-19
+Iter 01-->   5.64014e-08       1.15457e-02       3.63683e-02       2.70104e-04   7.15832e-09   2.11275e-03   
+Flash converged in 2 iterations. Error: 1.239469513139821e-16
+Iter 02-->   2.72812e-08       7.08211e-04       1.66202e-03       3.05331e-04   5.16318e-09   1.11545e-03   
+Flash converged in 2 iterations. Error: 2.472560513824002e-16
+Iter 03-->   2.71301e-08       2.36815e-06       4.21714e-05       1.98793e-05   5.16550e-09   7.69216e-05   
+-----------------------------------------------
+Final time: 5 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 16
+
+
+Printing solution to file at  5 days
+
+
+Time-step 17: Initial time: 5 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 3.19572e-08
+Initial Eq. 2 Residual Norm: 6.80889e-03
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 2 iterations. Error: 1.185530134330160e-18
+Iter 01-->   3.01987e-03       2.97996e-02       1.82659e-02       2.01277e-04   6.83901e-09   1.76893e-03   
+Flash converged in 6 iterations. Error: 2.197192485373190e-14
+Iter 02-->   7.92003e-04       6.57987e-03       3.20295e-03       4.90455e-04   6.15097e-04   6.84679e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 43200
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 5 iterations. Error: 8.240629785424797e-14
+Iter 01-->   3.26138e-04       2.33686e-03       1.73906e-03       4.05814e-04   4.13613e-04   4.24059e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 21600
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 5 iterations. Error: 5.853942493954616e-15
+Iter 01-->   1.07894e-04       5.01219e-04       8.81233e-04       1.78228e-04   2.50449e-04   2.44956e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 10800
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 4 iterations. Error: 2.276868433043763e-13
+Iter 01-->   2.82077e-05       1.04094e-04       4.97388e-04       2.19536e-04   1.39997e-04   1.32756e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 5400
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 4 iterations. Error: 3.257910190792018e-15
+Iter 01-->   5.74722e-06       1.43853e-04       3.32486e-04       2.09951e-04   7.43860e-05   6.92856e-04   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 2700
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 3 iterations. Error: 6.650448004383287e-13
+Iter 01-->   1.96629e-06       1.01970e-04       3.16725e-04       1.89502e-04   3.83964e-05   3.54270e-04   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1350
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 3 iterations. Error: 1.384132650906620e-14
+Iter 01-->   1.36099e-06       6.14603e-05       6.01896e-04       1.70301e-04   1.95139e-05   1.79263e-04   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 675
+Initial Eq. 1 Residual Norm: 3.01987e-03
+Initial Eq. 2 Residual Norm: 2.94181e-02
+Initial Eq. 3 Residual Norm: 2.91937e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 3 iterations. Error: 2.507058819960754e-16
+Iter 01-->   7.91606e-07       3.86353e-05       1.23083e-03       1.52516e-04   9.83782e-06   9.02703e-05   
+Flash converged in 2 iterations. Error: 7.545259612403714e-15
+Iter 02-->   6.13960e-09       6.66885e-06       1.05749e-03       9.61445e-06   2.64134e-09   1.72447e-07   
+Flash converged in 2 iterations. Error: 1.908911090650570e-16
+Iter 03-->   1.72681e-09       1.74753e-06       2.06234e-04       5.61229e-06   1.44196e-10   1.63460e-07   
+Flash converged in 2 iterations. Error: 2.602738807500263e-17
+Iter 04-->   2.52769e-10       3.08209e-07       6.10175e-05       1.63144e-06   3.37095e-11   3.85010e-08   
+-----------------------------------------------
+Final time: 5.008 days, dt= 675 sec (0 days : 0 hrs : 11 mins : 15 sec)
+end of time-step 17
+
+
+Time-step 18: Initial time: 5.008 days
+dt= 337.5 sec (0 days : 0 hrs : 5 mins : 37.5 sec)
+Initial Eq. 1 Residual Norm: 2.99542e-03
+Initial Eq. 2 Residual Norm: 2.84830e-02
+Initial Eq. 3 Residual Norm: 3.88585e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 3 iterations. Error: 3.149221809570213e-16
+Iter 01-->   9.24114e-08       1.54868e-05       3.97762e-04       1.91909e-05   4.90046e-06   4.49195e-05   
+Flash converged in 2 iterations. Error: 1.636138197395711e-17
+Iter 02-->   1.01735e-09       1.35215e-06       3.39135e-04       2.60504e-06   1.60888e-10   8.50895e-09   
+Flash converged in 2 iterations. Error: 2.089955327719699e-18
+Iter 03-->   5.20254e-10       7.16009e-07       1.38838e-04       2.18573e-06   1.42235e-11   1.08900e-08   
+Flash converged in 2 iterations. Error: 1.565281850078459e-18
+Iter 04-->   7.22271e-11       1.33697e-07       3.18797e-05       9.57118e-07   2.60835e-12   4.45419e-09   
+-----------------------------------------------
+Final time: 5.012 days, dt= 337.5 sec (0 days : 0 hrs : 5 mins : 37.5 sec)
+end of time-step 18
+
+
+Time-step 19: Initial time: 5.012 days
+dt= 675 sec (0 days : 0 hrs : 11 mins : 15 sec)
+Initial Eq. 1 Residual Norm: 2.98327e-03
+Initial Eq. 2 Residual Norm: 2.83391e-02
+Initial Eq. 3 Residual Norm: 3.98257e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 3 iterations. Error: 8.853366969136648e-15
+Iter 01-->   1.56622e-07       2.74067e-05       2.89301e-04       1.52457e-05   9.72144e-06   8.93379e-05   
+Flash converged in 2 iterations. Error: 4.001388875555068e-16
+Iter 02-->   1.28383e-09       1.01205e-06       2.08042e-04       2.92134e-06   4.25424e-10   6.19655e-08   
+Flash converged in 2 iterations. Error: 5.009251227456597e-17
+Iter 03-->   1.23705e-09       6.29765e-07       9.30522e-05       1.93280e-06   1.64442e-11   1.44176e-08   
+-----------------------------------------------
+Final time: 5.02 days, dt= 675 sec (0 days : 0 hrs : 11 mins : 15 sec)
+end of time-step 19
+
+
+Time-step 20: Initial time: 5.02 days
+dt= 1350 sec (0 days : 0 hrs : 22 mins : 30 sec)
+Initial Eq. 1 Residual Norm: 2.95895e-03
+Initial Eq. 2 Residual Norm: 2.81820e-02
+Initial Eq. 3 Residual Norm: 4.00535e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 3 iterations. Error: 3.066499742403329e-13
+Iter 01-->   6.49532e-07       5.06647e-05       1.90020e-04       1.94621e-05   1.91257e-05   1.76776e-04   
+Flash converged in 2 iterations. Error: 1.682696896915136e-15
+Iter 02-->   1.62002e-09       6.99861e-07       1.41171e-04       2.65795e-06   3.26153e-09   1.71110e-07   
+Flash converged in 2 iterations. Error: 3.209846279503829e-17
+Iter 03-->   6.99318e-10       2.34898e-07       3.80648e-05       1.74081e-06   5.96342e-11   2.38436e-08   
+-----------------------------------------------
+Final time: 5.035 days, dt= 1350 sec (0 days : 0 hrs : 22 mins : 30 sec)
+end of time-step 20
+
+
+Time-step 21: Initial time: 5.035 days
+dt= 2700 sec (0 days : 0 hrs : 45 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 2.91068e-03
+Initial Eq. 2 Residual Norm: 2.78819e-02
+Initial Eq. 3 Residual Norm: 3.99633e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 4 iterations. Error: 1.621678430191650e-15
+Iter 01-->   2.82264e-06       8.48050e-05       1.24909e-04       2.87296e-05   3.69942e-05   3.45731e-04   
+Flash converged in 2 iterations. Error: 2.178032358475586e-14
+Iter 02-->   1.32935e-09       4.42858e-07       9.54332e-05       1.96563e-06   2.32459e-08   3.77390e-07   
+-----------------------------------------------
+Final time: 5.066 days, dt= 2700 sec (0 days : 0 hrs : 45 mins : 0 sec)
+end of time-step 21
+
+
+Time-step 22: Initial time: 5.066 days
+dt= 5400 sec (0 days : 1 hrs : 30 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 2.81588e-03
+Initial Eq. 2 Residual Norm: 2.72659e-02
+Initial Eq. 3 Residual Norm: 3.97629e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 4 iterations. Error: 1.242715433472128e-13
+Iter 01-->   1.08772e-05       1.11050e-04       3.39362e-04       3.46467e-05   6.90765e-05   6.59098e-04   
+Flash converged in 3 iterations. Error: 7.296480101487124e-16
+Iter 02-->   2.69729e-09       4.51764e-07       4.16039e-05       8.29166e-06   1.54077e-07   4.59433e-07   
+-----------------------------------------------
+Final time: 5.129 days, dt= 5400 sec (0 days : 1 hrs : 30 mins : 0 sec)
+end of time-step 22
+
+
+Time-step 23: Initial time: 5.129 days
+dt= 10800 sec (0 days : 3 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 2.63506e-03
+Initial Eq. 2 Residual Norm: 2.60008e-02
+Initial Eq. 3 Residual Norm: 3.94545e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 5 iterations. Error: 4.211433339958480e-15
+Iter 01-->   3.37849e-05       6.33245e-05       7.70815e-04       7.94302e-05   1.19738e-04   1.18529e-03   
+Flash converged in 3 iterations. Error: 1.416014460995700e-13
+Iter 02-->   4.51920e-08       2.19104e-06       6.92500e-05       1.97117e-05   9.46552e-07   4.70471e-06   
+-----------------------------------------------
+Final time: 5.254 days, dt= 10800 sec (0 days : 3 hrs : 0 mins : 0 sec)
+end of time-step 23
+
+
+Time-step 24: Initial time: 5.254 days
+dt= 21600 sec (0 days : 6 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 2.31573e-03
+Initial Eq. 2 Residual Norm: 2.35408e-02
+Initial Eq. 3 Residual Norm: 3.93125e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 5 iterations. Error: 5.553422733428171e-14
+Iter 01-->   8.78767e-05       3.58406e-04       2.24874e-03       2.37431e-04   1.77537e-04   1.87328e-03   
+Flash converged in 4 iterations. Error: 1.013755164709528e-14
+Iter 02-->   1.04299e-07       9.35284e-06       1.55099e-04       5.81737e-05   4.54027e-06   2.08077e-05   
+Flash converged in 3 iterations. Error: 1.602895698513844e-15
+Iter 03-->   7.17036e-08       6.50184e-07       3.60697e-05       4.24408e-06   2.38686e-08   7.35650e-07   
+-----------------------------------------------
+Final time: 5.504 days, dt= 21600 sec (0 days : 6 hrs : 0 mins : 0 sec)
+end of time-step 24
+
+
+Time-step 25: Initial time: 5.504 days
+dt= 42862.5 sec (0 days : 11 hrs : 54 mins : 22.5 sec)
+Initial Eq. 1 Residual Norm: 1.84099e-03
+Initial Eq. 2 Residual Norm: 1.96232e-02
+Initial Eq. 3 Residual Norm: 3.92170e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 6 iterations. Error: 1.964697536288327e-14
+Iter 01-->   8.27362e-05       4.67352e-03       2.87065e-02       5.26667e-04   1.92067e-04   2.26628e-03   
+Flash converged in 4 iterations. Error: 7.046471191282704e-14
+Iter 02-->   7.49077e-07       7.99069e-05       3.43211e-04       2.08934e-04   6.38972e-06   4.35104e-04   
+Flash converged in 3 iterations. Error: 2.292183946299663e-14
+Iter 03-->   2.35857e-07       1.37063e-06       4.00484e-05       1.08373e-05   9.50454e-08   7.56191e-06   
+-----------------------------------------------
+Final time: 6 days, dt= 42862.5 sec (0 days : 11 hrs : 54 mins : 22.5 sec)
+end of time-step 25
+
+
+Printing solution to file at  6 days
+
+
+Time-step 26: Initial time: 6 days
+dt= 85725 sec (0 days : 23 hrs : 48 mins : 45 sec)
+Initial Eq. 1 Residual Norm: 1.34288e-03
+Initial Eq. 2 Residual Norm: 1.47988e-02
+Initial Eq. 3 Residual Norm: 3.77822e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 7 iterations. Error: 1.545187857870997e-14
+Iter 01-->   1.05485e-04       1.12912e-02       3.65440e-02       7.26334e-04   2.14826e-04   2.36960e-03   
+Flash converged in 5 iterations. Error: 1.235775935008788e-13
+Iter 02-->   3.94111e-06       6.31848e-04       1.13977e-03       2.56311e-04   1.23969e-05   1.41419e-03   
+Flash converged in 3 iterations. Error: 5.832236955234689e-13
+Iter 03-->   1.01906e-06       3.05020e-04       2.28341e-04       1.88019e-05   4.45694e-07   6.16521e-05   
+Flash converged in 3 iterations. Error: 1.344198343105488e-14
+Iter 04-->   6.84561e-07       4.75626e-04       6.26445e-04       9.98884e-06   1.07241e-07   4.99280e-05   
+Flash converged in 2 iterations. Error: 4.718887686634348e-13
+Iter 05-->   5.54992e-07       3.05368e-04       2.28968e-04       8.46885e-06   1.09745e-07   4.99333e-05   
+Flash converged in 2 iterations. Error: 4.894482048689136e-13
+Iter 06-->   6.69653e-07       4.75510e-04       6.26115e-04       8.56016e-06   1.09658e-07   4.99123e-05   
+Flash converged in 2 iterations. Error: 4.744439289547339e-13
+Iter 07-->   5.53534e-07       3.05368e-04       2.28942e-04       8.57314e-06   1.09650e-07   4.99123e-05   
+Flash converged in 2 iterations. Error: 4.887312573334648e-13
+Iter 08-->   6.69748e-07       4.75511e-04       6.26118e-04       8.57225e-06   1.09651e-07   4.99125e-05   
+Flash converged in 2 iterations. Error: 4.743930494915101e-13
+Iter 09-->   5.53546e-07       3.05368e-04       2.28943e-04       8.57209e-06   1.09651e-07   4.99125e-05   
+Flash converged in 2 iterations. Error: 4.887378425056238e-13
+Iter 10-->   6.69747e-07       4.75511e-04       6.26118e-04       8.57215e-06   1.09651e-07   4.99125e-05   
+Flash converged in 2 iterations. Error: 4.743934637794857e-13
+Iter 11-->   5.53546e-07       3.05368e-04       2.28943e-04       8.57211e-06   1.09651e-07   4.99125e-05   
+Flash converged in 2 iterations. Error: 4.887377789918728e-13
+Iter 12-->   6.69747e-07       4.75511e-04       6.26118e-04       8.57215e-06   1.09651e-07   4.99125e-05   
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 42862.5
+Initial Eq. 1 Residual Norm: 1.34319e-03
+Initial Eq. 2 Residual Norm: 1.47925e-02
+Initial Eq. 3 Residual Norm: 3.77822e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 6 iterations. Error: 1.324355098114588e-13
+Iter 01-->   5.49910e-05       4.91095e-03       3.06714e-02       4.13242e-04   1.37681e-04   1.41974e-03   
+Flash converged in 4 iterations. Error: 4.420870894638105e-13
+Iter 02-->   1.01606e-06       8.93403e-05       3.98614e-04       2.23185e-04   4.21870e-06   4.69356e-04   
+Flash converged in 3 iterations. Error: 1.007890534482371e-13
+Iter 03-->   4.86222e-07       1.54287e-06       5.06784e-05       1.01037e-05   7.31799e-08   8.63141e-06   
+-----------------------------------------------
+Final time: 6.496 days, dt= 42862.5 sec (0 days : 11 hrs : 54 mins : 22.5 sec)
+end of time-step 26
+
+
+Time-step 27: Initial time: 6.496 days
+dt= 42862.5 sec (0 days : 11 hrs : 54 mins : 22.5 sec)
+Initial Eq. 1 Residual Norm: 1.08843e-03
+Initial Eq. 2 Residual Norm: 1.21296e-02
+Initial Eq. 3 Residual Norm: 3.58820e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 6 iterations. Error: 3.532287948396300e-13
+Iter 01-->   4.90111e-05       2.37101e-03       1.47450e-02       3.57379e-04   9.51372e-05   1.08075e-03   
+Flash converged in 4 iterations. Error: 4.583377242674552e-14
+Iter 02-->   1.33266e-06       2.51788e-05       1.86671e-04       1.39436e-04   1.94755e-06   2.18441e-04   
+Flash converged in 3 iterations. Error: 1.702125697956352e-14
+Iter 03-->   3.01804e-07       9.03956e-07       2.69386e-05       6.85605e-06   7.20813e-08   2.37016e-06   
+-----------------------------------------------
+Final time: 6.992 days, dt= 42862.5 sec (0 days : 11 hrs : 54 mins : 22.5 sec)
+end of time-step 27
+
+
+Time-step 28: Initial time: 6.992 days
+dt= 675 sec (0 days : 0 hrs : 11 mins : 15 sec)
+Initial Eq. 1 Residual Norm: 9.40384e-04
+Initial Eq. 2 Residual Norm: 1.09229e-02
+Initial Eq. 3 Residual Norm: 3.08100e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 4 iterations. Error: 9.079340688642198e-13
+Iter 01-->   4.33328e-06       4.87202e-05       5.53548e-04       1.62080e-04   1.46423e-06   1.66343e-05   
+Flash converged in 2 iterations. Error: 8.474613882437092e-13
+Iter 02-->   1.68175e-08       1.22309e-06       5.79442e-04       4.36019e-06   7.19317e-09   8.80574e-08   
+Flash converged in 2 iterations. Error: 1.336249456415207e-14
+Iter 03-->   1.91369e-08       3.02217e-07       1.06476e-04       4.71242e-06   6.39107e-10   1.24139e-08   
+Flash converged in 2 iterations. Error: 1.129695983202737e-14
+Iter 04-->   6.36568e-09       1.23011e-07       4.39063e-05       8.44990e-07   3.26185e-10   2.99452e-09   
+-----------------------------------------------
+Final time: 7 days, dt= 675 sec (0 days : 0 hrs : 11 mins : 15 sec)
+end of time-step 28
+
+
+Printing solution to file at  7 days
+
+
+Time-step 29: Initial time: 7 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 9.39906e-04
+Initial Eq. 2 Residual Norm: 1.08306e-02
+Initial Eq. 3 Residual Norm: 3.87294e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 6 iterations. Error: 6.050709625199189e-13
+Iter 01-->   9.07069e-05       1.07254e-02       3.46892e-02       4.23131e-04   1.26783e-04   2.17359e-03   
+Flash converged in 5 iterations. Error: 1.754308460769096e-14
+Iter 02-->   4.06045e-06       2.55425e-04       9.01463e-04       2.19387e-04   6.93257e-06   1.37441e-03   
+Flash converged in 3 iterations. Error: 4.391993066915500e-13
+Iter 03-->   1.09438e-06       2.12556e-06       3.19158e-05       8.68695e-06   5.31069e-07   3.31489e-05   
+-----------------------------------------------
+Final time: 8 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 29
+
+
+Printing solution to file at  8 days
+
+
+Time-step 30: Initial time: 8 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 7.67299e-04
+Initial Eq. 2 Residual Norm: 8.87112e-03
+Initial Eq. 3 Residual Norm: 2.72260e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 7 iterations. Error: 1.456781508864054e-13
+Iter 01-->   7.69114e-05       1.20787e-02       3.89014e-02       4.29017e-04   9.78430e-05   1.93315e-03   
+Flash converged in 5 iterations. Error: 2.398712076311650e-14
+Iter 02-->   7.02650e-06       2.28347e-04       7.66894e-04       4.41946e-04   4.33720e-06   1.15679e-03   
+Flash converged in 4 iterations. Error: 1.423159098706603e-13
+Iter 03-->   3.74882e-06       5.37567e-06       9.26824e-05       1.34082e-05   6.57995e-07   2.52460e-05   
+-----------------------------------------------
+Final time: 9 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 30
+
+
+Printing solution to file at  9 days
+
+
+Time-step 31: Initial time: 9 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 6.70194e-04
+Initial Eq. 2 Residual Norm: 7.49782e-03
+Initial Eq. 3 Residual Norm: 2.33292e-02
+           ||Residual Eq1||  ||Residual Eq2||  ||Residual Eq3||   ||delta p||   ||delta z1||   ||delta z2||   
+Flash converged in 7 iterations. Error: 2.605382595320653e-13
+Iter 01-->   5.26773e-05       8.30705e-03       2.66999e-02       2.51049e-04   8.20454e-05   1.69059e-03   
+Flash converged in 5 iterations. Error: 2.376094013204877e-14
+Iter 02-->   4.84017e-06       1.16301e-04       3.74007e-04       2.26955e-04   3.88469e-06   8.23531e-04   
+Flash converged in 4 iterations. Error: 3.482606890387257e-14
+Iter 03-->   1.75950e-06       2.38427e-06       4.50116e-05       6.47781e-06   6.62174e-07   1.22485e-05   
+-----------------------------------------------
+Final time: 10 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 31
+
+
+Printing solution to file at  10 days
+
+
+
+
+The Total Simulation time is 5.4791 [s]
+Simulation successfully finished!
