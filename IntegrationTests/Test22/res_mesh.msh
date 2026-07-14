@@ -1,0 +1,52 @@
+SetFactory("OpenCASCADE");
+
+// Global cube dimensions
+L = 100;
+N = 11;
+
+// Create main cube
+Box(1) = {0, 0, 0, L, L, L};
+
+// Split cube into 8 sub-cubes by inserting 3 cutting planes
+// Plane at x = 50
+Plane Surface(100) = {}; // dummy surface
+Extrude {0,0,1} {
+  Surface{100};
+  Layers{1};
+  Recombine;
+}
+CutPlaneX = 50;
+Plane{200} = {1, 0, 0, -CutPlaneX};
+
+// Plane at y = 50
+CutPlaneY = 50;
+Plane{201} = {0, 1, 0, -CutPlaneY};
+
+// Plane at z = 50
+CutPlaneZ = 50;
+Plane{202} = {0, 0, 1, -CutPlaneZ};
+
+// Fragment the solid with the planes → produce 8 subcubes
+Fragment{ Volume{1}; }{ Plane{200,201,202}; }
+
+// ---------------------------------------------------------
+// MESH CONTROL
+// ---------------------------------------------------------
+
+Mesh.Algorithm3D = 3;   // Frontal hexahedral
+
+// Control number of nodes along edges
+Transfinite Curve "*" = N;
+
+// Structured surfaces and volumes
+Transfinite Surface "*";
+Transfinite Volume "*";
+
+Recombine Surface "*";   // hex mesh
+
+Mesh.SizeFactor = 1;
+
+// Generate HEX mesh
+Mesh 3;
+
+Physical Volume("Cube") = Volume "*";

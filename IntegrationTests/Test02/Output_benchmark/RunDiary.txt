@@ -1,0 +1,888 @@
+WARNING: Fields PERMEABILITY_CONTRAST_MEAN,PERMEABILITY_CONTRAST_ORDER,INCLUDE_ROCK_PROPERTIES not found.
+WARNING: Fields SCHEDULE,COMPOSITION not found.
+WARNING: Fields INITIAL_STATE not found.
+[Warning: No lookup table was provided for relative permeability. The
+default file 'LookupTable.txt' will be used.] 
+[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties>generate_RelPerm', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m', 49)" style="font-weight:bold">build_FluidProperties>generate_RelPerm</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m',49,0)">line 49</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m', 23)" style="font-weight:bold">build_FluidProperties</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m',23,0)">line 23</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory/translate_simulation_input', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m', 78)" style="font-weight:bold">darsim2_settings_factory/translate_simulation_input</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m',78,0)">line 78</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m', 25)" style="font-weight:bold">darsim2_settings_factory</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m',25,0)">line 25</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_darsim_settings', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/create_darsim_settings.m', 16)" style="font-weight:bold">create_darsim_settings</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/create_darsim_settings.m',16,0)">line 16</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m', 42)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m',42,0)">line 42</a>)] 
+[Warning: Injector 1 will be injecting component 1.] 
+[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildProductionSystemWells', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m', 670)" style="font-weight:bold">simulation_factory/BuildProductionSystemWells</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m',670,0)">line 670</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildProductionSystemReservoir', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m', 421)" style="font-weight:bold">simulation_factory/BuildProductionSystemReservoir</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m',421,0)">line 421</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildSimulation', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m', 31)" style="font-weight:bold">simulation_factory/BuildSimulation</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m',31,0)">line 31</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_simulator', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/simulation/create_simulator.m', 11)" style="font-weight:bold">create_simulator</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/simulation/create_simulator.m',11,0)">line 11</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m', 43)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m',43,0)">line 43</a>)] 
+Started simple initialization
+Initial conditions:
+Pressure: 250 bar
+Saturation: 0
+Temperature: 338.15 K
+---------------------------------------------------------
+
+
+Initialization took 0.0083557 s
+
+
+BEGIN TIME-DEPENDENT SIMULATION
+SIMULATION OF PROBLEM IntegrationTest HAS STARTED.
+FORMATION CHARACTERISTICS:
+Reservoir geometry:
+Lx: 100 m
+Ly: 100 m
+Thickness:  140 m
+Total Grid Cells: 10 x 10 x 10 = 1000, Number of Active Cells: 1000
+---------------------------------------------------------
+Fluid Model:
+Type: BlackOil
+N of phases: 2
+N of components:  2
+---------------------------------------------------------
+Total Simulation Time: 864000 seconds (10 days : 0 hrs : 0 mins : 0 sec)
+Maximum Allowed Time-steps: 20000
+Minimum Size of Time-step : 0.01
+Maximum Size of Time-step : 5
+Number of Reports         : 10
+---------------------------------------------------------
+Time-step 1: Initial time: 0 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49795e-01
+Initial Eq. 2 Residual Norm: 2.44181e+00
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   2.04539e-04       1.49728e-01       5.45051e-02   6.10483e-04   
+Iter 02-->   7.75541e-05       1.19876e-04       5.04131e-03   3.72235e-07   
+Iter 03-->   7.75538e-05       7.75541e-05       3.05033e-06   1.00000e-08   
+-----------------------------------------------
+Final time: 0.01 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 1
+
+
+Time-step 2: Initial time: 0.01 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49795e-01
+Initial Eq. 2 Residual Norm: 7.75541e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.04944e-04       1.49600e-01       5.01304e-03   1.21973e-03   
+Iter 02-->   2.61609e-07       2.18104e-04       5.00475e-03   1.73985e-06   
+Iter 03-->   1.35125e-07       2.61377e-07       8.63237e-06   2.12848e-09   
+-----------------------------------------------
+Final time: 0.03 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 2
+
+
+Time-step 3: Initial time: 0.03 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.49794e-01
+Initial Eq. 2 Residual Norm: 2.61377e-07
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.13431e-03       1.49346e-01       4.97135e-03   2.43454e-03   
+Iter 02-->   1.12192e-06       4.75217e-04       5.01379e-03   7.42559e-06   
+Iter 03-->   7.32440e-07       1.11991e-06       1.97715e-05   1.82116e-08   
+-----------------------------------------------
+Final time: 0.07 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 3
+
+
+Time-step 4: Initial time: 0.07 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Initial Eq. 1 Residual Norm: 1.49794e-01
+Initial Eq. 2 Residual Norm: 1.11991e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   2.39119e-03       1.48837e-01       4.96935e-03   4.84946e-03   
+Iter 02-->   4.63008e-06       9.86847e-04       5.03185e-03   3.03532e-05   
+Iter 03-->   3.33309e-06       4.61339e-06       4.19488e-05   1.49588e-07   
+-----------------------------------------------
+Final time: 0.15 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 4
+
+
+Time-step 5: Initial time: 0.15 days
+dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49792e-01
+Initial Eq. 2 Residual Norm: 4.61339e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.89637e-03       1.47816e-01       4.96541e-03   9.62102e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 6912
+Initial Eq. 1 Residual Norm: 1.49792e-01
+Initial Eq. 2 Residual Norm: 4.61339e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.38124e-03       1.48360e-01       4.96541e-03   4.81055e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 3456
+Initial Eq. 1 Residual Norm: 1.49792e-01
+Initial Eq. 2 Residual Norm: 4.61339e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   2.63091e-03       1.48630e-01       4.96541e-03   2.40529e-03   
+Iter 02-->   2.96283e-06       1.03798e-03       5.03791e-03   1.32261e-05   
+Iter 03-->   6.00889e-07       6.29598e-06       4.98260e-05   9.00538e-08   
+-----------------------------------------------
+Final time: 0.19 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 5
+
+
+Time-step 6: Initial time: 0.19 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49791e-01
+Initial Eq. 2 Residual Norm: 6.29598e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   2.75692e-03       1.48528e-01       4.96335e-03   1.19783e-03   
+Iter 02-->   2.82369e-06       1.10660e-03       5.04093e-03   6.13028e-06   
+Iter 03-->   7.45137e-07       5.87223e-06       5.37342e-05   4.26523e-08   
+-----------------------------------------------
+Final time: 0.21 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 6
+
+
+Time-step 7: Initial time: 0.21 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.49790e-01
+Initial Eq. 2 Residual Norm: 5.87223e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.37550e-03       1.48275e-01       4.96234e-03   2.39085e-03   
+Iter 02-->   4.56828e-06       1.33580e-03       5.04985e-03   1.60288e-05   
+Iter 03-->   1.02020e-06       9.64349e-06       6.46926e-05   1.38583e-07   
+-----------------------------------------------
+Final time: 0.25 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 7
+
+
+Time-step 8: Initial time: 0.25 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Initial Eq. 1 Residual Norm: 1.49788e-01
+Initial Eq. 2 Residual Norm: 9.64349e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.61299e-03       1.47768e-01       4.96040e-03   4.76254e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 3456
+Initial Eq. 1 Residual Norm: 1.49788e-01
+Initial Eq. 2 Residual Norm: 9.64349e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.86981e-03       1.48039e-01       4.96040e-03   2.38129e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 1.49788e-01
+Initial Eq. 2 Residual Norm: 9.64349e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.50088e-03       1.48174e-01       4.96040e-03   1.19065e-03   
+Iter 02-->   4.52910e-06       1.41162e-03       5.05284e-03   7.52863e-06   
+Iter 03-->   1.20532e-06       9.20874e-06       6.85582e-05   6.70219e-08   
+-----------------------------------------------
+Final time: 0.27 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 8
+
+
+Time-step 9: Initial time: 0.27 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49786e-01
+Initial Eq. 2 Residual Norm: 9.20874e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.56457e-03       1.48124e-01       4.95940e-03   5.94136e-04   
+Iter 02-->   4.62851e-06       1.45613e-03       5.05433e-03   3.64347e-06   
+Iter 03-->   1.30216e-06       9.08323e-06       7.04864e-05   3.32829e-08   
+-----------------------------------------------
+Final time: 0.28 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 9
+
+
+Time-step 10: Initial time: 0.28 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49786e-01
+Initial Eq. 2 Residual Norm: 9.08323e-06
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.87130e-03       1.47997e-01       4.95890e-03   1.18708e-03   
+Iter 02-->   5.54340e-06       1.56358e-03       5.05876e-03   8.21593e-06   
+Iter 03-->   1.47177e-06       1.11571e-05       7.59312e-05   8.12403e-08   
+-----------------------------------------------
+Final time: 0.3 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 10
+
+
+Time-step 11: Initial time: 0.3 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.49785e-01
+Initial Eq. 2 Residual Norm: 1.11571e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.48521e-03       1.47745e-01       4.95793e-03   2.36942e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 1.49785e-01
+Initial Eq. 2 Residual Norm: 1.11571e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.11766e-03       1.47880e-01       4.95793e-03   1.18471e-03   
+Iter 02-->   6.28003e-06       1.66463e-03       5.06270e-03   8.66980e-06   
+Iter 03-->   1.66225e-06       1.25591e-05       8.08321e-05   9.14652e-08   
+-----------------------------------------------
+Final time: 0.32 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 11
+
+
+Time-step 12: Initial time: 0.32 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49783e-01
+Initial Eq. 2 Residual Norm: 1.25591e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.36356e-03       1.47763e-01       4.95696e-03   1.18235e-03   
+Iter 02-->   7.06533e-06       1.76548e-03       5.06663e-03   9.12022e-06   
+Iter 03-->   1.86269e-06       1.40434e-05       8.57215e-05   1.02283e-07   
+-----------------------------------------------
+Final time: 0.34 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 12
+
+
+Time-step 13: Initial time: 0.34 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.49782e-01
+Initial Eq. 2 Residual Norm: 1.40434e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.97551e-03       1.47510e-01       4.95599e-03   2.35998e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 1.49782e-01
+Initial Eq. 2 Residual Norm: 1.40434e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.60898e-03       1.47645e-01       4.95599e-03   1.18000e-03   
+Iter 02-->   7.89955e-06       1.86612e-03       5.07055e-03   9.56720e-06   
+Iter 03-->   2.07282e-06       1.56097e-05       9.05994e-05   1.13691e-07   
+-----------------------------------------------
+Final time: 0.36 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 13
+
+
+Time-step 14: Initial time: 0.36 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49780e-01
+Initial Eq. 2 Residual Norm: 1.56097e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.85394e-03       1.47529e-01       4.95502e-03   1.17765e-03   
+Iter 02-->   8.78295e-06       1.96653e-03       5.07447e-03   1.00108e-05   
+Iter 03-->   2.29239e-06       1.72577e-05       9.54658e-05   1.25687e-07   
+-----------------------------------------------
+Final time: 0.38 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 14
+
+
+Time-step 15: Initial time: 0.38 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.49779e-01
+Initial Eq. 2 Residual Norm: 1.72577e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.46397e-03       1.47276e-01       4.95406e-03   2.35060e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 1.49779e-01
+Initial Eq. 2 Residual Norm: 1.72577e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.09843e-03       1.47412e-01       4.95406e-03   1.17531e-03   
+Iter 02-->   9.71578e-06       2.06672e-03       5.07837e-03   1.04510e-05   
+Iter 03-->   2.52113e-06       1.89872e-05       1.00321e-04   1.38266e-07   
+-----------------------------------------------
+Final time: 0.4 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 15
+
+
+Time-step 16: Initial time: 0.4 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49777e-01
+Initial Eq. 2 Residual Norm: 1.89872e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.34246e-03       1.47295e-01       4.95309e-03   1.17297e-03   
+Iter 02-->   1.06983e-05       2.16669e-03       5.08227e-03   1.08878e-05   
+Iter 03-->   2.75880e-06       2.07979e-05       1.05164e-04   1.51426e-07   
+-----------------------------------------------
+Final time: 0.42 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 16
+
+
+Time-step 17: Initial time: 0.42 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.49775e-01
+Initial Eq. 2 Residual Norm: 2.07979e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.95059e-03       1.47043e-01       4.95214e-03   2.34127e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 1.49775e-01
+Initial Eq. 2 Residual Norm: 2.07979e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.58601e-03       1.47179e-01       4.95214e-03   1.17064e-03   
+Iter 02-->   1.17308e-05       2.26642e-03       5.08615e-03   1.13213e-05   
+Iter 03-->   3.00514e-06       2.26897e-05       1.09996e-04   1.65164e-07   
+-----------------------------------------------
+Final time: 0.44 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 17
+
+
+Time-step 18: Initial time: 0.44 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49773e-01
+Initial Eq. 2 Residual Norm: 2.26897e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.82909e-03       1.47063e-01       4.95118e-03   1.16832e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49773e-01
+Initial Eq. 2 Residual Norm: 2.26897e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.64765e-03       1.47130e-01       4.95118e-03   5.84161e-04   
+Iter 02-->   1.19749e-05       2.31252e-03       5.08760e-03   5.56020e-06   
+Iter 03-->   3.15561e-06       2.25604e-05       1.11865e-04   8.24401e-08   
+-----------------------------------------------
+Final time: 0.45 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 18
+
+
+Time-step 19: Initial time: 0.45 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49772e-01
+Initial Eq. 2 Residual Norm: 2.25604e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.76913e-03       1.47072e-01       4.95069e-03   5.83581e-04   
+Iter 02-->   1.25188e-05       2.36234e-03       5.08954e-03   5.68459e-06   
+Iter 03-->   3.28495e-06       2.35367e-05       1.14273e-04   8.59882e-08   
+-----------------------------------------------
+Final time: 0.46 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 19
+
+
+Time-step 20: Initial time: 0.46 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49771e-01
+Initial Eq. 2 Residual Norm: 2.35367e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.07171e-03       1.46946e-01       4.95021e-03   1.16600e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49771e-01
+Initial Eq. 2 Residual Norm: 2.35367e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.89048e-03       1.47014e-01       4.95021e-03   5.83003e-04   
+Iter 02-->   1.30754e-05       2.41210e-03       5.09148e-03   5.80889e-06   
+Iter 03-->   3.41636e-06       2.45333e-05       1.16678e-04   8.96079e-08   
+-----------------------------------------------
+Final time: 0.47 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 20
+
+
+Time-step 21: Initial time: 0.47 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49770e-01
+Initial Eq. 2 Residual Norm: 2.45333e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.01172e-03       1.46956e-01       4.94974e-03   5.82425e-04   
+Iter 02-->   1.36447e-05       2.46180e-03       5.09341e-03   5.93310e-06   
+Iter 03-->   3.54980e-06       2.55500e-05       1.19081e-04   9.32993e-08   
+-----------------------------------------------
+Final time: 0.48 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 21
+
+
+Time-step 22: Initial time: 0.48 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49769e-01
+Initial Eq. 2 Residual Norm: 2.55500e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.31386e-03       1.46831e-01       4.94926e-03   1.16369e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49769e-01
+Initial Eq. 2 Residual Norm: 2.55500e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.13284e-03       1.46898e-01       4.94926e-03   5.81848e-04   
+Iter 02-->   1.42266e-05       2.51143e-03       5.09534e-03   6.05722e-06   
+Iter 03-->   3.68523e-06       2.65869e-05       1.21481e-04   9.70620e-08   
+-----------------------------------------------
+Final time: 0.49 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 22
+
+
+Time-step 23: Initial time: 0.49 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49768e-01
+Initial Eq. 2 Residual Norm: 2.65869e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.25385e-03       1.46840e-01       4.94879e-03   5.81272e-04   
+Iter 02-->   1.48213e-05       2.56101e-03       5.09727e-03   6.18125e-06   
+Iter 03-->   3.82264e-06       2.76439e-05       1.23878e-04   1.00896e-07   
+-----------------------------------------------
+Final time: 0.5 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 23
+
+
+Time-step 24: Initial time: 0.5 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49767e-01
+Initial Eq. 2 Residual Norm: 2.76439e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.55554e-03       1.46715e-01       4.94832e-03   1.16139e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49767e-01
+Initial Eq. 2 Residual Norm: 2.76439e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.37474e-03       1.46783e-01       4.94832e-03   5.80697e-04   
+Iter 02-->   1.54287e-05       2.61052e-03       5.09920e-03   6.30520e-06   
+Iter 03-->   3.96199e-06       2.87210e-05       1.26272e-04   1.04801e-07   
+-----------------------------------------------
+Final time: 0.51 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 24
+
+
+Time-step 25: Initial time: 0.51 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49766e-01
+Initial Eq. 2 Residual Norm: 2.87210e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.49551e-03       1.46725e-01       4.94785e-03   5.80122e-04   
+Iter 02-->   1.60489e-05       2.65997e-03       5.10112e-03   6.42905e-06   
+Iter 03-->   4.10325e-06       2.98181e-05       1.28663e-04   1.08776e-07   
+-----------------------------------------------
+Final time: 0.52 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 25
+
+
+Time-step 26: Initial time: 0.52 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49765e-01
+Initial Eq. 2 Residual Norm: 2.98181e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.79675e-03       1.46599e-01       4.94737e-03   1.15909e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49765e-01
+Initial Eq. 2 Residual Norm: 2.98181e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.61616e-03       1.46667e-01       4.94737e-03   5.79548e-04   
+Iter 02-->   1.66819e-05       2.70936e-03       5.10305e-03   6.55281e-06   
+Iter 03-->   4.24640e-06       3.09353e-05       1.31051e-04   1.12823e-07   
+-----------------------------------------------
+Final time: 0.53 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 26
+
+
+Time-step 27: Initial time: 0.53 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49764e-01
+Initial Eq. 2 Residual Norm: 3.09353e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.73670e-03       1.46609e-01       4.94690e-03   5.78976e-04   
+Iter 02-->   1.73278e-05       2.75869e-03       5.10497e-03   6.67649e-06   
+Iter 03-->   4.39141e-06       3.20725e-05       1.33436e-04   1.16940e-07   
+-----------------------------------------------
+Final time: 0.54 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 27
+
+
+Time-step 28: Initial time: 0.54 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49762e-01
+Initial Eq. 2 Residual Norm: 3.20725e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   7.03749e-03       1.46484e-01       4.94643e-03   1.15680e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49762e-01
+Initial Eq. 2 Residual Norm: 3.20725e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.85711e-03       1.46552e-01       4.94643e-03   5.78403e-04   
+Iter 02-->   1.79865e-05       2.80796e-03       5.10689e-03   6.80007e-06   
+Iter 03-->   4.53824e-06       3.32296e-05       1.35819e-04   1.21127e-07   
+-----------------------------------------------
+Final time: 0.55 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 28
+
+
+Time-step 29: Initial time: 0.55 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49761e-01
+Initial Eq. 2 Residual Norm: 3.32296e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.97742e-03       1.46494e-01       4.94596e-03   5.77832e-04   
+Iter 02-->   1.86581e-05       2.85717e-03       5.10880e-03   6.92356e-06   
+Iter 03-->   4.68688e-06       3.44067e-05       1.38199e-04   1.25384e-07   
+-----------------------------------------------
+Final time: 0.56 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 29
+
+
+Time-step 30: Initial time: 0.56 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49760e-01
+Initial Eq. 2 Residual Norm: 3.44067e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   7.27777e-03       1.46369e-01       4.94550e-03   1.15452e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49760e-01
+Initial Eq. 2 Residual Norm: 3.44067e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   7.09760e-03       1.46436e-01       4.94550e-03   5.77262e-04   
+Iter 02-->   1.93426e-05       2.90632e-03       5.11072e-03   7.04697e-06   
+Iter 03-->   4.83729e-06       3.56037e-05       1.40576e-04   1.29711e-07   
+-----------------------------------------------
+Final time: 0.57 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 30
+
+
+Time-step 31: Initial time: 0.57 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49759e-01
+Initial Eq. 2 Residual Norm: 3.56037e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   7.21767e-03       1.46379e-01       4.94503e-03   5.76692e-04   
+Iter 02-->   2.00402e-05       2.95540e-03       5.11263e-03   7.17028e-06   
+Iter 03-->   4.98945e-06       3.68206e-05       1.42950e-04   1.34108e-07   
+-----------------------------------------------
+Final time: 0.58 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 31
+
+
+Time-step 32: Initial time: 0.58 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.49757e-01
+Initial Eq. 2 Residual Norm: 3.68206e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.88863e-03       8.79750e-02       4.94456e-03   1.15224e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49757e-01
+Initial Eq. 2 Residual Norm: 3.68206e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   7.33762e-03       1.46321e-01       4.94456e-03   5.76123e-04   
+Iter 02-->   2.07507e-05       3.00443e-03       5.11454e-03   7.29351e-06   
+Iter 03-->   5.14332e-06       3.80573e-05       1.45321e-04   1.38574e-07   
+-----------------------------------------------
+Final time: 0.59 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 32
+
+
+Time-step 33: Initial time: 0.59 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.49756e-01
+Initial Eq. 2 Residual Norm: 3.80573e-05
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.98035e-03       3.28570e-02       4.94409e-03   5.75555e-04   
+Iter 02-->   9.71304e-06       1.59834e-03       1.15033e-03   8.31124e-06   
+Iter 03-->   1.63950e-06       5.13810e-05       3.81467e-05   4.40740e-08   
+-----------------------------------------------
+Final time: 0.6 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 33
+
+
+Time-step 34: Initial time: 0.6 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Initial Eq. 1 Residual Norm: 1.45354e-01
+Initial Eq. 2 Residual Norm: 1.13252e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.26891e-04       5.45386e-03       2.64033e-03   1.12443e-03   
+Iter 02-->   8.80028e-06       4.00041e-04       2.05399e-04   3.61990e-06   
+Iter 03-->   5.16517e-07       1.79408e-05       2.08167e-05   3.61633e-08   
+-----------------------------------------------
+Final time: 0.62 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 34
+
+
+Time-step 35: Initial time: 0.62 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Initial Eq. 1 Residual Norm: 1.40941e-01
+Initial Eq. 2 Residual Norm: 1.85664e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   6.90329e-05       7.24768e-03       3.00951e-04   2.19088e-03   
+Iter 02-->   2.46876e-06       8.11870e-05       3.02505e-04   7.46411e-07   
+-----------------------------------------------
+Final time: 0.66 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 35
+
+
+Time-step 36: Initial time: 0.66 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Initial Eq. 1 Residual Norm: 1.37612e-01
+Initial Eq. 2 Residual Norm: 1.84670e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   2.31264e-04       1.11818e-02       2.55746e-04   4.18789e-03   
+Iter 02-->   3.23684e-06       9.60420e-05       4.62106e-04   4.60836e-06   
+-----------------------------------------------
+Final time: 0.74 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 36
+
+
+Time-step 37: Initial time: 0.74 days
+dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+Initial Eq. 1 Residual Norm: 1.31602e-01
+Initial Eq. 2 Residual Norm: 1.76363e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   5.65510e-04       1.89759e-02       3.73226e-04   7.67268e-03   
+Iter 02-->   5.25228e-06       1.84254e-04       7.52025e-04   7.99385e-06   
+Iter 03-->   3.58111e-06       9.45084e-05       8.66348e-06   6.96496e-07   
+-----------------------------------------------
+Final time: 0.9 days, dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+end of time-step 37
+
+
+Time-step 38: Initial time: 0.9 days
+dt= 8640 sec (0 days : 2 hrs : 24 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 1.20940e-01
+Initial Eq. 2 Residual Norm: 1.60836e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.37406e-04       2.32093e-02       7.02962e-04   4.55348e-03   
+Iter 02-->   1.81587e-05       4.76337e-04       9.15096e-04   1.00023e-05   
+Iter 03-->   7.86130e-06       2.26830e-04       2.18529e-05   1.78726e-06   
+Iter 04-->   2.83106e-07       2.40963e-05       8.72265e-06   1.14986e-06   
+-----------------------------------------------
+Final time: 1 days, dt= 8640 sec (0 days : 2 hrs : 24 mins : 0 sec)
+end of time-step 38
+
+
+Printing solution to file at  1 days
+
+
+Time-step 39: Initial time: 1 days
+dt= 17280 sec (0 days : 4 hrs : 48 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 1.14868e-01
+Initial Eq. 2 Residual Norm: 1.51753e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   4.13385e-04       2.77057e-02       8.38854e-04   8.19757e-03   
+Iter 02-->   1.70320e-05       4.34482e-04       1.21296e-03   2.24404e-05   
+Iter 03-->   1.11020e-05       2.20077e-04       9.22703e-06   4.36027e-06   
+Iter 04-->   2.24967e-07       3.10601e-05       8.68332e-06   3.18305e-06   
+-----------------------------------------------
+Final time: 1.2 days, dt= 17280 sec (0 days : 4 hrs : 48 mins : 0 sec)
+end of time-step 39
+
+
+Time-step 40: Initial time: 1.2 days
+dt= 34560 sec (0 days : 9 hrs : 36 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 1.05398e-01
+Initial Eq. 2 Residual Norm: 1.36678e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.55452e-03       3.75819e-02       1.07818e-03   1.36548e-02   
+Iter 02-->   2.03261e-05       6.30132e-04       1.66308e-03   1.15698e-04   
+Iter 03-->   2.59014e-05       2.28737e-04       1.03563e-05   1.15918e-05   
+Iter 04-->   8.35289e-07       4.44249e-05       9.03907e-06   9.39142e-06   
+-----------------------------------------------
+Final time: 1.6 days, dt= 34560 sec (0 days : 9 hrs : 36 mins : 0 sec)
+end of time-step 40
+
+
+Time-step 41: Initial time: 1.6 days
+dt= 34560 sec (0 days : 9 hrs : 36 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 9.26366e-02
+Initial Eq. 2 Residual Norm: 1.13677e-01
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.36996e-03       4.44204e-02       1.54762e-03   1.17100e-02   
+Iter 02-->   3.58294e-05       9.82324e-04       1.99019e-03   8.03455e-05   
+Iter 03-->   3.75214e-05       3.52212e-04       1.11134e-05   2.40485e-05   
+Iter 04-->   1.28319e-06       7.57013e-05       1.47921e-05   1.64144e-05   
+-----------------------------------------------
+Final time: 2 days, dt= 34560 sec (0 days : 9 hrs : 36 mins : 0 sec)
+end of time-step 41
+
+
+Printing solution to file at  2 days
+
+
+Time-step 42: Initial time: 2 days
+dt= 69120 sec (0 days : 19 hrs : 12 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 8.49184e-02
+Initial Eq. 2 Residual Norm: 9.65129e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   3.40845e-03       5.29859e-02       1.84260e-03   1.79080e-02   
+Iter 02-->   3.77571e-05       1.49820e-03       2.45683e-03   3.26717e-04   
+Iter 03-->   7.21002e-05       3.24591e-04       5.36091e-05   4.55987e-05   
+Iter 04-->   4.02830e-06       8.47966e-05       1.21197e-05   3.46430e-05   
+-----------------------------------------------
+Final time: 2.8 days, dt= 69120 sec (0 days : 19 hrs : 12 mins : 0 sec)
+end of time-step 42
+
+
+Time-step 43: Initial time: 2.8 days
+dt= 17280 sec (0 days : 4 hrs : 48 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 7.79846e-02
+Initial Eq. 2 Residual Norm: 7.38811e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.69669e-03       5.52777e-02       2.35534e-03   4.33612e-03   
+Iter 02-->   2.08684e-04       2.73311e-03       2.47967e-03   1.19242e-04   
+Iter 03-->   8.50936e-05       1.18067e-03       4.27912e-05   6.00954e-05   
+Iter 04-->   8.39325e-06       2.83514e-04       5.69041e-05   3.15953e-05   
+Iter 05-->   2.71351e-06       3.43779e-05       1.21499e-05   1.45011e-06   
+-----------------------------------------------
+Final time: 3 days, dt= 17280 sec (0 days : 4 hrs : 48 mins : 0 sec)
+end of time-step 43
+
+
+Printing solution to file at  3 days
+
+
+Time-step 44: Initial time: 3 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 7.71199e-02
+Initial Eq. 2 Residual Norm: 6.92110e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.21404e-02       4.17057e-02       2.40634e-03   1.81640e-02   
+Iter 02-->   3.54707e-04       3.38612e-03       1.83800e-03   3.45132e-03   
+Iter 03-->   6.92280e-05       2.61818e-04       1.61909e-04   6.64828e-05   
+Iter 04-->   5.04776e-06       3.90750e-05       9.00992e-06   3.41325e-05   
+-----------------------------------------------
+Final time: 4 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 44
+
+
+Printing solution to file at  4 days
+
+
+Time-step 45: Initial time: 4 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 7.09942e-02
+Initial Eq. 2 Residual Norm: 6.16875e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.13735e-02       2.00429e-02       2.16799e-03   1.35184e-02   
+Iter 02-->   7.72587e-05       4.45694e-03       6.14390e-04   2.78354e-03   
+Iter 03-->   2.87998e-05       1.19952e-04       2.43595e-04   5.44380e-05   
+Iter 04-->   9.16284e-06       3.23088e-05       4.55106e-06   9.57802e-06   
+-----------------------------------------------
+Final time: 5 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 45
+
+
+Printing solution to file at  5 days
+
+
+Time-step 46: Initial time: 5 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 6.11386e-02
+Initial Eq. 2 Residual Norm: 7.02954e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.07131e-03       2.36587e-02       1.12312e-03   1.14145e-02   
+Iter 02-->   3.72355e-05       6.00619e-04       1.17207e-03   3.82053e-04   
+Iter 03-->   4.90451e-05       1.61532e-04       2.96032e-05   5.26632e-05   
+Iter 04-->   7.08325e-07       3.51936e-05       9.48160e-06   3.09287e-05   
+-----------------------------------------------
+Final time: 6 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 46
+
+
+Printing solution to file at  6 days
+
+
+Time-step 47: Initial time: 6 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 5.45040e-02
+Initial Eq. 2 Residual Norm: 6.59553e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.05470e-03       2.95246e-02       1.09219e-03   9.82943e-03   
+Iter 02-->   4.74189e-05       8.37967e-04       1.52496e-03   1.96593e-04   
+Iter 03-->   7.04589e-05       2.35746e-04       8.72272e-06   6.59904e-05   
+Iter 04-->   2.07012e-06       5.98144e-05       1.41584e-05   4.53305e-05   
+-----------------------------------------------
+Final time: 7 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 47
+
+
+Printing solution to file at  7 days
+
+
+Time-step 48: Initial time: 7 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 5.15352e-02
+Initial Eq. 2 Residual Norm: 5.59395e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.27543e-03       3.39634e-02       1.44242e-03   8.60003e-03   
+Iter 02-->   7.06481e-05       1.23418e-03       1.79684e-03   2.82430e-04   
+Iter 03-->   8.73445e-05       3.10108e-04       7.37750e-06   9.20590e-05   
+Iter 04-->   2.57273e-06       8.54949e-05       1.98978e-05   5.81162e-05   
+-----------------------------------------------
+Final time: 8 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 48
+
+
+Printing solution to file at  8 days
+
+
+Time-step 49: Initial time: 8 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 5.05715e-02
+Initial Eq. 2 Residual Norm: 4.79400e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   1.79373e-03       3.76833e-02       1.72116e-03   9.02376e-03   
+Iter 02-->   1.25209e-04       1.25430e-03       2.00994e-03   2.78447e-04   
+Iter 03-->   1.00553e-04       3.67416e-04       3.53606e-05   1.16809e-04   
+Iter 04-->   2.96491e-06       6.49488e-05       2.23290e-05   7.03773e-05   
+-----------------------------------------------
+Final time: 9 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 49
+
+
+Printing solution to file at  9 days
+
+
+Time-step 50: Initial time: 9 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Initial Eq. 1 Residual Norm: 5.06082e-02
+Initial Eq. 2 Residual Norm: 4.14787e-02
+           ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
+Iter 01-->   2.24242e-03       2.51278e-02       2.23341e-03   8.05991e-03   
+Iter 02-->   1.24168e-04       1.85226e-03       1.28846e-03   6.49344e-04   
+Iter 03-->   6.99043e-05       2.70457e-04       9.24522e-05   1.15438e-04   
+Iter 04-->   3.62001e-06       5.83708e-05       1.72341e-05   4.32453e-05   
+-----------------------------------------------
+Final time: 10 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 50
+
+
+Printing solution to file at  10 days
+
+
+
+
+The Total Simulation time is 6.6272 [s]
+Simulation successfully finished!
