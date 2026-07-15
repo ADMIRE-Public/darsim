@@ -39,6 +39,23 @@ classdef UnstructuredPointGrid_VTK_Plotter < VTK_Plotter
      
             [cellVerts, nv] = obj.local_clean_connectivity(verts_raw);
 
+            cellTypes = zeros(Grid.N,1,'int32');
+            if isprop(Grid.mesh, 'element') && isprop(Grid.mesh.element, 'type')
+                t = Grid.mesh.element.type(:);
+                cellTypes(t==1) = int32(10);   % VTK_TETRA
+                cellTypes(t==2) = int32(12);   % VTK_HEXAHEDRON
+                cellTypes(t==3) = int32(13);   % VTK_WEDGE
+                cellTypes(t==4) = int32(14);   % VTK_PYRAMID
+                miss = (cellTypes==0);
+                if any(miss)
+                    cellTypes(miss) = obj.local_infer_cell_types(nv(miss)); % fallback
+                end
+            else
+                cellTypes = obj.local_infer_cell_types(nv);
+            end
+
+            cellVerts = obj.wedge_order_correction(VTK_Nodes, cellTypes, cellVerts);
+
             totalInts = sum(double(nv) + 1);
             fprintf(fileID, 'CELLS %d %d\n', Grid.N, totalInts);
 
@@ -56,22 +73,6 @@ classdef UnstructuredPointGrid_VTK_Plotter < VTK_Plotter
             end
             fprintf(fileID, '\n');
 
-   
-            cellTypes = zeros(Grid.N,1,'int32');
-            if isprop(Grid.mesh, 'element') && isprop(Grid.mesh.element, 'type')
-                t = Grid.mesh.element.type(:);
-                cellTypes(t==1) = int32(10);   % VTK_TETRA
-                cellTypes(t==2) = int32(12);   % VTK_HEXAHEDRON
-                cellTypes(t==3) = int32(13);   % VTK_WEDGE
-                cellTypes(t==4) = int32(14);   % VTK_PYRAMID
-                miss = (cellTypes==0);
-                if any(miss)
-                    cellTypes(miss) = obj.local_infer_cell_types(nv(miss)); % fallback
-                end
-            else
-                cellTypes = obj.local_infer_cell_types(nv);
-            end
-
             fprintf(fileID, 'CELL_TYPES %d\n', Grid.N);
             if obj.isBinary
                 fwrite(fileID, cellTypes.', 'int32', 0, 'b');
@@ -87,10 +88,10 @@ classdef UnstructuredPointGrid_VTK_Plotter < VTK_Plotter
 
             lfaces = [Grid.mesh.face.inner.vertices; Grid.mesh.face.bound.vertices];
             num_nodes = sum(lfaces ~=0,2);
-            node_group = unique(num_nodes)'; %#ok<NASGU>
+            node_group = unique(num_nodes)';
             [~,ref_order] = sort(num_nodes);
-            num_nodes = num_nodes(ref_order); %#ok<NASGU>
-            lfaces = lfaces(ref_order,:); %#ok<NASGU>
+            num_nodes = num_nodes(ref_order);
+            lfaces = lfaces(ref_order,:); 
 
             all_neigh = [Grid.mesh.face.inner.upstream Grid.mesh.face.inner.downstream; ...
                          Grid.mesh.face.bound.upstream Grid.mesh.face.bound.upstream*0];
@@ -470,6 +471,100 @@ classdef UnstructuredPointGrid_VTK_Plotter < VTK_Plotter
 
                 cellVerts{c} = v;
                 nv(c) = int32(numel(v));
+            end
+        end
+
+        function cellVertsNew = wedge_order_correction( ...
+                ~, VTK_Nodes, cellTypes, cellVertsOld)
+        
+            cellVertsNew = cellVertsOld;
+        
+            for c = 1:numel(cellVertsOld)
+        
+                if cellTypes(c) ~= 13
+                    continue
+                end
+        
+                ids = cellVertsOld{c};
+                ids = ids(isfinite(ids) & ids > 0);
+        
+                if numel(ids) ~= 6
+                    error('Cell %d is marked as a wedge but has %d vertices.', ...
+                          c, numel(ids));
+                end
+        
+                xyz = VTK_Nodes(ids,:);
+        
+                xyzCentered = xyz - mean(xyz,1);
+                [~,~,V] = svd(xyzCentered, 0);
+        
+                bestGap = -inf;
+        
+                for k = 1:3
+                    prismAxisCandidate = V(:,k);
+                    projection = xyzCentered * prismAxisCandidate;
+        
+                    [projectionSorted, order] = sort(projection);
+                    gap = projectionSorted(4) - projectionSorted(3);
+        
+                    if gap > bestGap
+                        bestGap = gap;
+                        prismAxis = prismAxisCandidate;
+                        sortedOrder = order;
+                    end
+                end
+        
+                bottom = sortedOrder(1:3);
+                top    = sortedOrder(4:6);
+        
+                if mean(xyz(bottom,3)) > mean(xyz(top,3))
+                    temp = bottom;
+                    bottom = top;
+                    top = temp;
+                    prismAxis = -prismAxis;
+                end
+        
+                bottomProjected = xyz(bottom,:) ...
+                    - (xyz(bottom,:) * prismAxis) * prismAxis';
+        
+                topProjected = xyz(top,:) ...
+                    - (xyz(top,:) * prismAxis) * prismAxis';
+        
+                permutations = perms(1:3);
+                bestDistance = inf;
+                bestTop = top;
+        
+                for p = 1:size(permutations,1)
+                    candidatePermutation = permutations(p,:);
+                    candidateTop = top(candidatePermutation);
+        
+                    d = topProjected(candidatePermutation,:) ...
+                        - bottomProjected;
+        
+                    totalDistance = sum(vecnorm(d,2,2));
+        
+                    if totalDistance < bestDistance
+                        bestDistance = totalDistance;
+                        bestTop = candidateTop;
+                    end
+                end
+        
+                top = bestTop;
+        
+                p1 = xyz(bottom(1),:);
+                p2 = xyz(bottom(2),:);
+                p3 = xyz(bottom(3),:);
+                p4 = xyz(top(1),:);
+        
+                J = [p2-p1; p3-p1; p4-p1]';
+        
+                if det(J) < 0
+                    bottom([2 3]) = bottom([3 2]);
+                    top([2 3]) = top([3 2]);
+                end
+        
+                orderedLocalIDs = [bottom(:); top(:)];
+                cellVertsNew{c} = ids(orderedLocalIDs)';
             end
         end
 
