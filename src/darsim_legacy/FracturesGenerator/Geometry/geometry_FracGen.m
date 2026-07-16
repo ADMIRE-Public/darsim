@@ -45,6 +45,7 @@ classdef geometry_FracGen < handle
                 Fracture(f). avgDist_frac_pEDFM = cell(length(Fracture),1);
                 Fracture(f).      CI_frac_pEDFM = cell(length(Fracture),1);
                 Fracture(f).NumOf_fracConn_pEDFM = zeros( Fracture(f).N_Total , 1);
+                Fracture(f).      Coplanar_EDFM  = cell( Fracture(f).N_Total , 1 );
             end
             
             %% Intersections of fracture plates with each other (if any)

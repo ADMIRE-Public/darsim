@@ -92,7 +92,7 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                             Fracture(f).       Af_rock_EDFM{If}(Index_matIntersect,1) = Im;
                             Fracture(f).  avgDist_rock_EDFM{If}(Index_matIntersect,1) = Im;
                             Fracture(f).       CI_rock_EDFM{If}(Index_matIntersect,1) = Im;
-                            Fracture(f).           Coplanar_EDFM{If}(Index_matIntersect,1) = Im;
+                            Fracture(f).      Coplanar_EDFM{If}(Index_matIntersect,1) = Im;
                             
                             Fracture(f).intersectCoord_rock{If}{Index_matIntersect,2} = intersectCoord;
                             
