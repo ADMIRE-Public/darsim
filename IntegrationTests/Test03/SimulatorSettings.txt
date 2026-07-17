@@ -23,36 +23,5 @@ FIM
 	
 LINEARSOLVER
 	direct
-	
---Algebraic Dynamic Multilevel method settings
-ADM
-	0
-DLGR
-	0
-LEVELS
-	1
-COARSENING_RATIOS
-	2
-	1
-	2
-COARSENING_CRITERION
-	dfdx
-VARIABLE
-	z_1
-TOLERANCE
-	0.1
 
---Constant, Homogeneous, MS
---When using homogenization (DLGR=1), use "Constant" pressure interpolator.
-PRESSURE_INTERPOLATOR
-	Constant
-	COUPLED
-	BASIS_FUNCTION_MAX_CONTRAST
-		1e2
-	pEDFM_MAX_CONTRAST
-		1e2
-		
-HYPERBOLIC_INTERPOLATOR
-	Constant
-	
 -- END OF DECK 
