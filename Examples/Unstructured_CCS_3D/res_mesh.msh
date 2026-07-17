@@ -1,0 +1,195 @@
+// ==========================================================
+// Extended Synthetic Anticline Reservoir (Gmsh)
+// Includes:
+//   - Larger horizontal extent
+//   - Asymmetric plunging anticline
+//   - Local crest roughness
+//   - Stratigraphic pinch-out toward +X direction
+//   - Tetrahedral mesh
+// ==========================================================
+
+SetFactory("Built-in");
+
+// ----------------------------------------------------------
+// Mesh size
+// ----------------------------------------------------------
+cl1 = 20;
+
+// ----------------------------------------------------------
+// Larger basin dimensions
+// ----------------------------------------------------------
+XX = 500;     // increased horizontal extent
+YY = 320;
+ZZ = 50;
+
+// ----------------------------------------------------------
+// Structural parameters
+// ----------------------------------------------------------
+hh = 30;
+qq = 60;
+HH = 18;
+ww = 16;
+
+// ==========================================================
+// BASE CORNERS
+// ==========================================================
+Point(1) = {0,   0,  0, cl1};
+Point(2) = {XX,  0,  0, cl1};
+Point(3) = {XX, YY,  0, cl1};
+Point(4) = {0,  YY,  0, cl1};
+
+// ==========================================================
+// TOP BOUNDARY CORNERS
+// Right side lowered to simulate regional thinning
+// ==========================================================
+Point(5) = {0,   0, ZZ, cl1};
+Point(6) = {XX,  0, ZZ-18, cl1};   // pinch-out trend
+Point(7) = {XX, YY, ZZ-20, cl1};
+Point(8) = {0,  YY, ZZ, cl1};
+
+// ==========================================================
+// FRONT FACE (Y=0)
+// Crest near center-left, layer thins toward right
+// ==========================================================
+Point(9)  = {0.42*XX, 0, hh, cl1};
+Point(10) = {0.42*XX, 0, ZZ + qq + hh - 2, cl1};
+Point(17) = {0.78*XX, 0, ZZ - 8, cl1}; // thinning shoulder
+
+// ==========================================================
+// BACK FACE (Y=YY)
+// Stronger uplift = plunge
+// Pinch-out to far right
+// ==========================================================
+Point(11) = {0.18*XX, YY, ZZ + HH - 4, cl1};
+Point(15) = {0.34*XX, YY, ZZ + HH + 5, cl1};
+Point(12) = {0.50*XX, YY, ZZ + HH + ww + 8, cl1}; // crest
+Point(16) = {0.66*XX, YY, ZZ + HH + 3, cl1};
+Point(13) = {0.82*XX, YY, ZZ - 6, cl1};           // thinning
+Point(18) = {0.94*XX, YY, ZZ - 16, cl1};          // pinch-out edge
+
+Point(14) = {0.50*XX, YY, HH + 3, cl1};
+
+// ==========================================================
+// CURVES
+// ==========================================================
+
+// --------------------------
+// Front face
+// --------------------------
+Spline(1) = {5,10,17,6};
+Line(2)   = {6,2};
+Spline(3) = {2,9,1};
+Line(4)   = {1,5};
+
+// --------------------------
+// Back face
+// --------------------------
+Spline(5) = {8,11,15,12,16,13,18,7};
+Line(6)   = {7,3};
+Spline(7) = {3,14,4};
+Line(8)   = {4,8};
+
+// --------------------------
+// Side edges
+// --------------------------
+Line(9)  = {8,5};
+Line(10) = {7,6};
+Line(11) = {3,2};
+Line(12) = {4,1};
+
+// ==========================================================
+// SURFACES
+// ==========================================================
+
+// Front
+Curve Loop(1) = {1,2,3,4};
+Surface(1) = {1};
+
+// Right side
+Curve Loop(2) = {10,2,-11,-6};
+Surface(2) = {2};
+
+// Bottom
+Curve Loop(3) = {11,3,-12,-7};
+Surface(3) = {3};
+
+// Back
+Curve Loop(4) = {7,8,5,6};
+Surface(4) = {4};
+
+// Folded / thinning roof
+Curve Loop(5) = {5,10,-1,-9};
+Surface(5) = {5};
+
+// Left side
+Curve Loop(6) = {8,9,-4,-12};
+Plane Surface(6) = {6};
+
+// ==========================================================
+// VOLUME
+// ==========================================================
+Surface Loop(1) = {1,2,3,4,5,6};
+Volume(1) = {1};
+
+// ==========================================================
+// MESH REFINEMENT AROUND STRUCTURE
+// ==========================================================
+Field[1] = Distance;
+Field[1].CurvesList = {5};
+
+Field[2] = Threshold;
+Field[2].InField = 1;
+Field[2].SizeMin = 4;
+Field[2].SizeMax = 30;
+Field[2].DistMin = 15;
+Field[2].DistMax = 60;
+
+// ==========================================================
+// MESH OPTIONS
+// ==========================================================
+Mesh.CharacteristicLengthMin = 4;
+Mesh.CharacteristicLengthMax = 35;
+
+Mesh.Algorithm3D = 1;
+Mesh.Optimize = 1;
+Mesh.OptimizeNetgen = 1;
+
+// ==========================================================
+// WELL LOCATION (vertical trajectory)
+// ==========================================================
+wx = 230;
+wy = 130;
+
+// bottom and top points of well
+Point(1001) = {wx, wy, 0, 1};
+Point(1002) = {wx, wy, 140, 1};
+
+// vertical well line
+Line(1001) = {1001,1002};
+
+// ==========================================================
+// WELL REFINEMENT FIELD
+// ==========================================================
+Field[3] = Distance;
+Field[3].CurvesList = {1001};
+
+Field[4] = Threshold;
+Field[4].InField = 3;
+Field[4].SizeMin = 10;     // finest near well
+Field[4].SizeMax = 100;    // coarse far away
+Field[4].DistMin = 90;
+Field[4].DistMax = 200;
+
+// ==========================================================
+// COMBINE FIELDS
+// Smallest size wins
+// ==========================================================
+Field[5] = Min;
+Field[5].FieldsList = {4};
+
+Background Field = 5;
+
+// ==========================================================
+// GENERATE MESH
+// ==========================================================
+Mesh 3;

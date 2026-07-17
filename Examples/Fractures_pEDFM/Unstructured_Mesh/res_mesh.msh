@@ -1,0 +1,100 @@
+// triangular_prisms_only.geo
+//
+// Domain:
+//   x = 0 to 100 m
+//   y = 0 to  50 m
+//   z = 0 to   1 m
+//
+// The base is meshed entirely with triangles.
+// Each triangle is extruded through one layer to form
+// one six-node triangular prism.
+
+SetFactory("Built-in");
+
+// ------------------------------------------------------------
+// Parameters
+// ------------------------------------------------------------
+
+width     = 100.0;
+height    = 50.0;
+thickness = 1.0;
+
+// Approximate in-plane triangle edge length
+lc = 1.0;
+
+// ------------------------------------------------------------
+// Geometry
+// ------------------------------------------------------------
+
+Point(1) = {0,     0,      0, lc};
+Point(2) = {width, 0,      0, lc};
+Point(3) = {width, 0, height, lc};
+Point(4) = {0,     0, height, lc};
+
+Line(1) = {1, 2};
+Line(2) = {2, 3};
+Line(3) = {3, 4};
+Line(4) = {4, 1};
+
+Curve Loop(1) = {1, 2, 3, 4};
+Plane Surface(1) = {1};
+
+// ------------------------------------------------------------
+// Triangular surface mesh
+// ------------------------------------------------------------
+
+Mesh.MeshSizeMin = lc;
+Mesh.MeshSizeMax = lc;
+
+// Frontal-Delaunay triangular meshing
+MeshAlgorithm Surface{1}= 4;
+
+Recombine Surface{1};
+
+Mesh.RecombinationAlgorithm = 3;
+
+Mesh.RecombineOptimizeTopology = 5;
+Mesh.RecombineNodeRepositioning = 1;
+
+// ------------------------------------------------------------
+// Extrude triangles into triangular prisms
+// ------------------------------------------------------------
+
+out[] = Extrude {0, thickness, 0}
+{
+    Surface{1};
+
+    // Exactly one element through the thickness
+    Layers{1};
+
+    // Required to produce prisms instead of tetrahedra
+    Recombine;
+};
+
+// ------------------------------------------------------------
+// Physical groups
+// ------------------------------------------------------------
+
+Physical Surface("bottom") = {1};
+Physical Surface("top") = {out[0]};
+
+Physical Surface("sides") = {
+    out[2],
+    out[3],
+    out[4],
+    out[5]
+};
+
+Physical Volume("domain") = {out[1]};
+
+// ------------------------------------------------------------
+// Output
+// ------------------------------------------------------------
+
+Mesh.ElementOrder = 1;
+Mesh.MshFileVersion = 4.1;
+
+Mesh 3;
+
+// Uncomment to save automatically:
+// Save "triangular_prisms_only.msh";
