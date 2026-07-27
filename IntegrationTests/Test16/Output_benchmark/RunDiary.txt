@@ -1,0 +1,677 @@
+WARNING: Fields PERMEABILITY_CONTRAST_MEAN,PERMEABILITY_CONTRAST_ORDER,INCLUDE_ROCK_PROPERTIES not found.
+WARNING: Fields SCHEDULE,COMPOSITION not found.
+WARNING: Fields INITIAL_STATE not found.
+[Warning: No lookup table was provided for relative permeability. The default file 'LookupTable.txt' will be used.] 
+[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties>generate_RelPerm', 'D:\darsim-main\darsim-main\src\factory\fluid-property-factory\build_FluidProperties.m', 49)" style="font-weight:bold">build_FluidProperties>generate_RelPerm</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\factory\fluid-property-factory\build_FluidProperties.m',49,0)">line 49</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties', 'D:\darsim-main\darsim-main\src\factory\fluid-property-factory\build_FluidProperties.m', 23)" style="font-weight:bold">build_FluidProperties</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\factory\fluid-property-factory\build_FluidProperties.m',23,0)">line 23</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory/translate_simulation_input', 'D:\darsim-main\darsim-main\src\reader\darsim2_settings_factory.m', 78)" style="font-weight:bold">darsim2_settings_factory/translate_simulation_input</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\reader\darsim2_settings_factory.m',78,0)">line 78</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory', 'D:\darsim-main\darsim-main\src\reader\darsim2_settings_factory.m', 25)" style="font-weight:bold">darsim2_settings_factory</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\reader\darsim2_settings_factory.m',25,0)">line 25</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_darsim_settings', 'D:\darsim-main\darsim-main\src\reader\create_darsim_settings.m', 16)" style="font-weight:bold">create_darsim_settings</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\reader\create_darsim_settings.m',16,0)">line 16</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', 'D:\darsim-main\darsim-main\src\DARSim.m', 42)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\DARSim.m',42,0)">line 42</a>)] 
+[Warning: Injector 1 will be injecting component 1.] 
+[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildProductionSystemWells', 'D:\darsim-main\darsim-main\src\factory\simulation_factory.m', 670)" style="font-weight:bold">simulation_factory/BuildProductionSystemWells</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\factory\simulation_factory.m',670,0)">line 670</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildProductionSystemReservoir', 'D:\darsim-main\darsim-main\src\factory\simulation_factory.m', 421)" style="font-weight:bold">simulation_factory/BuildProductionSystemReservoir</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\factory\simulation_factory.m',421,0)">line 421</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildSimulation', 'D:\darsim-main\darsim-main\src\factory\simulation_factory.m', 31)" style="font-weight:bold">simulation_factory/BuildSimulation</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\factory\simulation_factory.m',31,0)">line 31</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_simulator', 'D:\darsim-main\darsim-main\src\simulation\create_simulator.m', 11)" style="font-weight:bold">create_simulator</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\simulation\create_simulator.m',11,0)">line 11</a>)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', 'D:\darsim-main\darsim-main\src\DARSim.m', 43)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('D:\darsim-main\darsim-main\src\DARSim.m',43,0)">line 43</a>)] 
+Started simple initialization
+Initial conditions:
+Pressure: 250 bar
+Saturation: 0
+Temperature: 338.15 K
+---------------------------------------------------------
+
+
+Initialization took 0.069311 s
+
+
+Algebraic Dynamic Multilevel (ADM) method run with 1 levels and tolerance Δz_1 = 0.000010
+
+Constructing coarse grids
+The Vertices are on the corners.
+Coarsening ratio in reservoir: 3 x 3 x 3
+Number of reservoir coarse nodes at level 1: 64
+Static operators - start computation
+Building Pressure Restriction 1
+Building Pressure Prolongation 1
+Pressure static operators built in: 0.065081 s
+Building Pressure Restriction 1
+Building Pressure Prolongation 1
+Pressure static operators built in: 0.0015762 s
+Static operators - end
+Static operators construction took 0.094103
+
+BEGIN TIME-DEPENDENT SIMULATION
+SIMULATION OF PROBLEM IntegrationTest HAS STARTED.
+FORMATION CHARACTERISTICS:
+Reservoir geometry:
+Lx: 100 m
+Ly: 100 m
+Thickness:  100 m
+Total Grid Cells: 10 x 10 x 10 = 1000, Number of Active Cells: 1000
+---------------------------------------------------------
+Fluid Model:
+Type: BlackOil
+N of phases: 2
+N of components:  2
+---------------------------------------------------------
+Total Simulation Time: 864000 seconds (10 days : 0 hrs : 0 mins : 0 sec)
+Maximum Allowed Time-steps: 20000
+Minimum Size of Time-step : 0.01
+Maximum Size of Time-step : 5
+Number of Reports         : 10
+---------------------------------------------------------
+Time-step 1: Initial time: 0 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Restriction built in: 0.0061892 s
+Pressure Prolongation built in: 0.0064251 s
+Full Prolongation built in: 0.0076872 s
+Number of ADM Active Grids: 144 (14.40 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49795e-01
+Initial Eq. 2 Residual Norm: 1.01282e+00
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.91523e-04       1.49745e-01       4.08489e-02   6.10483e-04   
+Iter 02-->   2.93421e-05       9.60124e-05       5.02600e-03   3.72235e-07   
+Iter 03-->   2.93408e-05       2.93421e-05       3.04106e-06   1.00000e-08   
+-----------------------------------------------
+Final time: 0.01 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 1
+
+
+Time-step 2: Initial time: 0.01 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Restriction built in: 0.0028675 s
+Pressure Prolongation built in: 0.0029885 s
+Full Prolongation built in: 0.0038289 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49795e-01
+Initial Eq. 2 Residual Norm: 4.78183e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   5.03729e-04       1.49634e-01       4.92650e-03   1.21973e-03   
+Iter 02-->   2.60460e-07       2.17310e-04       4.91764e-03   1.73184e-06   
+Iter 03-->   1.57016e-07       2.60289e-07       8.48336e-06   2.11913e-09   
+-----------------------------------------------
+Final time: 0.03 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 2
+
+
+Time-step 3: Initial time: 0.03 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Restriction built in: 0.0025268 s
+Pressure Prolongation built in: 0.0068122 s
+Full Prolongation built in: 0.0090729 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49794e-01
+Initial Eq. 2 Residual Norm: 2.60289e-07
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.13076e-03       1.49412e-01       4.88497e-03   2.43449e-03   
+Iter 02-->   1.11506e-06       4.73057e-04       4.92683e-03   7.37710e-06   
+Iter 03-->   8.51337e-07       1.11358e-06       1.94318e-05   1.81003e-08   
+-----------------------------------------------
+Final time: 0.07 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 3
+
+
+Time-step 4: Initial time: 0.07 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Restriction built in: 0.0009255 s
+Pressure Prolongation built in: 0.0023627 s
+Full Prolongation built in: 0.0027747 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49794e-01
+Initial Eq. 2 Residual Norm: 1.11358e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.38329e-03       1.48968e-01       4.88301e-03   4.84923e-03   
+Iter 02-->   4.59881e-06       9.82226e-04       4.94516e-03   3.01232e-05   
+Iter 03-->   3.87628e-06       4.58648e-06       4.12320e-05   1.48578e-07   
+-----------------------------------------------
+Final time: 0.15 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 4
+
+
+Time-step 5: Initial time: 0.15 days
+dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+Restriction built in: 0.0025548 s
+Pressure Prolongation built in: 0.012685 s
+Full Prolongation built in: 0.014651 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49791e-01
+Initial Eq. 2 Residual Norm: 4.58648e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   4.88102e-03       1.48079e-01       4.87915e-03   9.62000e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 6912
+Initial Eq. 1 Residual Norm: 1.49791e-01
+Initial Eq. 2 Residual Norm: 4.58648e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   3.36323e-03       1.48483e-01       4.87915e-03   4.81005e-03   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 3456
+Initial Eq. 1 Residual Norm: 1.49791e-01
+Initial Eq. 2 Residual Norm: 4.58648e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.61226e-03       1.48684e-01       4.87915e-03   2.40504e-03   
+Iter 02-->   1.98552e-06       1.03206e-03       4.95054e-03   1.29790e-05   
+Iter 03-->   6.29180e-06       1.98286e-06       4.90164e-05   3.19968e-08   
+-----------------------------------------------
+Final time: 0.19 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 5
+
+
+Time-step 6: Initial time: 0.19 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Restriction built in: 0.0002881 s
+Pressure Prolongation built in: 0.0005323 s
+Full Prolongation built in: 0.0006986 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49789e-01
+Initial Eq. 2 Residual Norm: 1.98286e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.73290e-03       1.48543e-01       4.87709e-03   1.19767e-03   
+Iter 02-->   2.30034e-06       1.10220e-03       4.95322e-03   5.97359e-06   
+Iter 03-->   9.18206e-08       7.97583e-06       5.28079e-05   5.76259e-08   
+-----------------------------------------------
+Final time: 0.21 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 6
+
+
+Time-step 7: Initial time: 0.21 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Restriction built in: 0.0003982 s
+Pressure Prolongation built in: 0.0004491 s
+Full Prolongation built in: 0.000635 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49788e-01
+Initial Eq. 2 Residual Norm: 7.97583e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   3.34894e-03       1.48323e-01       4.87615e-03   2.39050e-03   
+Iter 02-->   3.28638e-06       1.32885e-03       4.96227e-03   1.56799e-05   
+Iter 03-->   1.71537e-07       1.27197e-05       6.35941e-05   1.80370e-07   
+-----------------------------------------------
+Final time: 0.25 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 7
+
+
+Time-step 8: Initial time: 0.25 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Restriction built in: 0.000276 s
+Pressure Prolongation built in: 0.0004007 s
+Full Prolongation built in: 0.0005629 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49786e-01
+Initial Eq. 2 Residual Norm: 1.27197e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   4.58174e-03       1.47881e-01       4.87422e-03   4.76170e-03   
+Iter 02-->   7.47049e-06       1.79747e-03       4.98033e-03   4.60188e-05   
+Iter 03-->   1.88506e-05       7.45033e-06       8.52234e-05   2.28569e-07   
+-----------------------------------------------
+Final time: 0.33 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 8
+
+
+Time-step 9: Initial time: 0.33 days
+dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+Restriction built in: 0.0002757 s
+Pressure Prolongation built in: 0.000396 s
+Full Prolongation built in: 0.0005438 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49779e-01
+Initial Eq. 2 Residual Norm: 7.45033e-06
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   7.04361e-03       1.46997e-01       4.87028e-03   9.44674e-03   
+Iter 02-->   2.36327e-05       2.74939e-03       5.01632e-03   1.48552e-04   
+Iter 03-->   4.09396e-05       2.35035e-05       1.27790e-04   1.49028e-06   
+-----------------------------------------------
+Final time: 0.49 days, dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+end of time-step 9
+
+
+Time-step 10: Initial time: 0.49 days
+dt= 27648 sec (0 days : 7 hrs : 40 mins : 48 sec)
+Restriction built in: 0.000307 s
+Pressure Prolongation built in: 0.0004267 s
+Full Prolongation built in: 0.0005816 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49761e-01
+Initial Eq. 2 Residual Norm: 2.35035e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.03396e-02       1.55212e-02       4.86299e-03   1.85913e-02   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 13824
+Initial Eq. 1 Residual Norm: 1.49761e-01
+Initial Eq. 2 Residual Norm: 2.35035e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.00329e-02       6.79031e-02       4.86299e-03   9.29632e-03   
+Iter 02-->   1.47106e-04       2.02331e-03       2.59830e-03   2.87628e-04   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 6912
+Initial Eq. 1 Residual Norm: 1.49761e-01
+Initial Eq. 2 Residual Norm: 2.35035e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   7.46170e-03       1.46452e-01       4.86299e-03   4.64833e-03   
+Iter 02-->   1.81106e-05       2.94528e-03       5.02611e-03   6.54562e-05   
+Iter 03-->   1.93323e-06       6.18291e-05       1.41960e-04   1.74869e-06   
+-----------------------------------------------
+Final time: 0.57 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 10
+
+
+Time-step 11: Initial time: 0.57 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Restriction built in: 0.0002954 s
+Pressure Prolongation built in: 0.000439 s
+Full Prolongation built in: 0.0006259 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49749e-01
+Initial Eq. 2 Residual Norm: 6.18291e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   5.69300e-03       5.60238e-02       4.85925e-03   2.30574e-03   
+Iter 02-->   1.83041e-05       1.56798e-03       2.01499e-03   4.16142e-05   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 1728
+Initial Eq. 1 Residual Norm: 1.49749e-01
+Initial Eq. 2 Residual Norm: 6.18291e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   7.31734e-03       1.46284e-01       4.85925e-03   1.15288e-03   
+Iter 02-->   2.08290e-05       2.99671e-03       5.02595e-03   1.39721e-05   
+Iter 03-->   1.82724e-06       5.49040e-05       1.43171e-04   3.99072e-07   
+-----------------------------------------------
+Final time: 0.59 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 11
+
+
+Time-step 12: Initial time: 0.59 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Restriction built in: 0.0003025 s
+Pressure Prolongation built in: 0.0004357 s
+Full Prolongation built in: 0.0006109 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.49746e-01
+Initial Eq. 2 Residual Norm: 5.49040e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.96515e-03       3.01411e-02       4.85835e-03   1.15059e-03   
+Iter 02-->   5.60939e-06       2.76501e-03       7.83340e-04   2.32368e-05   
+##### A large Delta is detected.
+Max num. of iterations reached or stagnation detected: Time-step was chopped
+
+
+Restart Newton loop dt = 864
+Initial Eq. 1 Residual Norm: 1.49746e-01
+Initial Eq. 2 Residual Norm: 5.49040e-05
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.79791e-03       8.58429e-03       4.85835e-03   5.75297e-04   
+Iter 02-->   9.36994e-06       2.04079e-03       1.13406e-04   8.63357e-06   
+Iter 03-->   3.83275e-07       1.95779e-05       7.03445e-05   4.77091e-08   
+-----------------------------------------------
+Final time: 0.6 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 12
+
+
+Time-step 13: Initial time: 0.6 days
+dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+Restriction built in: 0.0003067 s
+Pressure Prolongation built in: 0.0004376 s
+Full Prolongation built in: 0.0006011 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.43864e-01
+Initial Eq. 2 Residual Norm: 1.50283e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.21911e-04       4.81617e-03       1.41427e-03   5.63777e-04   
+Iter 02-->   7.50700e-06       2.30013e-04       1.84004e-04   4.30463e-07   
+Iter 03-->   7.69271e-07       2.25991e-05       9.90913e-06   1.17773e-08   
+-----------------------------------------------
+Final time: 0.61 days, dt= 864 sec (0 days : 0 hrs : 14 mins : 24 sec)
+end of time-step 13
+
+
+Time-step 14: Initial time: 0.61 days
+dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+Restriction built in: 0.0003308 s
+Pressure Prolongation built in: 0.0004713 s
+Full Prolongation built in: 0.0006761 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.41631e-01
+Initial Eq. 2 Residual Norm: 1.87622e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   3.65403e-05       5.78855e-03       2.90325e-04   1.11440e-03   
+Iter 02-->   2.66361e-06       7.79290e-05       2.35171e-04   1.95885e-07   
+-----------------------------------------------
+Final time: 0.63 days, dt= 1728 sec (0 days : 0 hrs : 28 mins : 48 sec)
+end of time-step 14
+
+
+Time-step 15: Initial time: 0.63 days
+dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+Restriction built in: 0.0003113 s
+Pressure Prolongation built in: 0.000461 s
+Full Prolongation built in: 0.0006563 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.39943e-01
+Initial Eq. 2 Residual Norm: 1.88875e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.10847e-04       7.69279e-03       2.17503e-04   2.18072e-03   
+Iter 02-->   2.79847e-06       7.74772e-05       3.16441e-04   1.35937e-06   
+-----------------------------------------------
+Final time: 0.67 days, dt= 3456 sec (0 days : 0 hrs : 57 mins : 36 sec)
+end of time-step 15
+
+
+Time-step 16: Initial time: 0.67 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Restriction built in: 0.000313 s
+Pressure Prolongation built in: 0.0004768 s
+Full Prolongation built in: 0.0006877 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.36918e-01
+Initial Eq. 2 Residual Norm: 1.84827e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.31148e-04       1.15451e-02       2.72061e-04   4.17799e-03   
+Iter 02-->   3.95048e-06       1.09826e-04       4.67656e-04   4.19803e-06   
+Iter 03-->   2.05483e-06       6.44835e-05       4.75281e-06   1.47683e-07   
+-----------------------------------------------
+Final time: 0.75 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 16
+
+
+Time-step 17: Initial time: 0.75 days
+dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+Restriction built in: 0.0002894 s
+Pressure Prolongation built in: 0.0004249 s
+Full Prolongation built in: 0.0005871 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.31194e-01
+Initial Eq. 2 Residual Norm: 1.76666e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   5.48098e-04       1.92532e-02       3.88403e-04   7.68158e-03   
+Iter 02-->   6.26174e-06       2.12281e-04       7.44369e-04   9.14041e-06   
+Iter 03-->   3.86020e-06       9.88188e-05       1.02935e-05   7.67815e-07   
+-----------------------------------------------
+Final time: 0.91 days, dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
+end of time-step 17
+
+
+Time-step 18: Initial time: 0.91 days
+dt= 7776 sec (0 days : 2 hrs : 9 mins : 36 sec)
+Restriction built in: 0.0003333 s
+Pressure Prolongation built in: 0.0004339 s
+Full Prolongation built in: 0.0006052 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.20920e-01
+Initial Eq. 2 Residual Norm: 1.61670e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   3.76786e-04       2.26363e-02       7.02076e-04   4.13147e-03   
+Iter 02-->   2.17506e-05       5.15516e-04       8.82679e-04   9.16245e-06   
+Iter 03-->   9.80915e-06       2.41466e-04       2.31635e-05   1.75428e-06   
+Iter 04-->   4.77886e-07       2.64637e-05       9.38945e-06   1.05146e-06   
+-----------------------------------------------
+Final time: 1 days, dt= 7776 sec (0 days : 2 hrs : 9 mins : 36 sec)
+end of time-step 18
+
+
+Printing solution to file at  1 days
+
+
+Time-step 19: Initial time: 1 days
+dt= 15552 sec (0 days : 4 hrs : 19 mins : 12 sec)
+Restriction built in: 0.0002938 s
+Pressure Prolongation built in: 0.0004231 s
+Full Prolongation built in: 0.0005913 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.15584e-01
+Initial Eq. 2 Residual Norm: 1.53695e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   3.28558e-04       2.66731e-02       8.18896e-04   7.53492e-03   
+Iter 02-->   2.03933e-05       4.59066e-04       1.14619e-03   1.64495e-05   
+Iter 03-->   1.09577e-05       2.30048e-04       1.11599e-05   4.03446e-06   
+Iter 04-->   2.67146e-07       3.07717e-05       8.98896e-06   2.75522e-06   
+-----------------------------------------------
+Final time: 1.18 days, dt= 15552 sec (0 days : 4 hrs : 19 mins : 12 sec)
+end of time-step 19
+
+
+Time-step 20: Initial time: 1.18 days
+dt= 31104 sec (0 days : 8 hrs : 38 mins : 24 sec)
+Restriction built in: 0.0003775 s
+Pressure Prolongation built in: 0.0004409 s
+Full Prolongation built in: 0.0005973 s
+Number of ADM Active Grids: 228 (22.80 Percent of nodes)
+Initial Eq. 1 Residual Norm: 1.07091e-01
+Initial Eq. 2 Residual Norm: 1.40212e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.32525e-03       3.60551e-02       1.02705e-03   1.28126e-02   
+Iter 02-->   2.40640e-05       6.04118e-04       1.55563e-03   8.44400e-05   
+Iter 03-->   2.00183e-05       2.32102e-04       4.95776e-06   1.02924e-05   
+Iter 04-->   6.62923e-07       4.24506e-05       9.13939e-06   7.79787e-06   
+-----------------------------------------------
+Final time: 1.54 days, dt= 31104 sec (0 days : 8 hrs : 38 mins : 24 sec)
+end of time-step 20
+
+
+Time-step 21: Initial time: 1.54 days
+dt= 39744 sec (0 days : 11 hrs : 2 mins : 24 sec)
+Restriction built in: 0.0003046 s
+Pressure Prolongation built in: 0.0004462 s
+Full Prolongation built in: 0.000601 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 9.50539e-02
+Initial Eq. 2 Residual Norm: 1.19955e-01
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.60927e-03       4.39215e-02       1.42508e-03   1.37145e-02   
+Iter 02-->   3.54161e-05       1.00206e-03       1.93841e-03   1.27329e-04   
+Iter 03-->   3.29740e-05       3.13708e-04       1.66282e-05   2.26441e-05   
+Iter 04-->   1.21303e-06       6.72498e-05       1.25729e-05   1.60761e-05   
+-----------------------------------------------
+Final time: 2 days, dt= 39744 sec (0 days : 11 hrs : 2 mins : 24 sec)
+end of time-step 21
+
+
+Printing solution to file at  2 days
+
+
+Time-step 22: Initial time: 2 days
+dt= 79488 sec (0 days : 22 hrs : 4 mins : 48 sec)
+Restriction built in: 0.0004175 s
+Pressure Prolongation built in: 0.000666 s
+Full Prolongation built in: 0.0009143 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 8.58524e-02
+Initial Eq. 2 Residual Norm: 9.90451e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   4.03484e-03       5.37003e-02       1.77680e-03   2.04429e-02   
+Iter 02-->   4.03292e-05       1.71864e-03       2.45137e-03   4.68591e-04   
+Iter 03-->   6.21992e-05       3.23005e-04       6.36410e-05   4.70390e-05   
+Iter 04-->   4.22591e-06       8.51120e-05       1.08008e-05   3.60107e-05   
+-----------------------------------------------
+Final time: 2.92 days, dt= 79488 sec (0 days : 22 hrs : 4 mins : 48 sec)
+end of time-step 22
+
+
+Time-step 23: Initial time: 2.92 days
+dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+Restriction built in: 0.0002996 s
+Pressure Prolongation built in: 0.0004422 s
+Full Prolongation built in: 0.0005932 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 7.82355e-02
+Initial Eq. 2 Residual Norm: 7.39532e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.58377e-03       5.42551e-02       2.31033e-03   1.82382e-03   
+Iter 02-->   5.81684e-04       5.48083e-03       2.30674e-03   7.01888e-05   
+Iter 03-->   2.42526e-04       2.60420e-03       1.67847e-04   5.65748e-05   
+Iter 04-->   4.03690e-05       6.60045e-04       1.24465e-04   2.57774e-05   
+Iter 05-->   1.76570e-05       1.83420e-04       1.84542e-05   4.21467e-06   
+Iter 06-->   1.40104e-06       4.00092e-05       8.34830e-06   1.77931e-06   
+-----------------------------------------------
+Final time: 3 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
+end of time-step 23
+
+
+Printing solution to file at  3 days
+
+
+Time-step 24: Initial time: 3 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0003145 s
+Pressure Prolongation built in: 0.0004538 s
+Full Prolongation built in: 0.0006339 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 7.78967e-02
+Initial Eq. 2 Residual Norm: 7.20662e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.20429e-02       4.10131e-02       2.34111e-03   1.86211e-02   
+Iter 02-->   2.94421e-04       3.82273e-03       1.65113e-03   3.69807e-03   
+Iter 03-->   5.09961e-05       2.47138e-04       1.80337e-04   6.31602e-05   
+Iter 04-->   5.17714e-06       3.45556e-05       9.90703e-06   2.95421e-05   
+-----------------------------------------------
+Final time: 4 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 24
+
+
+Printing solution to file at  4 days
+
+
+Time-step 25: Initial time: 4 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0003145 s
+Pressure Prolongation built in: 0.000459 s
+Full Prolongation built in: 0.0006494 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 7.10547e-02
+Initial Eq. 2 Residual Norm: 6.59139e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   8.75364e-03       1.50730e-02       1.99742e-03   1.41271e-02   
+Iter 02-->   8.50947e-05       3.44609e-03       7.51141e-04   1.30963e-03   
+Iter 03-->   2.85563e-05       1.22183e-04       1.73811e-04   5.57590e-05   
+Iter 04-->   5.53508e-06       2.64032e-05       3.64838e-06   1.47046e-05   
+-----------------------------------------------
+Final time: 5 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 25
+
+
+Printing solution to file at  5 days
+
+
+Time-step 26: Initial time: 5 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0003622 s
+Pressure Prolongation built in: 0.0004605 s
+Full Prolongation built in: 0.0006496 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 6.25230e-02
+Initial Eq. 2 Residual Norm: 7.00396e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.38238e-03       2.30596e-02       1.21595e-03   1.20389e-02   
+Iter 02-->   4.60172e-05       7.08969e-04       1.09200e-03   3.65484e-04   
+Iter 03-->   3.92705e-05       1.53755e-04       4.15254e-05   5.50339e-05   
+Iter 04-->   1.26046e-06       3.23936e-05       9.19998e-06   2.80663e-05   
+-----------------------------------------------
+Final time: 6 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 26
+
+
+Printing solution to file at  6 days
+
+
+Time-step 27: Initial time: 6 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0005173 s
+Pressure Prolongation built in: 0.0008287 s
+Full Prolongation built in: 0.0011476 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 5.58407e-02
+Initial Eq. 2 Residual Norm: 6.88073e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   9.93443e-04       2.89201e-02       1.02847e-03   1.04085e-02   
+Iter 02-->   5.50221e-05       8.28575e-04       1.44120e-03   2.13891e-04   
+Iter 03-->   5.76382e-05       2.27075e-04       1.08439e-05   6.33233e-05   
+Iter 04-->   1.69573e-06       5.65795e-05       1.35560e-05   4.25104e-05   
+-----------------------------------------------
+Final time: 7 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 27
+
+
+Printing solution to file at  7 days
+
+
+Time-step 28: Initial time: 7 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0003092 s
+Pressure Prolongation built in: 0.0004706 s
+Full Prolongation built in: 0.0006632 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 5.27491e-02
+Initial Eq. 2 Residual Norm: 5.90332e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   1.30933e-03       3.34918e-02       1.36662e-03   9.14663e-03   
+Iter 02-->   7.96652e-05       1.24166e-03       1.70984e-03   2.14077e-04   
+Iter 03-->   7.29885e-05       3.00759e-04       8.62148e-06   8.92024e-05   
+Iter 04-->   2.24231e-06       8.22892e-05       1.92456e-05   5.51980e-05   
+-----------------------------------------------
+Final time: 8 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 28
+
+
+Printing solution to file at  8 days
+
+
+Time-step 29: Initial time: 8 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0003117 s
+Pressure Prolongation built in: 0.000466 s
+Full Prolongation built in: 0.0006624 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 5.16251e-02
+Initial Eq. 2 Residual Norm: 5.11221e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   2.87072e-03       3.13595e-02       1.63992e-03   9.42984e-03   
+Iter 02-->   1.18560e-04       1.66346e-03       1.65206e-03   4.95855e-04   
+Iter 03-->   7.89178e-05       3.20701e-04       3.35374e-05   1.04873e-04   
+Iter 04-->   3.13828e-06       7.66230e-05       2.03601e-05   5.73850e-05   
+-----------------------------------------------
+Final time: 9 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 29
+
+
+Printing solution to file at  9 days
+
+
+Time-step 30: Initial time: 9 days
+dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+Restriction built in: 0.0004956 s
+Pressure Prolongation built in: 0.0007801 s
+Full Prolongation built in: 0.0011466 s
+Number of ADM Active Grids: 377 (37.70 Percent of nodes)
+Initial Eq. 1 Residual Norm: 5.08547e-02
+Initial Eq. 2 Residual Norm: 4.56714e-02
+           ||Residual Eq1||    ||Residual Eq2||    ||delta p||    ||delta S||
+Iter 01-->   3.57954e-03       1.96105e-02       1.77654e-03   8.39707e-03   
+Iter 02-->   9.61315e-05       1.37154e-03       1.14855e-03   5.73239e-04   
+Iter 03-->   5.72306e-05       2.29215e-04       6.27523e-05   1.00843e-04   
+Iter 04-->   2.88512e-06       3.18916e-05       1.55154e-05   4.11598e-05   
+-----------------------------------------------
+Final time: 10 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
+end of time-step 30
+
+
+Printing solution to file at  10 days
+
+
+
+
+The Total Simulation time is 5.3434 [s]
+Simulation successfully finished!

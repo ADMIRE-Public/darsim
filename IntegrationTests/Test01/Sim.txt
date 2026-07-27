@@ -58,26 +58,25 @@ GRAVITY
 	
 --Fluid/Rock Properties
 FLUID_DENSITY (kg/m^3)
-	1.98
-	1060
+	NaN
+	NaN
 	
 ROCK_DENSITY (kg/m^3)
-	2600
+	NaN
 
-FLUID_VISCOSITY (Pa.sec)
-	6.5e-5
-	5.4e-4
+HYSTERESIS
+	OFF
 
 FLUID_COMPRESSIBILITY (1/Pa)
-	0
-	0
+	NaN
+	NaN
 
 FLUID_HEAT_CONDUCTIVITY (W/m/K)
 	0.6
 	0.1
 	
 ROCK_COMPRESSIBILITY (1/Pa)
-	0
+	NaN
 
 ROCK_HEAT_CONDUCTIVITY (W/m/K)
 	3.0
@@ -91,18 +90,11 @@ ROCK_SPECIFIC_HEAT (J/Kg/K)
 
 RELPERM (Linear,Quadratic,Corey,Foam,Table)
 	Table
-	--srw (injecting residual saturation)
-	0.0
-	--srnw (resident residual saturation)
-	0.2
-	--Wetting kre [-]
-	1
-	--Nonwetting kre [-]
-	1
-	--Wetting n [-]
-	1
-	--Nonwetting n [-]
-	1
+	table1.txt
+	table2.txt
+
+FACIES_INDEX
+	facies.txt
 	
 CAPILLARITY (Linear,JLeverett,BrooksCorey,Table)
 	Table

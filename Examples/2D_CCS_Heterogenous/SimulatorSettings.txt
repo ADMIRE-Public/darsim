@@ -1,7 +1,5 @@
 -- DARSim: Simulator settings
 --(MaxIter, Tol, CFL)
-TIMESTEPS
-	20000
 
 REPORTS
 	360

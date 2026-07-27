@@ -31,7 +31,8 @@ files = files(~[files.isdir]);
 allNames = {files.name};
 
 idx = contains(allNames, "IntegrationTest_Fracture") | ...
-      contains(allNames, "IntegrationTest_Reservoir");
+      (contains(allNames, "IntegrationTest_Reservoir") & ...
+      ~(contains(allNames, "Level")));
 
 matchingFiles = files(idx);
 names = {matchingFiles.name};

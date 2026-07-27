@@ -1,0 +1,27 @@
+-- Matteo Cusini's research code: Simulator settings
+--(MaxIter, Tol, CFL)
+TIMESTEPS
+	20000
+
+REPORTS
+	10
+
+--Minimum and Maximum allowed time-step (in days)
+MINMAXDT
+	1e-2 5.00e0
+
+OUTPUT
+	VTK
+	BINARY
+
+--Fully Implicit Method (max iteration, residual tolerances (each equation), solution tolerances (each equation), CFL)	
+FIM
+	12
+	1e-4,1e-4
+	1e-3,1e-3
+	100
+	
+LINEARSOLVER
+	direct
+	
+-- END OF DECK 

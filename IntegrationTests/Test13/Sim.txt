@@ -59,22 +59,22 @@ GRAVITY
 	
 --Fluid/Rock Properties
 FLUID_DENSITY (kg/m^3)
-	1.98
-	1060
+	NaN
+	NaN
 	
 ROCK_DENSITY (kg/m^3)
-	2600
+	NaN
 
 FLUID_VISCOSITY (Pa.sec)
-	1.0e-5
+	NaN
 	4.4e-4
 
 FLUID_COMPRESSIBILITY (1/Pa)
-	0
-	0
+	NaN
+	NaN
 	
 ROCK_COMPRESSIBILITY (1/Pa)
-	0
+	NaN
 
 ROCK_HEAT_CONDUCTIVITY (W/m/K)
 	3.0
