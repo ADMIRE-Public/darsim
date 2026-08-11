@@ -98,7 +98,7 @@ classdef Rachford_Rice_3component < Rachford_Rice_flash_calculator
                 % Ref: Rachford–Rice equation–A look from a different perspective
                 % R. Monroy-Loperena (2023)
                 it_NewtonRaphson = 1;
-                while ~(all(abs(V_max - V_min) < 1e-15, 1) || all(abs(F_mid) < 1e-10, 1))
+                while ~all(abs(V_max - V_min) < 1e-15 | abs(F_mid) < 1E-30)
                     
                     % fprintf('#iter bisection-NewtonRaphson: %3d\n', it_RachfordRice);
                     V_bs = (V_min + V_max) / 2;  % Next iter solution by bisection
