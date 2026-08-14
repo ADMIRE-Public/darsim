@@ -23,9 +23,6 @@ classdef Compositional_fluid_model < fluid_model
             for i=1:length(Inj)
                 N = length(Inj{1}.Cells);
                 c = Inj{i}.Composition;
-                if c == nc
-                    error('Water injection is not implemented.');
-                end
                 Inj{i}.z = nan(N, nc);
                 Inj{i}.x = zeros(N, nph * nc); 
                 Inj{i}.x(:, nph*(c-1)+1:nph*c) = 1;
@@ -34,11 +31,19 @@ classdef Compositional_fluid_model < fluid_model
                 end
                 Inj{i}.S = 1;
                 % Inj{i}.Mob = obj.ComputePhaseMobilities(Inj{i}.S);
-                mu = obj.Phases(1).mu;
-                if isempty(mu) || all(isnan(mu(:)))
-                    mu = obj.Phases(1).ComputeViscosity(Inj{i}.p, Inj{i}.T, Inj{i}.x, obj.Thermo);
+                if c < nc
+                    mu = obj.Phases(1).mu;
+                    if isempty(mu) || all(isnan(mu(:)))
+                        mu = obj.Phases(1).ComputeViscosity(Inj{i}.p, Inj{i}.T, Inj{i}.x, obj.Thermo);
+                    end
+                    Inj{i}.Mob = [1/mu 0];
+                else
+                    mu = obj.Phases(2).mu;
+                    if isempty(mu) || all(isnan(mu(:)))
+                        mu = obj.Phases(2).ComputeViscosity(Inj{i}.p, Inj{i}.T, Inj{i}.x, obj.Thermo);
+                    end
+                    Inj{i}.Mob = [0 1/mu];
                 end
-                Inj{i}.Mob = [1/mu 0];
             end        
         end
         %% Call Flash
