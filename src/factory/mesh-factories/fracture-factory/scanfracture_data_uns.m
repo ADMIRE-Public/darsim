@@ -1,32 +1,58 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DARSim Reservoir Simulator
-%Author: Artur Castiel;
+%Author: Ryan Haagenson; Artur Castiel
 %TU Delft
+%
+% Scan for previous FractureFactory output file. If none exists, run
+% FractureFactory() to generate (p)EDFM connections.
+%
+% Input:
+%   ReservoirGrid:  struct
+%                   Contains reservoir grid information
+%
+% Output:
+%   FracturesGrid:    struct
+%                     Contains fracture grid information
+%   CrossConnections: struct
+%                     Contains (p)EDFM cross connection information for 
+%                     each fracture cell
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [FracturesGrid, CrossConnections] = scanfracture_data_uns(obj,ReservoirGrid)
+function [FracturesGrid, CrossConnections] = ...
+         scanfracture_data_uns(obj,ReservoirGrid)
+
     % Loading of basic settings
-    fracture_file = fullfile(obj.SimulationInput.Directory, obj.SimulationInput.FracturesProperties.FractureMatrix);
+    fracture_file = fullfile(obj.SimulationInput.Directory, ...
+        obj.SimulationInput.FracturesProperties.FractureMatrix);
     
-    if strcmpi(obj.SimulationInput.FracturesProperties.FractureModelType,"EDFM")
+    % Set the EDFM/pEDFM flags
+    if strcmpi(...
+            obj.SimulationInput.FracturesProperties.FractureModelType,...
+            "EDFM")
         flag_edfm = true;
     else
         flag_edfm = false;
     end
     
-    if strcmpi(obj.SimulationInput.FracturesProperties.FractureModelType,"pEDFM")
+    if strcmpi(...
+            obj.SimulationInput.FracturesProperties.FractureModelType,...
+            "pEDFM")
         flag_pedfm = true;
     else
         flag_pedfm = false;
     end
     
-    % Creation of the rock frac mesh intersection settings
+    % Create rock-frac mesh intersection settings blueprint
+    % These are set by user-input (SimulationInput or SimulatorSettings)
     rockfrac_int_blueprint = struct( ...
         "edfm_method",...
-        obj.SimulationInput.FracturesProperties.all_settings.EDFM_METHOD, ...
+        obj.SimulationInput.FracturesProperties.all_settings. ...
+        EDFM_METHOD, ...
         "num_area_points", ...
-        obj.SimulationInput.FracturesProperties.all_settings.FRACTURE_NUM_POINTS,...
+        obj.SimulationInput.FracturesProperties.all_settings. ...
+        FRACTURE_NUM_POINTS,...
         "num_frac_boundbox", ...
-        obj.SimulationInput.FracturesProperties.all_settings.FRACTURE_BOUNDING_BOX,...
+        obj.SimulationInput.FracturesProperties.all_settings. ...
+        FRACTURE_BOUNDING_BOX,...
         "parallel", ...
         obj.SimulatorSettings.parallel, ...
         "useHalf",...
@@ -36,22 +62,27 @@ function [FracturesGrid, CrossConnections] = scanfracture_data_uns(obj,Reservoir
         "pedfm", ...
         flag_pedfm, ...
         "d_avg_refinement", ...
-        obj.SimulationInput.FracturesProperties.all_settings.FRACTURE_AVERAGE_DISTANCE_REFINEMENT...
+        obj.SimulationInput.FracturesProperties.all_settings. ...
+        FRACTURE_AVERAGE_DISTANCE_REFINEMENT...
         );
 
-    % Translating fracture blueprint
-    UnstructureData = obj.SimulationInput.ReservoirProperties.UnstructuredGridData;
+    % Unstructure rock mesh properties
+    UnstructureData = ...
+        obj.SimulationInput.ReservoirProperties.UnstructuredGridData;
     if isempty(UnstructureData.props)
-        UnstructureData.props = struct("perm",obj.SimulationInput.ReservoirProperties.Perm);
+        UnstructureData.props = ...
+            struct("perm",obj.SimulationInput.ReservoirProperties.Perm);
     end
     
-    % Generating fracture geometry blueprint from DARSim file
+    % MATLAB file to save FractureFactory output
     [fPath, ~, ~] = fileparts(fracture_file);
     procFile = fullfile(fPath, "fracture_process.mat");
     
+    % Read in saved FractureFactory output if available
     if isfile(procFile)
         disp("Fractures and Intersections reloaded.");
         load(fullfile(fPath,"fracture_process.mat"),"fractures")
+    % Else call FractureFacotry and save output
     else
         fractures = FractureFactory( ...
             obj.SimulationInput.FracturesProperties, ...
@@ -68,23 +99,36 @@ function [FracturesGrid, CrossConnections] = scanfracture_data_uns(obj,Reservoir
     
     % Translating between DARSim versions
     trans_obj = translate_newDarsim_to_oldDarsim(fractures.frac_core, ...
-        obj.SimulationInput.ReservoirProperties.UnstructuredGridData, fractures.fracmesh);
+        obj.SimulationInput.ReservoirProperties.UnstructuredGridData, ...
+        fractures.fracmesh);
     
-    % Updating the number of fracture grid since on unstructured grids this cannot be load a priori
-    obj.SimulationInput.FracturesProperties.NumOfAllFracGrids = sum(trans_obj.num_frac_el);
+    % Updating the number of fracture grid since on unstructured grids 
+    % This cannot be load a priori
+    obj.SimulationInput.FracturesProperties.NumOfAllFracGrids = ...
+        sum(trans_obj.num_frac_el);
+
+    % Creating the CrossConnections object
+    % This is used to build Jacobian 
+    % Same object exists for Cartesian-based pEDFM method
     CrossConnections = cross_connections();
     for index = 1:length(trans_obj.CrossConnections)
-        CrossConnections(index).Cells = trans_obj.CrossConnections(index).Cells;
-        CrossConnections(index).CI = trans_obj.CrossConnections(index).CI;
-        CrossConnections(index).T_Geo = trans_obj.CrossConnections(index).T_Geo;
-        CrossConnections(index).T_Geo_Cond = trans_obj.CrossConnections(index).T_Geo_Cond;
-        CrossConnections(index).UpWind = trans_obj.CrossConnections(index).UpWind;
-        CrossConnections(index).U_Geo = trans_obj.CrossConnections(index).U_Geo;
+        CrossConnections(index).Cells = ...
+            trans_obj.CrossConnections(index).Cells;
+        CrossConnections(index).CI = ...
+            trans_obj.CrossConnections(index).CI;
+        CrossConnections(index).T_Geo = ...
+            trans_obj.CrossConnections(index).T_Geo;
+        CrossConnections(index).T_Geo_Cond = ...
+            trans_obj.CrossConnections(index).T_Geo_Cond;
+        CrossConnections(index).UpWind = ...
+            trans_obj.CrossConnections(index).UpWind;
+        CrossConnections(index).U_Geo = ...
+            trans_obj.CrossConnections(index).U_Geo;
     end
     
     Nf = zeros(NumOfFrac,1);
     
-    % Creation of cartesian grid in each fracture
+    % Creating a Cartesian grid for each fracture
     for f = 1 : NumOfFrac
         FractureGrid = unstructured_fracture_grid(trans_obj.fracmesh(f));
         FractureGrid.GridCoords = FractureGrid.fracmesh.vertex.coords;
@@ -92,10 +136,13 @@ function [FracturesGrid, CrossConnections] = scanfracture_data_uns(obj,Reservoir
         Nf(f) = FractureGrid.N;
     end
 
-    % In darsim only inner faces are considered,therefore we are retrieving
-    % only the inner faces. DARSIM 3 data structured uses [inner; bound];
+    % Older versions of DARim only inner faces are considered,
+    % Therefore we are retrieving only the inner faces. 
+    % DARSim 3 data structured uses [inner; bound];
     trans_alpha = fractures.frac_core.alpha;
-    trans_alpha = trans_alpha(1:obj.SimulationInput.ReservoirProperties.UnstructuredGridData.face.inner.num);
+    trans_alpha = trans_alpha(1: ...
+        obj.SimulationInput.ReservoirProperties. ...
+        UnstructuredGridData.face.inner.num);
     ReservoirGrid.AddpEDFMCorrections(trans_alpha);
     fprintf(' ---> Complete!\n');
 

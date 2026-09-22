@@ -1,7 +1,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DARSim Reservoir Simulator
-%Author: Artur Castiel;
+%Author: Ryan Haagenson; Artur Castiel
 %TU Delft
+%
+% FractureFactory class for constructing the fracture geometry, fracture 
+% mesh, and fracture-rock and fracture-fracture intersections required for 
+% (p)EDFM simulations.
+%
+% Input:
+%   fracture_init:      struct
+%                       Contains basic fracture information
+%   rockmesh:           struct
+%                       Contains relevant rock mesh information
+%   settings:           struct
+%                       Contains relevant simulation settings
+%
+% Output:
+%   FractureFactory:    object
+%                       Contains fracture geometry, mesh, intersection,
+%                       cross connection, and physical property information
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 classdef FractureFactory
     properties
@@ -28,6 +45,16 @@ classdef FractureFactory
     methods 
         function obj = FractureFactory(fracture_init, rockmesh,...
                                                     settings, varargin) 
+
+            % Initialize fracmesh type: ustructured (1) or structured (0)
+            obj.unstructured_fracmesh =  fracture_init.UnsFracmesh;
+
+            % Initialize General simulation settings
+            obj.settings = settings;
+
+            % Initialize rockmesh information
+            obj.rockmesh = rockmesh;
+
             % Check and intialize fracture geometry blueprint if not provided
             if isstruct(fracture_init) || isobject(fracture_init)
                 obj.geometry_blueprint = fracture_init.blueprint;
@@ -39,27 +66,31 @@ classdef FractureFactory
                 error("ERROR: Fracture network failed to intialize. " + ...
                     " No fracture geometry blueprint found.")
             end
-            obj.unstructured_fracmesh =  fracture_init.UnsFracmesh;
+
+            % Initialize fracture simulation type: EDFM or pEDFM
             obj.type = obj.geometry_blueprint.Type;
-            obj.settings = settings;
-            obj.rockmesh = rockmesh;
+
             % Intialize fracture geometries based on the blueprint
             [obj.geometry,obj.num_frac] = obj.build_geometry();
+
             % Intialize fracture meshes based on geometry and blueprint
             [obj.fracmesh] = obj.build_fracmesh(rockmesh);
-            % Find fracture geometry intersection based on geometry and
-            % frac_mesh intersection if there are more than one fracture
+
+            % Find fracture intersections based on geometry 
+            % If there are more than one fracture
             frac_mesh_dist_int = cell(1);
             if obj.num_frac > 1
                 obj.geo_intersection = obj.find_geo_intersection();
                 [frac_mesh_dist_int] = ...
-                    obj.create_frac_mesh_intersection(... 
-                                                     obj.geo_intersection);
+                    obj.create_frac_mesh_intersection(obj.geo_intersection);
             end
+
+            % Find intersections between fractures and rock matrix
             [edfm_geo, pedfm_geo, avg_d_rock_geo, avd_d_frac_geo] = ...
                         obj.create_frac_rock_intersection(rockmesh, ...
                                     frac_mesh_dist_int, settings);
-
+            
+            % Compute the physical properties of the (p)EDFM connections
             obj.frac_core = compute_physical_prop_pedfm(rockmesh,...
                         obj.fracmesh, obj.geometry, frac_mesh_dist_int, ...
                         edfm_geo, pedfm_geo, avg_d_rock_geo, ...
@@ -69,14 +100,14 @@ classdef FractureFactory
     methods (Access = private)
         function [edfm_geo, pedfm_geo, d_rock,d_frac] = ...
                     create_frac_rock_intersection(obj,rockmesh,...
-                                                frac_int,settings)
+                                                frac_mesh_dist_int,settings)
             if isfield(settings,"edfm_method")
                 if settings.edfm_method == "monte_carlo"
                     [edfm_geo, pedfm_geo, d_frac] = ...
                         find_pedfm_edfm_int_area_MC(...
                         obj.fracmesh, ...
                         rockmesh, ...
-                        frac_int, ...
+                        frac_mesh_dist_int, ...
                         obj.geometry, ...
                         obj.geo_intersection, ...
                         settings);
@@ -97,7 +128,7 @@ classdef FractureFactory
                         settings);
                     [d_frac] = find_distance_frac_to_frac_int(...
                         obj.fracmesh, ...
-                        frac_int, ...
+                        frac_mesh_dist_int, ...
                         obj.geometry, ...
                         obj.geo_intersection,settings);
                     [d_rock] = ...
@@ -119,44 +150,6 @@ classdef FractureFactory
 
         end
 
-        function edfm_pedfm_geo = ...
-                    edfm_pedfm_geo_merger(~, edfm_geo, pedfm_geo)
-            if isStructEmpty(pedfm_geo)
-                edfm_pedfm_geo = edfm_geo;
-            else
-                % Merging pEDFM and EDFM to make data structure compatible
-                if iscell(edfm_geo.vol_ind)
-                    num_cells = length(edfm_geo.vol_ind);
-                else
-                    num_cells = 1;
-                end
-                unique_ind = cell(num_cells,1);
-                area = cell(num_cells,1);
-                unique_areas = cell(num_cells,1);
-                edfm_pedfm_geo = struct();
-                for index = 1:num_cells
-                all_ind = ...
-                  [[edfm_geo.vol_ind{index}] [edfm_geo.frac_ind{index}];...
-                  [pedfm_geo.vol_ind{index}] [pedfm_geo.frac_ind{index}]];
-                area{index} = ...
-                        [[edfm_geo.area{index}]; [pedfm_geo.area{index}]];
-                [unique_ind{index}, ~, groups] = unique(all_ind,"rows");
-                unique_areas{index} = accumarray(groups,area{index});
-                end
-                edfm_pedfm_geo.area = unique_areas;                
-                vol_ind = cell(num_cells,1);
-                frac_ind = cell(num_cells,1);
-                for index = 1:num_cells
-                    auxmat = unique_ind{index};
-                    vol_ind{index,1} =  auxmat(:,1);
-                    frac_ind{index,1} = auxmat(:,2);
-                end
-                edfm_pedfm_geo.vol_ind = vol_ind;
-                edfm_pedfm_geo.frac_ind = frac_ind;
-                edfm_pedfm_geo.area = unique_areas;
-            end
-            edfm_pedfm_geo.pedfm_geo = pedfm_geo;
-        end
         function [geo,num_frac] = build_geometry(obj)
             fractures_geometry = ...
                 FractureGeometryBuilder(obj.geometry_blueprint);
