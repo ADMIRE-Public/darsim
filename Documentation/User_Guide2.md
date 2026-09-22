@@ -1,7 +1,7 @@
 
 # DARSim User Guide
 
-![DARSim Logo](DARSimLogoNew.png)
+![DARSim Logo](../DARSimLogo.png)
 
 ## Table of Contents
 
