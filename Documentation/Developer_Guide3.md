@@ -201,7 +201,7 @@ DARSim("Examples/<example name>", "Sim.txt")
 
 Congratulations! You now have a local Git-enabled repository of DARSim. 
 
-### 4.2 Basic Git Principles
+### 4.2 Basic Git Concepts
 Below is a list of basic Git principles that are important to understand for any DARSim contributor. This is not intended to be a comprehensive review of Git concepts. For a deeper grasp of the Git principles, please refer to one of the many online resources that are freely available. 
 
 ### Concept 1: Remote Repository
@@ -276,7 +276,7 @@ Retrieve updates of a branch from the remote repository and merges them with the
 git pull origin <branch_name>
 ```
 
-### Concept 9: Roles
+### Concept 10: Roles
 
 - **Maintainer:** Reviews and merges contributions with the `main` branch.
 - **Developer/Contributor:** Develops and tests new functionality on feature branches.
