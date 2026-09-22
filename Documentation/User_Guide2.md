@@ -67,11 +67,7 @@ DARSim solves the conservation equations governing multiphase, multicomponent fl
 For each fluid component ($c$), DARSim solves a nonlinear mass conservation equation of the form
 
 $$
-\frac{\partial}{\partial t}\left(\phi S_\alpha x_{c,\alpha}\rho_\alpha\right)
-+ \nabla \cdot \left(\sum_{\alpha} x_{c,\alpha}\rho_{\alpha}u_{\alpha}\right)
-+ \nabla \cdot \left(\sum_{\alpha} S_{\alpha}\rho_{\alpha}J_{\alpha}\right)
-- \sum_{\alpha} x_{c,\alpha}\rho_\alpha(q_{w,\alpha}+q_{f,\alpha})
-= 0
+\frac{\partial}{\partial t}\left(\phi S_\alpha x_{c,\alpha}\rho_\alpha\right) + \nabla \cdot \left(\sum_{\alpha} x_{c,\alpha}\rho_{\alpha}u_{\alpha}\right) + \nabla \cdot \left(\sum_{\alpha} S_{\alpha}\rho_{\alpha}J_{\alpha}\right) - \sum_{\alpha} x_{c,\alpha}\rho_\alpha(q_{w,\alpha}+q_{f,\alpha}) = 0
 $$
 
 where:
