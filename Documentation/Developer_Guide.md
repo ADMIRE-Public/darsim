@@ -104,6 +104,8 @@ This workflow provides robust performance for strongly coupled multiphase and mu
 
 The following source files provide the primary entry points into the DARSim codebase. They are grouped according to their role within the simulator.
 
+Additionally, there is a code organization map in HTML format provided with the source code. To view, please open `code-organization.html` found inside the `/src` directory. Here, you can navigate and search through the various source code files and get an overview of the code base structure. 
+
 ### 3.1 Entry Points and Simulation Assembly
 
 These files control the overall execution of a DARSim simulation.
