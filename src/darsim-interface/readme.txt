@@ -16,7 +16,7 @@ DARSim is an open-source Matlab-based 3D reservoir simulator which is aimed at d
 research and prototype platform for testing new ideas, as well as field-relevant simulation
 of multiphase flow in natural subsurface formations.
 
-The key elements that make DARSim2 unique are the following:
+The key elements that make DARSim3 unique are the following:
 
 - It is a comprehensive easy-to-work open-source simulator
 - It has the state-of-the-art multiscale in space and time implementation
@@ -29,4 +29,4 @@ The key elements that make DARSim2 unique are the following:
 - Take DARSim3 as a base code, and develop your own MSc or PhD thesis project on it. It may 
  save you up to 6 years of time!
 - It is fully based on the published papers of the development team!
-- It allows for Corner Point Grid Geometry for fine-scale simulations with 3D pEDFM fractures!
+- It allows for corner point and unstructured grid geometry for fine-scale simulations with 3D pEDFM fractures!
