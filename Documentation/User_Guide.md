@@ -56,6 +56,14 @@ where the correct path to the simulation directory and the name of the main simu
 
 More details on the contents of these files is provided below. Please refer to the `Examples` directory of the DARSim repository for examples of the simulation files. Note that the main simulation input file is named `Sim.txt` in the `Examples` directory.
 
+### 2.2 Parallel Simulations
+
+On Windows and Linux machines, DARSim can be run in parallel. This capability makes use of the native parallelized solver capabilities available through MATLAB. To run a simulation in parallel, pass the number of desried processors (`n`) to the DARSim function:
+
+```matlab
+DARSim("<path/to/simulation>","<InputFileName.txt>",n)
+```
+
 ---
 
 ## 3. Mathematical Model
@@ -476,6 +484,26 @@ INITIAL_COMPOSITION_1
 INITIAL_COMPOSITION_2
 	1.0
 ```
+
+Alternatively, the initial conditions can be set using an external file. In this way, uniform values do not need to be applied across the entire reservoir. To use an external file for initial conditions, the main simulation input file should include:
+
+```
+INITIAL_STATE
+    <Initial_State.txt>
+```
+
+Here, `Initial_State.txt` is the file name containing the initial conditions, which can have any name. The text file should include one column for the cell index, one column for the liquid phase pressure, and one column for the mass fractions of each component in the system. For example, a two-component system would have an initial state file with:
+
+```
+1 1.0e7 0.1 0.9
+2 1.1e7 0.2 0.8
+3 1.5e7 0.5 0.5
+...
+```
+
+There should be one row in the initial state file for every cell in the simulation. 
+
+
 #### Note: Component and phase indexing...
 
 For the black-oil fluid models, the first phase is the gaseous phase and the first component is CO2 or H2 (depending on the composition list) while the second phase and component is brine. For the three-component H2-CH4-Brine system, the first two components are H2 and CH4 respectively, while the last component is brine. 

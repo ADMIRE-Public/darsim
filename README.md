@@ -110,9 +110,14 @@ DARSim is provided for **research use only**.
 
 The authors and Delft University of Technology assume **no liability** for the use of this software or its results.
 
+### Principal Investigators
+
+- Hadi Hajibeygi (TU Delft, Civil Engineering and Geosciences)
+- Cornelis Vuik (TU Delft, Delft Institute of Applied Mathematics)
+
 ### Contributors List
 
-DARSim development team includes (but is not limited to):
+Current and previous members of the DARSim development team include (but is not limited to):
 
 - Mengjie Zhao
 - Amin Masaghi Bonabi
@@ -121,13 +126,8 @@ DARSim development team includes (but is not limited to):
 - Artur Castiel de Souza
 - Mousa HosseiniMehr
 - Janio Piguave
-- Arjan Marelis
+- Matei Ţene
 - Matteo Cusini
-
-### Principal Investigators
-
-- Hadi Hajibeygi (TU Delft, Civil Engineering and Geosciences)
-- Cornelis Vuik (TU Delft, Delft Institute of Applied Mathematics)
 
 ### Citations
 
