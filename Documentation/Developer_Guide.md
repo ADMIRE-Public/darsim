@@ -1,7 +1,7 @@
 
 # DARSim Developer Guide
 
-![DARSim Logo](DARSimLogoNew.png)
+![DARSim Logo](../DARSimLogo.png)
 
 ## Table of Contents
 
@@ -104,6 +104,8 @@ This workflow provides robust performance for strongly coupled multiphase and mu
 
 The following source files provide the primary entry points into the DARSim codebase. They are grouped according to their role within the simulator.
 
+Additionally, there is a code organization map in HTML format provided with the source code. To view, please open `code-organization.html` found inside the `/src` directory. Here, you can navigate and search through the various source code files and get an overview of the code base structure. 
+
 ### 3.1 Entry Points and Simulation Assembly
 
 These files control the overall execution of a DARSim simulation.
@@ -201,7 +203,7 @@ DARSim("Examples/<example name>", "Sim.txt")
 
 Congratulations! You now have a local Git-enabled repository of DARSim. 
 
-### 4.2 Basic Git Principles
+### 4.2 Basic Git Concepts
 Below is a list of basic Git principles that are important to understand for any DARSim contributor. This is not intended to be a comprehensive review of Git concepts. For a deeper grasp of the Git principles, please refer to one of the many online resources that are freely available. 
 
 ### Concept 1: Remote Repository
@@ -276,7 +278,7 @@ Retrieve updates of a branch from the remote repository and merges them with the
 git pull origin <branch_name>
 ```
 
-### Concept 9: Roles
+### Concept 10: Roles
 
 - **Maintainer:** Reviews and merges contributions with the `main` branch.
 - **Developer/Contributor:** Develops and tests new functionality on feature branches.
