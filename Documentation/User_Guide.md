@@ -558,9 +558,19 @@ For more examples on how to define wells in DARSim, please refer to the `Example
 
 ## 11. Fractures
 
-DARSim supports naturally fractured reservoirs through Embedded Discrete Fracture Models (EDFM) and Projection-based EDFM (pEDFM).
+DARSim supports naturally fractured reservoirs through Embedded Discrete Fracture Models (EDFM) and Projection-based EDFM (pEDFM). 
 
 Fractures are represented as lower-dimensional entities that exchange mass with the surrounding porous matrix through transmissibility-based coupling terms. This approach allows complex fracture networks to be modeled without requiring the computational grid to conform to individual fracture geometries.
+
+To run a simulation without fractures, include the following the main simulation input file:
+
+```
+FRACTURED
+	OFF
+	NA
+```
+
+The `NA` is required here, which stands for "not applicable" with regard to the name of the fracture file name. 
 
 When applying pEDFM to a Cartesian or corner-point grid, the user must first call DARSimFracGen.m located inside `src/darsim_legacy/FracturesGenerator`. To call this function, run the following command from within the `FracturesGenerator` directory:
 
