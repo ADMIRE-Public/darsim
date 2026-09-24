@@ -1,4 +1,4 @@
-![DARSim Logo](Logo/DARSimLogo2.pdf)
+![DARSim Logo](Logo/DARSimLogo2.png)
 
 Delft Advanced Reservoir Simulator (TU Delft)
 
