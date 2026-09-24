@@ -1,7 +1,7 @@
 
 # DARSim User Guide
 
-![DARSim Logo](../DARSimLogo.png)
+![DARSim Logo](../Logo/DARSimLogo2.png)
 
 ## Table of Contents
 
@@ -296,7 +296,7 @@ POROSITY
 
 ### 5.2 Permeability
 
-For permeability, the units (milliDarcy or square meters) must be defined through the `PERMEABILITY_UNIT` keyword. Next, the scale (linear or logarithmic) must be defined with `PERMEABILITY SCALE`.
+For permeability, the units (milliDarcy or square meters) must be defined through the `PERMEABILITY_UNIT` keyword. Next, the scale (`Linear` or `Logarithmic`) must be defined with `PERMEABILITY SCALE`.
 
 ```
 PERMEABILITY_UNIT
@@ -306,7 +306,7 @@ PERMEABILITY_SCALE
     Linear
 ```
 
-Permeability values can be define as either homogeneous (single value) or heterogeneous (from and external file), similar to the porosity value. Permeablity, though, can also be anisotropic with different values in the x, y, and z direcitons. 
+Permeability values can be define as either homogeneous (single value) or heterogeneous (from and external file), similar to the porosity value. Permeablity, though, can also be anisotropic with different values in the x, y, and z direcitons. For example:
 
 ```
 PERMEABILITY_X
@@ -325,12 +325,15 @@ To use external files for the permeability values (to account for heterogeneity)
 
 ```
 PERMEABILITY_X
+	INCLUDE
     Perm_het_x.txt
 
 PERMEABILITY_Y
+	INCLUDE
     Perm_het_y.txt
 
 PERMEABILITY_Z
+	INCLUDE
     Perm_het_z.txt
 ```
 
@@ -341,6 +344,7 @@ Generally, the relative permeability and capillary pressure curves are supplied 
 ```
 RELPERM
 	Table
+	<LookupTableName.txt>
 
 CAPILLARITY
 	Table
@@ -349,7 +353,7 @@ CAPILLARITY
 
 Here, the `2` under `CAPILARITY` tells DARSim which fluid phase is considered the wetting phase. Typically this is the brine phase (i.e. phase `2`). 
 
-By default, the lookup table file should be called `LookupTable.txt` and located in the simulation directory for DARSim to find it. The look up table will include five separate tables:
+The lookup table file can have any name (given in place of `<LookupTableName.txt>`) and located in the simulation directory for DARSim to find it. The look up table will include five separate tables:
 
 - Wetting phase relative permeability curve: --wetting_kr
 - Non-wetting phase relative permeability curve (drainage): --nonwetting_drainage_kr
@@ -367,6 +371,16 @@ HYSTERESIS
 ```
 
 For cases without hysteresis, set this keyword to `OFF` and give identical curves for the drainage and imbitition curves inside `LookupTable.txt`. 
+
+When including fractures in the simulation, the relative permeability model also needs the wetting-phase residual saturation value in the fracture cells. To include this, modify the `RELPERM` block to:
+
+```
+RELPREM
+	Table
+	<LookupTableName.txt>
+	srw_frac
+	0.2
+```
 
 ### 5.4 Multiple Facies Types
 
@@ -416,7 +430,7 @@ COMPONENT_LIST
 	CO2-Brine
 ```
 
-### 6.1 Fluid properties: Density and Viscosity
+### 6.1 Fluid properties: Density, Viscosity, Salinity
 
 The governing equations depend on two important fluid properties for each fluid phase: density and viscosity. 
 
@@ -433,6 +447,13 @@ FLUID_VISCOSITY (Pa.sec)
 In this example, the viscosity of the gas phase (the first phase) is 6.5e-5 Pa.sec, while the viscosity of the brine phase (the second phase) is 5.4e-4 Pa.sec. The units for viscosity in the input file are assumed to be Pascal-seconds. 
 
 For the three component system of H2-CH4-Brine, the viscosity of the gas phase can vary significantly depending on the composition. Therefore, DARSim employs a composition-dependent relationship to define the gas phase viscosity in the three component fluid model. In this case, the gas phase viscosity in the main simulation input file can be listed as "NaN". 
+
+The salinity of the brine phase is controlled through the following keyword in the main simulation input file:
+
+```
+SALINITY (ppm by mass)
+	100e3
+```
 
 ---
 
@@ -492,17 +513,18 @@ INITIAL_STATE
     <Initial_State.txt>
 ```
 
-Here, `Initial_State.txt` is the file name containing the initial conditions, which can have any name. The text file should include one column for the cell index, one column for the liquid phase pressure, and one column for the mass fractions of each component in the system. For example, a two-component system would have an initial state file with:
+Here, `Initial_State.txt` is the file name containing the initial conditions, which can have any name. The comma-separated text file should include one column for the cell index, one column for the brine phase pressure, and one column for the mass fractions of each component in the system. For example, a two-component CO2-Brine system would have an initial state file:
 
 ```
-1 1.0e7 0.1 0.9
-2 1.1e7 0.2 0.8
-3 1.5e7 0.5 0.5
+1, 1.0e7, 0.1, 0.9
+2, 1.1e7, 0.2, 0.8
+3, 1.5e7, 0.5, 0.5
 ...
 ```
 
-There should be one row in the initial state file for every cell in the simulation. 
+There should be one row in the initial state file for every cell in the grid. Note that the mass fraction values must sum to unity. 
 
+When the initial conditions are supplied from an external file, the simulation still requires a value for the `INITIAL_PRESSURE` keyword. This is a single pressure value that will be used to initialize the fluid properties of the injection fluid at the wells; however, fluid properties will rapidly come into equilibirum with the reservoir fluid pressure during the simulation. 
 
 #### Note: Component and phase indexing...
 
@@ -535,18 +557,18 @@ WELL_START
 		XYZ_LIST
 		[ <x1> , <y1> , <z1> ]
 		[ <x2> , <y2> , <z2> ]
-	CONSTRAINT ("PRESSURE" or "RATE", Value (Pa or Pore Volumes/day))
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
 		RATE
 		1e-1
-	FORMULA ("WI")
+	FORMULA (Well Index: "WI")
 		WI
 		9.2
 	SCHEDULE ([Open, Close, Open, Close, ...] in days)
 		0, 30
 	COMPOSITION (Which component to inject -- only required for injectors)
 		1
-	BOUNDARY_CONDITION (Value (K))
-		TEMPERATURE
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
 		300
 WELL_END
 ```

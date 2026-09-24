@@ -1,137 +1,90 @@
--- DARSim2 INPUT file
+-- DARSim3 INPUT file
 -- All keywords are in capital letters
 
---Name
+--Simulation Name
 TITLE
 	IntegrationTest
 
---Size of the reservoir in m 
-DIMENSION
- 	100
+--Gravity Control
+GRAVITY
+	ON
+
+--Grid
+DIMENSION (In meters; Dummy values for UnstructuredGrid)
 	100
 	100
-	
---Grid Discretization ("CartesianGrid" or "CornerPointGrid")
---To include the CornerPointGrid input data, add the name of the input file in the line below the "CornerPointGrid" keyword.
---To include the CornerPointGrid permeability/porosity input data, add the name of the input corresponding file in the line under the previous.
-GRID_DISCRETIZATION
+	100
+
+GRID_DISCRETIZATION (CartesianGrid, CornerPointGrid, UnstructuredGrid)
 	CornerPointGrid
 	parallelepiped_100x100x100_shift_up40_10x10x10.grdecl
 
---grid Nx//Ny//Nz
-SPECGRID
+SPECGRID (Nx//Ny//Nz; Dummy values for UnstructuredGrid)
 	10
 	10
 	10
-	
---Total time (in days and hours and minutes and seconds)
+
+--Total time (Days, Hours, Minutes, and Seconds)
 TOTAL_TIME
 	10 DAYS 0 HOURS 0 MINUTES 0 SECONDS
-	
---Permeability
-	--To specify unit (m2, D, mD), add "permeability_unit" keyword in capital letters. Default is m2)
-	--To specify scale (Linear or Logarithmic), add "permeability_scale" keyword in capital letters. Default is Linear. If the data is in log scale, use "logarithmic" keyword in capital letters.
-	--In case of using heterogenous input file, you can choose to permanently reduce the heterogenous contrast by using "contrast_reduction" in capital letters.
-	
-	PERMEABILITY_UNIT
-		m2
-	
-	PERMEABILITY_SCALE
-		Linear
-		
 
-		PERMEABILITY_X
-			INCLUDE
-			Permeability.txt
-		
+--Reservoir Properties
+PERMEABILITY_UNIT (m2, mD)
+	m2
 
-		PERMEABILITY_Y
-			INCLUDE
-			Permeability.txt
+PERMEABILITY_SCALE (Linear, Logarithmic)
+	Linear
 
+PERMEABILITY_X
+	INCLUDE
+	Permeability.txt
 
-		PERMEABILITY_Z
-			INCLUDE
-			Permeability.txt
-	
+PERMEABILITY_Y
+	INCLUDE
+	Permeability.txt
+
+PERMEABILITY_Z
+	INCLUDE
+	Permeability.txt
+
 POROSITY
-	0.2 
-	
-GRAVITY
-	ON
-	
---Fluid/Rock Properties
-FLUID_DENSITY (kg/m^3)
-	1.98
-	1060
-	
-ROCK_DENSITY (kg/m^3)
-	2600
-
-FLUID_VISCOSITY (Pa.sec)
-	6.5e-5
-	5.4e-4
-
-FLUID_COMPRESSIBILITY (1/Pa)
-	0
-	0
-
-FLUID_HEAT_CONDUCTIVITY (W/m/K)
-	0.6
-	0.1
-	
-ROCK_COMPRESSIBILITY (1/Pa)
-	0
-
-ROCK_HEAT_CONDUCTIVITY (W/m/K)
-	3.0
-	
-FLUID_SPECIFIC_HEAT (J/Kg/K)
-	4200
-	8000
-
-ROCK_SPECIFIC_HEAT (J/Kg/K)
-	850
-
-RELPERM (Linear,Quadratic,Corey,Foam,Table)
-	Table
-	--srw (injecting residual saturation)
-	0.0
-	--srnw (resident residual saturation)
 	0.2
-	--Wetting kre [-]
-	1
-	--Nonwetting kre [-]
-	1
-	--Wetting n [-]
-	1
-	--Nonwetting n [-]
-	1
-	
-CAPILLARITY (Linear,JLeverett,BrooksCorey,Table)
+
+RELPERM
 	Table
+	LookupTable.txt
+
+CAPILLARITY
+	Table
+	--Wetting phase index
 	2
 
-COMPONENT_LIST
-	CO2-Brine
+HYSTERESIS
+	OFF
 
-SALINITY
-	100e3
-	
+--Fluid Properties
 FLUID_MODEL (Immiscible,BlackOil,Compositional,Geothermal_SinglePhase, Geothermal_MultiPhase)
 	BlackOil
 	--Number of phases
 	2
 	--Number of components
 	2
-	
---initial conditions ( Pressure(pa), Temperature(K), Enthalpy(J/Kg), Satuaration_1, Saturation_2, etc )
-INITIAL_PRESSURE
+
+COMPONENT_LIST
+	CO2-Brine
+
+FLUID_VISCOSITY (Pa.sec)
+	6.5e-5
+	5.4e-4
+
+SALINITY (ppm by mass)
+	100e3
+
+--Initial Conditions
+INITIAL_PRESSURE (Pa)
 	2.5e7
-INITIAL_TEMPERATURE
+INITIAL_TEMPERATURE (K)
 	338.15
-INITIAL_ENTHALPY
-	nan
 INITIAL_SATURATION_1
 	0.0
 INITIAL_SATURATION_2
@@ -141,47 +94,48 @@ INITIAL_COMPOSITION_1
 INITIAL_COMPOSITION_2
 	1.0
 
---Wells ( [i;j;k](start), [i;j;k](end), constraint (pressure - rate), value (Pa - pv/day), type(PI/radius), value(m^3/day/pa - m), temperature (K) )
+--Well Controls
 WELL_START
-	TYPE ("Inj" or "Prod" in capital letters)
+	TYPE ("INJ" or "PROD")
 		INJ
-	COORDINATE ("ijk_list" or "xyz_list" or "cell_index_list" in capital letters)
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
 		XYZ_LIST
 		[ 5 , 5 , 1 ]
 		[ 5 , 5 , 9 ]
-	CONSTRAINT ("pressure" or "rate" in capital letters, Value (Pa - pv/day))
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
 		RATE
 		8.0e-5
-	FORMULA ("PI" or "radius" in capital letters, Value(m^3/day/pa - m))
+	FORMULA (Well Index: "WI")
 		WI
 		9.2
-	BOUNDARY_CONDITION (Value (K))
-		TEMPERATURE
+	COMPOSITION
+		1
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
 		338.15
 WELL_END
 
---Wells ( [i;j;k](start), [i;j;k](end), constraint (pressure - rate), value (Pa - pv/day), type(PI/radius), value(m^3/day/pa - m), temperature (K) )
 WELL_START
-	TYPE ("Inj" or "Prod" in capital letters)
+	TYPE ("INJ" or "PROD")
 		PROD
-	COORDINATE ("ijk_list" or "xyz_list" or "cell_index_list" in capital letters)
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
 		XYZ_LIST
 		[ 95 , 95 , 135 ]
 		[ 95 , 95 , 135 ]
-	CONSTRAINT ("pressure" or "rate" in capital letters, Value (Pa - pv/day))
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
 		PRESSURE
 		2.5e7
-	FORMULA ("PI" or "radius" in capital letters, Value(m^3/day/pa - m))
+	FORMULA (Well Index: "WI")
 		WI
 		9.2
-	BOUNDARY_CONDITION (Value (K))
-		TEMPERATURE
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
 		338.15
 WELL_END
 
---Keyword for fractures
+--Fracture Controls
 FRACTURED
 	OFF
-	Fracture_Output.txt
+	NA
 
 -- END OF DECK 

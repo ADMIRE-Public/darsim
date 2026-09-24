@@ -1,7 +1,7 @@
 ========================================================================
 DARSim Integration Test Report
 ========================================================================
-Date and time                   : 23-Jul-2026 16:34:36
+Date and time                   : 24-Sep-2026 13:06:00
 MATLAB version                  : 24.2.0.2863752 (R2024b) Update 5
 DARSim root                     : /Users/rhaagenson/Codes/DARSim/GitVersion/DARSim
 Source directory                : /Users/rhaagenson/Codes/DARSim/GitVersion/DARSim/src
@@ -17,32 +17,22 @@ Missing benchmark directories   : none
 
 PRE-RUN CLEANUP
 ------------------------------------------------------------------------
-Deleted : /Users/rhaagenson/Codes/DARSim/GitVersion/DARSim/IntegrationTests/Test01/Output
-Deleted 1 pre-existing Output directories.
+Deleted 0 pre-existing Output directories.
 
 ========================================================================
 Test01
 ========================================================================
 Status : running
-Status : failed: error
-Wall time : 0.078084 s
-Error identifier : MATLAB:load:couldNotReadFile
-Error message    : Unable to find file or directory '/Users/rhaagenson/Codes/DARSim/GitVersion/DARSim/IntegrationTests/Test01/facies.txt'.
-Stack trace:
-  build_media_information, line 58
-  build_ReservoirProperties, line 10
-  darsim2_settings_factory.translate_simulation_input, line 76
-  darsim2_settings_factory.darsim2_settings_factory, line 25
-  create_darsim_settings, line 16
-  DARSim, line 42
-  RunIntegrationTests, line 112
+Status : pass
+Wall time : 3.963270 s
+Compared VTK files : 11
 
 ========================================================================
 Test02
 ========================================================================
 Status : running
 Status : pass
-Wall time : 6.727650 s
+Wall time : 5.823884 s
 Compared VTK files : 11
 
 ========================================================================
@@ -50,7 +40,7 @@ Test03
 ========================================================================
 Status : running
 Status : pass
-Wall time : 4.649991 s
+Wall time : 3.789350 s
 Compared VTK files : 11
 
 ========================================================================
@@ -58,7 +48,7 @@ Test04
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.864720 s
+Wall time : 2.367882 s
 Compared VTK files : 11
 
 ========================================================================
@@ -66,7 +56,7 @@ Test05
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.628364 s
+Wall time : 2.304610 s
 Compared VTK files : 11
 
 ========================================================================
@@ -74,7 +64,7 @@ Test06
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.831728 s
+Wall time : 2.377030 s
 Compared VTK files : 11
 
 ========================================================================
@@ -82,7 +72,7 @@ Test07
 ========================================================================
 Status : running
 Status : pass
-Wall time : 1.878306 s
+Wall time : 1.415975 s
 Compared VTK files : 11
 
 ========================================================================
@@ -90,7 +80,7 @@ Test08
 ========================================================================
 Status : running
 Status : pass
-Wall time : 1.778848 s
+Wall time : 1.438587 s
 Compared VTK files : 11
 
 ========================================================================
@@ -98,7 +88,7 @@ Test09
 ========================================================================
 Status : running
 Status : pass
-Wall time : 1.833753 s
+Wall time : 1.439696 s
 Compared VTK files : 11
 
 ========================================================================
@@ -106,7 +96,7 @@ Test10
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.307021 s
+Wall time : 1.853799 s
 Compared VTK files : 11
 
 ========================================================================
@@ -114,7 +104,7 @@ Test11
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.042045 s
+Wall time : 1.679610 s
 Compared VTK files : 11
 
 ========================================================================
@@ -122,7 +112,7 @@ Test12
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.038130 s
+Wall time : 1.639759 s
 Compared VTK files : 11
 
 ========================================================================
@@ -130,7 +120,7 @@ Test13
 ========================================================================
 Status : running
 Status : pass
-Wall time : 7.958203 s
+Wall time : 6.854512 s
 Compared VTK files : 11
 
 ========================================================================
@@ -138,7 +128,7 @@ Test14
 ========================================================================
 Status : running
 Status : pass
-Wall time : 6.705361 s
+Wall time : 6.073328 s
 Compared VTK files : 11
 
 ========================================================================
@@ -146,7 +136,7 @@ Test15
 ========================================================================
 Status : running
 Status : pass
-Wall time : 10.428546 s
+Wall time : 8.239993 s
 Compared VTK files : 11
 
 ========================================================================
@@ -154,7 +144,7 @@ Test16
 ========================================================================
 Status : running
 Status : pass
-Wall time : 3.173463 s
+Wall time : 2.418024 s
 Compared VTK files : 11
 
 ========================================================================
@@ -162,7 +152,7 @@ Test17
 ========================================================================
 Status : running
 Status : pass
-Wall time : 2.087259 s
+Wall time : 1.770347 s
 Compared VTK files : 11
 
 ========================================================================
@@ -170,7 +160,7 @@ Test18
 ========================================================================
 Status : running
 Status : pass
-Wall time : 1.101415 s
+Wall time : 0.958208 s
 Compared VTK files : 11
 
 ========================================================================
@@ -178,7 +168,7 @@ Test19
 ========================================================================
 Status : running
 Status : pass
-Wall time : 1.395552 s
+Wall time : 1.151018 s
 Compared VTK files : 11
 
 ========================================================================
@@ -186,7 +176,7 @@ Test20
 ========================================================================
 Status : running
 Status : pass
-Wall time : 14.117978 s
+Wall time : 11.366560 s
 Compared VTK files : 33
 
 ========================================================================
@@ -199,7 +189,7 @@ Test22
 ========================================================================
 Status : running
 Status : pass
-Wall time : 36.568938 s
+Wall time : 32.313482 s
 Compared VTK files : 22
 
 ========================================================================
@@ -207,7 +197,7 @@ Test23
 ========================================================================
 Status : running
 Status : pass
-Wall time : 6.979878 s
+Wall time : 6.465086 s
 Compared VTK files : 11
 
 ========================================================================
@@ -215,7 +205,7 @@ Test24
 ========================================================================
 Status : running
 Status : pass
-Wall time : 7.237531 s
+Wall time : 6.491123 s
 Compared VTK files : 11
 
 ========================================================================
@@ -223,7 +213,7 @@ Test25
 ========================================================================
 Status : running
 Status : pass
-Wall time : 9.040318 s
+Wall time : 8.470834 s
 Compared VTK files : 11
 
 ========================================================================
@@ -231,7 +221,7 @@ Test26
 ========================================================================
 Status : running
 Status : pass
-Wall time : 4.107045 s
+Wall time : 3.610019 s
 Compared VTK files : 11
 
 ========================================================================
@@ -239,7 +229,7 @@ Test27
 ========================================================================
 Status : running
 Status : pass
-Wall time : 8.052454 s
+Wall time : 7.474214 s
 Compared VTK files : 11
 
 ========================================================================
@@ -247,7 +237,7 @@ Test28
 ========================================================================
 Status : running
 Status : pass
-Wall time : 11.065064 s
+Wall time : 10.287730 s
 Compared VTK files : 11
 
 ========================================================================
@@ -255,7 +245,7 @@ Test29
 ========================================================================
 Status : running
 Status : pass
-Wall time : 7.184886 s
+Wall time : 6.639083 s
 Compared VTK files : 11
 
 ========================================================================
@@ -265,12 +255,12 @@ Highest test number             : 29
 Existing test directories       : 28
 Skipped: missing directory      : 1
 Skipped: missing benchmark      : 0
-Passed                          : 27
-Failed: error                   : 1
+Passed                          : 28
+Failed: error                   : 0
 Failed: convergence             : 0
 Failed: output mismatch         : 0
-Total suite wall time           : 170.137516 s
-Overall status                  : FAIL
+Total suite wall time           : 151.586069 s
+Overall status                  : PASS
 
 POST-RUN CLEANUP
 ------------------------------------------------------------------------
