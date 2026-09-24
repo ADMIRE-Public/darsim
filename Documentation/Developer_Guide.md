@@ -1,7 +1,7 @@
 
 # DARSim Developer Guide
 
-![DARSim Logo](../Logo/DARSimLogo1.png)
+![DARSim Logo](../Logo/DARSimLogo2.png)
 
 ## Table of Contents
 
