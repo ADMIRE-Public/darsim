@@ -16,6 +16,8 @@ DARSim is based on a fully implicit finite volume discretization framework and s
 
 The simulator is designed for flexibility in grid representation and physical modeling, enabling research into complex subsurface flow systems.
 
+![DARSim GIF](Logo/DARSimLogo.gif)
+
 ---
 
 ## Key Features
