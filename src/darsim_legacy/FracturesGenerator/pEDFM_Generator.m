@@ -41,7 +41,6 @@ classdef pEDFM_Generator < handle
             end
         end
         function OutputResults(obj)
-            warning("VTK FILE WRITER IS DEFINED HERE")
             switch obj.Geometry.DiscretizationType
                 case('CartesianGrid')
                     obj.Writer.VTK_Plotter = plotVTK_CarstesianGrid_FracGen(strcat(obj.Writer.Directory,'/Output_FracGen'), '3D-pEDFM');
@@ -52,7 +51,6 @@ classdef pEDFM_Generator < handle
             end
             obj.Writer.VTK_Plotter.PlotSolution(obj.Geometry);
             %%
-            warning("text file is generated here - summary of the data structure and all the information")
             obj.Writer.PrintInfo();
             obj.Writer.WriteOutputTextFile(obj.Geometry);
         end

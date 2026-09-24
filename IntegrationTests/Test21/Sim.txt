@@ -1,0 +1,143 @@
+-- DARSim3 INPUT file
+-- All keywords are in capital letters
+
+--Simulation Name
+TITLE
+	IntegrationTest
+
+--Gravity Control
+GRAVITY
+	ON
+
+--Grid
+DIMENSION (In meters; Dummy values for UnstructuredGrid)
+	100
+	100
+	100
+	
+GRID_DISCRETIZATION (CartesianGrid, CornerPointGrid, UnstructuredGrid)
+	CornerPointGrid
+	parallelepiped_100x100x100_shift_up40_10x10x10.grdecl
+
+SPECGRID (Nx//Ny//Nz; Dummy values for UnstructuredGrid)
+	10
+	10
+	10
+	
+--Total time (Days, Hours, Minutes, and Seconds)
+TOTAL_TIME
+	10 DAYS 0 HOURS 0 MINUTES 0 SECONDS
+	
+--Reservoir Properties
+PERMEABILITY_UNIT (m2, mD)
+	m2
+
+PERMEABILITY_SCALE (Linear, Logarithmic)
+	Linear
+	
+
+PERMEABILITY_X
+	8.0e-14
+
+
+PERMEABILITY_Y
+	8.0e-14
+
+
+PERMEABILITY_Z
+	8.0e-14
+	
+POROSITY
+	0.2 
+
+RELPERM
+	Table
+	LookupTable.txt
+	srw_frac
+	0.2
+
+CAPILLARITY
+	Table
+	--Wetting phase index
+	2
+
+HYSTERESIS
+	OFF
+	
+--Fluid Properties
+FLUID_MODEL (Immiscible,BlackOil,Compositional,Geothermal_SinglePhase, Geothermal_MultiPhase)
+	BlackOil
+	--Number of phases
+	2
+	--Number of components
+	2
+
+COMPONENT_LIST
+	CO2-Brine
+
+FLUID_VISCOSITY (Pa.sec)
+	6.5e-5
+	5.4e-4
+
+SALINITY (ppm by mass)
+	100e3
+	
+--Initial Conditions
+INITIAL_PRESSURE (Pa)
+	2.5e7
+INITIAL_TEMPERATURE (K)
+	338.15
+INITIAL_SATURATION_1
+	0.0
+INITIAL_SATURATION_2
+	1.0
+INITIAL_COMPOSITION_1
+	0.0
+INITIAL_COMPOSITION_2
+	1.0
+
+--Well Controls
+WELL_START
+	TYPE ("INJ" or "PROD")
+		INJ
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
+		XYZ_LIST
+		[ 5 , 5 , 1 ]
+		[ 5 , 5 , 9 ]
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+		RATE
+		8.0e-5
+	FORMULA (Well Index: "WI")
+		WI
+		9.2
+	COMPOSITION
+		1
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
+		338.15
+WELL_END
+
+WELL_START
+	TYPE ("INJ" or "PROD")
+		PROD
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
+		XYZ_LIST
+		[ 95 , 95 , 135 ]
+		[ 95 , 95 , 135 ]
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+		PRESSURE
+		2.5e7
+	FORMULA (Well Index: "WI")
+		WI
+		9.2
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
+		338.15
+WELL_END
+
+--Fracture Controls
+FRACTURED
+	ON
+	Fracture_Output.txt
+
+-- END OF DECK 

@@ -17,7 +17,6 @@ classdef geometry_FracGen < handle
     methods
         function Compute_EDFM_Connectivities(obj)
             %%
-            warning("more import class - EDFM AND PEDFM GENERATION: take a look here")
             Fracture = obj.FracturesGrid.Fracture;
             Epsilon = obj.ReservoirGrid.Epsilon;
 

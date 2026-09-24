@@ -21,7 +21,9 @@ classdef writer_FracGen < handle
             %%
             disp( '******************* Writing the data into output text file *********************' );
             disp(['Deleting file ', obj.File]);
-            delete( strcat(obj.Directory,'/',obj.File) );
+            if isfile(strcat(obj.Directory,'/',obj.File))
+                delete( strcat(obj.Directory,'/',obj.File) );
+            end
             disp(['Writing into file ', obj.File]);
         end
         function WriteOutputTextFile(obj,Geometry)
