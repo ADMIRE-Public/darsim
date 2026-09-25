@@ -158,7 +158,27 @@ The fracture workflow is implemented through dedicated reader, preprocessing, an
 
 ### 3.5 ADM Implementation
 
-** WE NEED MORE DETAILED INFORMATION ON THE CODE ARCHITECTURE/WORKFLOW FOR ADM **
+Algebraic Dynamic Multilevel (ADM) reduces the linear-system size by selecting a combination of fine and coarse cells during the simulation. The physical state, residual, and Jacobian remain represented on the fine grid. Restriction and prolongation operators connect this system to the active ADM grid.
+
+The current reader and simulation factory assemble ADM, while most numerical classes are located under `src/darsim_legacy/ADMOperators`.
+
+| File | Purpose |
+|------|---------|
+| `src/reader/darsim2_settings_factory.m` | Converts ADM keywords into levels, ratios, selection controls, and interpolation settings. |
+| `src/factory/simulation_factory.m` | Creates the ADM discretization, grid selector, interpolation builders, linear solver, and convergence checker. |
+| `src/darsim_legacy/Discretizations/Multiscale_Discretization_model.m` | Checks grid/coarsening compatibility and constructs the coarse-grid hierarchy. |
+| `src/darsim_legacy/Discretizations/ADMDiscretizationModel/ADM_Discretization_model.m` | Initializes mappings and operators, marks well regions, and coordinates dynamic grid selection. |
+| `src/darsim_legacy/Discretizations/ADMDiscretizationModel/grid_mapper.m` | Establishes parent/child relationships and coarse-grid vertices. |
+| `src/darsim_legacy/Discretizations/ADMDiscretizationModel/adm_grid_selector_delta.m` | Implements the spatial-difference criterion, `dfdx`. |
+| `src/darsim_legacy/Discretizations/Grids/adm_grid.m` | Stores active cells, levels, and mappings. |
+| `src/darsim_legacy/ADMOperators/operators_handler_adm.m` | Builds dynamic finite-volume restriction and variable-specific prolongation operators. |
+| `src/darsim_legacy/ADMOperators/prolongation_builder_MSPressure.m` | Constructs multiscale pressure interpolation through its basis-function updater. |
+| `src/darsim_legacy/ADMOperators/prolongation_builder_constant.m` | Provides piecewise-constant interpolation. |
+| `src/darsim_legacy/ADMOperators/operators_assembler_fim.m` | Assembles block-diagonal operators for the fully implicit system. |
+| `src/darsim_legacy/Solvers/LinearSolvers/linear_solver_ADM.m` | Restricts the system, solves it, and prolongs the correction. |
+| `src/darsim_legacy/Solvers/NonLinearSolvers/ConvergenceCheckers/convergence_checker_ADM.m` | Checks restricted, cell-count-normalized residuals and fine-scale solution updates. |
+| `src/darsim_legacy/Writer/Run_Summary_ADM.m` | Records active reservoir cell counts at each level. |
+| `src/darsim_legacy/Writer/output_writer_ADM.m` | Writes ADM statistics and invokes ADM grid visualization. |
 
 ---
 
