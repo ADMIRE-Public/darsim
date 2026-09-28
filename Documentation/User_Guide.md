@@ -408,6 +408,8 @@ Here, `<table_1.txt>` and `<table_2.txt>` are standing in for the actual lookup 
 
 ### 5.5 Diffusion and dispersion
 
+By default, diffusion and dispersion is neglected in DARSim. However, it is still possible to include both molecular diffusion and mechanical dispersion in the transport equations when desired. 
+
 Molecular diffusion is configured in the main simulation input file through `DIFFUSION_CONSTANTS`. Values are given in m²/s, with one entry per fluid phase in phase order, rather than one entry per component. Mechanical dispersion is configured through `DISPERSIVITY` in the main simulation input file. Dispersivity is a length, in meters, used in the velocity-dependent dispersion calculation.
 
 For a two-phase model, homogeneous diffusion coefficients and dispersivity can be specified as:
