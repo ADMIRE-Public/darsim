@@ -636,7 +636,56 @@ ADM provides dynamic multilevel model reduction to improve computational efficie
 
 During a simulation, regions requiring high spatial resolution are solved on fine grids, whereas smoother regions are represented on coarser grids. The adaptive refinement strategy reduces computational cost while preserving important flow features near wells and displacement fronts.
 
-**NEEDS MORE INFORMATION ABOUT SETTING UP AN ADM SIMULATION HERE**
+ADM is configured in `SimulatorSettings.txt`, in the same simulation directory as the main input file.
+
+```text
+ADM
+    1
+
+DLGR
+    0
+
+LEVELS
+    2
+
+COARSENING_RATIOS
+    3
+    1
+    3
+
+COARSENING_CRITERION
+    dfdx
+
+VARIABLE
+    z_1
+
+TOLERANCE
+    1e-3
+
+PRESSURE_INTERPOLATOR
+    Multiscale
+    COUPLED
+    BASIS_FUNCTION_MAX_CONTRAST
+        1e1
+    pEDFM_MAX_CONTRAST
+        1e2
+
+HYPERBOLIC_INTERPOLATOR
+    Constant
+```
+
+| Keyword | Description |
+|---------|-------------|
+| `ADM` | Set to `1` to enable ADM, or `0` for a fine-scale reference simulation. |
+| `LEVELS` | Number of coarse levels above the fine grid. With `2`, levels 0, 1, and 2 are available. |
+| `COARSENING_RATIOS` | Base factors in x, y, and z, respectively. A value of `1` leaves that direction uncoarsened. |
+| `COARSENING_CRITERION` | `dfdx` selects resolution using spatial differences in the monitored variable. |
+| `VARIABLE` | State variable used for selection. The example uses `z_1`, the overall fraction of component 1. The name must exist in the fluid model; `S_1` can monitor phase-1 saturation where available. |
+| `TOLERANCE` | Spatial-difference threshold. Smaller values generally retain more fine cells; larger values allow more coarsening. Separate from the Newton tolerances under `FIM`. |
+| `PRESSURE_INTERPOLATOR` | `Multiscale` uses multiscale pressure basis functions. The following `COUPLED` entry selects coupled basis functions for fractured models. |
+| `BASIS_FUNCTION_MAX_CONTRAST` | Contrast limit used in pressure basis-function construction; the example uses `1e1`. |
+| `pEDFM_MAX_CONTRAST` | Contrast control for pEDFM connections in basis-function construction; the example uses `1e2`. |
+| `HYPERBOLIC_INTERPOLATOR` | `Constant` uses piecewise-constant transport interpolation. |
 
 ---
 
