@@ -404,7 +404,51 @@ CAPILLARITY
 	2
 ```
 
-Here, `<table_1.txt>` and `<table_2.txt>` are standing in for the actual lookup table names to use for each rock/facies type. 
+Here, `<table_1.txt>` and `<table_2.txt>` are standing in for the actual lookup table names to use for each rock/facies type.
+
+### 5.5 Diffusion and dispersion
+
+Molecular diffusion is configured in the main simulation input file through `DIFFUSION_CONSTANTS`. Values are given in m²/s, with one entry per fluid phase in phase order, rather than one entry per component. Mechanical dispersion is configured through `DISPERSIVITY` in the main simulation input file. Dispersivity is a length, in meters, used in the velocity-dependent dispersion calculation.
+
+For a two-phase model, homogeneous diffusion coefficients and dispersivity can be specified as:
+
+```text
+DIFFUSION_CONSTANTS (m2/s)
+    1.0e-8
+    2.0e-9
+
+DISPERSIVITY (m)
+    0.5
+```
+
+The first value applies to phase 1 and the second to phase 2. Each value is assigned to every active reservoir cell. For spatially varying coefficients, supply one data file per phase:
+
+```text
+DIFFUSION_CONSTANTS (m2/s)
+    diffusion_phase1.txt
+    diffusion_phase2.txt
+
+DISPERSIVITY (m)
+    dispersivity.txt	
+```
+
+A constant and a file can also be combined. For example, the following uses a constant for phase 1 and a spatially varying field for phase 2:
+
+```text
+DIFFUSION_CONSTANTS (m2/s)
+    1.0e-8
+    diffusion_phase2.txt
+```
+
+Place the files in the simulation directory. Each file should contain a single column of numeric coefficients, without a header, units, or cell-index column. Provide exactly one row per active reservoir cell, in the same order as the active cells in the reservoir mesh. The reader checks the row count against the number of active cells. For a mesh with inactive cells, do not include additional rows for those cells.
+
+To set molecular diffusion to zero in a two-phase model, use:
+
+```text
+DIFFUSION_CONSTANTS (m2/s)
+    0
+    0
+```
 
 ---
 
