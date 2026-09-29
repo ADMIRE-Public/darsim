@@ -46,6 +46,7 @@ for n = numbers
     fracFile1 = fullfile(root, sprintf('Test%02d', n), 'Fracture_Output.txt');
     fracFile2 = fullfile(root, sprintf('Test%02d', n), 'fracture_process.mat');
     fracFolder = fullfile(root, sprintf('Test%02d', n), 'Output_FracGen');
+    CPGFile = fullfile(root, sprintf('Test%02d',n), 'CornerPointGridData.mat');
     if isfolder(folder)
         try
             rmdir(folder, 's'); count = count + 1;
@@ -58,14 +59,14 @@ for n = numbers
         try
             delete(fracFile1);
         catch ME
-            fprintf(logID, 'WARNING: Could not delet %s\nReason: %s\n', fracFile1, ME.message);
+            fprintf(logID, 'WARNING: Could not delete %s\nReason: %s\n', fracFile1, ME.message);
         end
     end
     if isfile(fracFile2)
         try
             delete(fracFile2);
         catch ME
-            fprintf(logID, 'WARNING: Could not delet %s\nReason: %s\n', fracFile2, ME.message);
+            fprintf(logID, 'WARNING: Could not delete %s\nReason: %s\n', fracFile2, ME.message);
         end
     end
     if isfolder(fracFolder)
@@ -73,7 +74,14 @@ for n = numbers
             rmdir(fracFolder, 's');
             fprintf(logID, 'Deleted : %s\n', fracFolder);
         catch ME
-            fprintf(logID, 'WARNING: Could not delet %s\nReason: %s\n', fracFolder, ME.message);
+            fprintf(logID, 'WARNING: Could not delete %s\nReason: %s\n', fracFolder, ME.message);
+        end
+    end
+    if isfile(CPGFile)
+        try
+            delete(CPGFile);
+        catch ME
+            fprintf(logID, 'WARNING: Could not delete %s\nReason: %s\n', CPGFile, ME.message);
         end
     end
 end

@@ -1,10 +1,8 @@
--- DARSim: Simulator settings
---(MaxIter, Tol, CFL)
+-- DARSim3: Simulator settings
 
 REPORTS
 	360
 
---Minimum and Maximum allowed time-step (in days)
 MINMAXDT
 	1e-2 5.0e0
 
