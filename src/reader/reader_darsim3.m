@@ -69,7 +69,14 @@ classdef reader_darsim3
             [defaultKeys, defaultValues] = generate_defaultKeyValues(...
                               obj.SimulatorPath, "defaultFracture.dat");              
             FractureBlueprint = verify_blueprint(FractureBlueprint, ...
-                defaultKeys, defaultValues);            
+                defaultKeys, defaultValues);
+            % PATCH: Need to correct DIMENS to DIMENSION
+            fields = fieldnames(FractureBlueprint);
+            idx = find(strcmp(fields, 'DIMENS'));
+            FractureBlueprint.DIMENSION = FractureBlueprint.DIMENS;
+            FractureBlueprint = rmfield(FractureBlueprint,'DIMENS');
+            fields{idx} = 'DIMENSION';
+            FractureBlueprint = orderfields(FractureBlueprint,fields);
         end
 
 

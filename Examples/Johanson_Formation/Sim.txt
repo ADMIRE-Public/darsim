@@ -1,0 +1,96 @@
+-- DARSim3 INPUT file
+-- All keywords are in capital letters
+
+--Name
+TITLE
+	Johanson_Formation
+
+--Gravity Control
+GRAVITY
+	ON
+
+--Grid
+DIMENSION (In meters; Dummy values for UnstructuredGrid)
+	100
+	100
+	11
+	
+GRID_DISCRETIZATION
+	CornerPointGrid
+	NPD5_geometry_and_properties.grdecl
+
+SPECGRID (Nx//Ny//Nz; Dummy values for UnstructuredGrid)
+ 	100
+	100
+	11
+	
+--Total time (Days, Hours, Minutes, and Seconds)
+TOTAL_TIME
+	1800 DAYS 0 HOURS 0 MINUTES 0 SECONDS
+
+--Reservoir Properties
+RELPERM (Linear,Quadratic,Corey,Foam,Table)
+	Table
+	
+CAPILLARITY (Linear,JLeverett,BrooksCorey,Table)
+	Table
+	2
+
+HYSTERESIS
+	ON
+
+--Fluid Properties
+FLUID_MODEL (Immiscible,BlackOil,Compositional,Geothermal_SinglePhase, Geothermal_MultiPhase)
+	Compositional
+	--Number of phases
+	2
+	--Number of components
+	2
+
+COMPONENT_LIST
+	H2-Brine
+
+FLUID_VISCOSITY (Pa.sec)
+	0.965e-5
+	5.5e-4
+	
+--Initial Conditions
+INITIAL_PRESSURE
+	2e7
+INITIAL_TEMPERATURE (K)
+	340
+INITIAL_SATURATION_1
+	0.0
+INITIAL_SATURATION_2
+	1.0
+INITIAL_COMPOSITION_1
+	0.0
+INITIAL_COMPOSITION_2
+	1.0
+
+--Well Controls
+WELL_START
+	TYPE ("INJ" or "PROD")
+		INJ
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
+		CELL_INDEX_LIST
+		[ 43 ]
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+		RATE    
+		1E-5
+	FORMULA (Well Index: "WI")
+		WI
+		9.2
+	COMPOSITION
+		1
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
+		340	
+WELL_END
+
+--Keyword for fractures
+FRACTURED
+	OFF
+	NA
+
+-- END OF DECK 
