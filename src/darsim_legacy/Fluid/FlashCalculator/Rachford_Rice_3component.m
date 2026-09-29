@@ -40,7 +40,7 @@ classdef Rachford_Rice_3component < Rachford_Rice_flash_calculator
             for i=1:nc
                 Z(:, i) = Status.Properties(['z_', num2str(i)]).Value;
             end
-            P = Status.Properties('P_1').Value;
+            P = Status.Properties('P_2').Value;
             T = Status.T;
 
             comp = Thermo.comp; % A cell array containing component data
