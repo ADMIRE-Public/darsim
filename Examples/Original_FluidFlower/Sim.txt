@@ -1,0 +1,168 @@
+-- DARSim3 INPUT file
+-- All keywords are in capital letters
+
+--Name
+TITLE
+	FluidFlower
+
+--Gravity Control
+GRAVITY
+	ON
+
+--Grid
+DIMENSION (In meters; Dummy values for UnstructuredGrid)
+ 	2.86
+	0.019
+	1.53
+	
+GRID_DISCRETIZATION
+	CartesianGrid
+
+SPECGRID (Nx//Ny//Nz; Dummy values for UnstructuredGrid)
+	286
+	1
+	153
+	
+--Total time (Days, Hours, Minutes, and Seconds)
+TOTAL_TIME
+	2 DAYS 0 HOURS 0 MINUTES 0 SECONDS
+	
+--Reservoir Properties
+PERMEABILITY_UNIT
+	mD
+	
+PERMEABILITY_SCALE
+	Linear
+		
+PERMEABILITY_X
+	INCLUDE
+	FF_perm_x.txt
+
+PERMEABILITY_Y
+	INCLUDE
+	FF_perm_x.txt
+
+PERMEABILITY_Z
+	INCLUDE
+	FF_perm_z.txt	
+	
+POROSITY
+	INCLUDE
+	FF_porosity.txt
+
+FACIES_INDEX
+	FF_sand_index.txt
+
+RELPERM
+	Table
+	LookupTable_1.txt
+	LookupTable_2.txt
+	LookupTable_3.txt
+	LookupTable_4.txt
+	LookupTable_5.txt
+	LookupTable_6.txt
+	LookupTable_7.txt
+	LookupTable_8.txt
+	
+CAPILLARITY
+	Table
+	--Wetting phase index
+	2
+	
+HYSTERESIS
+	ON
+	
+--Fluid Properties
+FLUID_MODEL (Immiscible,BlackOil,Compositional,Geothermal_SinglePhase, Geothermal_MultiPhase)
+	BlackOil
+	--Number of phases
+	2
+	--Number of components
+	2
+	
+COMPONENT_LIST
+	CO2-Brine
+
+FLUID_VISCOSITY (Pa.sec)
+	1.7706e-5
+	1.0110e-3
+	
+--Initial Conditions
+INITIAL_PRESSURE
+	1.01325e5
+INITIAL_TEMPERATURE (K)
+	293.15
+INITIAL_SATURATION_1
+	0.0
+INITIAL_SATURATION_2
+	1.0
+INITIAL_COMPOSITION_1
+	0.0
+INITIAL_COMPOSITION_2
+	1.0
+
+--Well Controls
+WELL_START
+	TYPE ("INJ" or "PROD")
+		INJ
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
+		XYZ_LIST
+		[ 0.925 , 0.01 , 0.325 ]
+		[ 0.925 , 0.01 , 0.325 ]
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+		RATE
+		3.3488372e-1
+	FORMULA (Well Index: "WI")
+		WI
+		9.2
+	COMPOSITION
+		1
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
+		293.15
+WELL_END
+
+WELL_START
+	TYPE ("INJ" or "PROD")
+		INJ
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
+		XYZ_LIST
+		[ 1.725 , 0.01 , 0.725 ]
+		[ 1.725 , 0.01 , 0.725 ]
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+		RATE
+		3.3488372e-1
+	FORMULA (Well Index: "WI")
+		WI
+		9.2
+	COMPOSITION
+		1
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
+		293.15
+WELL_END
+
+WELL_START
+	TYPE ("INJ" or "PROD")
+		PROD
+	COORDINATE ("IJK_LIST" or "XYZ_LIST" or "CELL_INDEX_LIST")
+		XYZ_LIST
+		[ 0.00 , 0.01 , 1.53 ]
+		[ 2.86 , 0.01 , 1.53 ]
+	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+		PRESSURE
+		1e5
+	FORMULA (Well Index: "WI")
+		DIRICHLET
+		1000000
+	BOUNDARY_CONDITION
+		TEMPERATURE (K)
+		293.15
+WELL_END
+
+--Keyword for fractures
+FRACTURED
+	OFF
+	NA
+
+-- END OF DECK 
