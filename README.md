@@ -52,6 +52,8 @@ To install DARSim:
 3. Add `/src` and all subdirectories to the MATLAB path.
 4. Execute DARSim from within the `/src` directory.
 
+A more detailed installation guide is provided in the User and Developer Guides inside the `Documentation` directory. 
+
 ---
 
 ## Running Simulations
@@ -66,7 +68,7 @@ DARSim("<path-to-simulation-files>", "<simulation-file-name.txt>")
 
 ### Example
 
-DARSim("examples/<example_name>", "Sim.txt")
+DARSim("Examples/<example_name>", "Sim.txt")
 
 Each simulation requires at minimum:
 
@@ -87,22 +89,21 @@ Each simulation requires at minimum:
 
 DARSim includes a suite of example cases demonstrating various scenarios, such as:
 
-- Basic multiphase flow
+- Basic multiphase flow in heterogeneous media
 - CO₂ injection scenarios using ADM
 - 3-component hydrogen storage systems
 - Fractured reservoir simulations
+- Unstructured meshes
+- Non-isothermal simulations
+- Benchmark Fluid Flower simulation
+
+These simulations can be found in the `Examples` directory. Each comes with a short explaination (PDF document) of the simulation and input file. 
 
 ---
 
 ### Documentation
 
-Please refer to the Documentation directory for full documentation. 
-
-An overview of code organization and structure is provided in:
-
-```matlab
-/documentation/code-organization.html
-```
+Please refer to the Documentation directory for full documentation on DARSim, including a User Guide and Developer Guide. 
 
 ---
 
