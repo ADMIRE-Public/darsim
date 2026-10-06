@@ -13,7 +13,7 @@ classdef Rachford_Rice_3component < Rachford_Rice_flash_calculator
         function obj = Rachford_Rice_3component()
         end
         function K_Wilson(obj, Status, Thermo)
-            P = Status.Properties('P_1').Value;
+            P = Status.Properties('P_2').Value;
             T = Status.T;
             N = length(P);
 

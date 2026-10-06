@@ -85,7 +85,7 @@ classdef Compositional_fluid_model < fluid_model
                 % else
                 %     rho.Value = obj.Phases(i).ComputeDensity(Status.Properties('P_2').Value, obj.Components, Status.Properties('x_1ph2').Value);
                 % end
-                rho.Value = obj.Phases(i).ComputeDensity(Status.Properties(['P_', num2str(i)]).Value, obj.Components, Status);
+                rho.Value = obj.Phases(i).ComputeDensity(Status.Properties('P_2').Value, obj.Components, Status);
             end
         end
         function z = ComputeTotalFractions(obj, Status, N)
@@ -357,7 +357,7 @@ classdef Compositional_fluid_model < fluid_model
         function drhodp = ComputeDrhoDp(obj, Status, SinglePhase, dxdp)
             drhodp = zeros(length(SinglePhase), obj.NofPhases);
             for i=1:obj.NofPhases
-                drhodp(:, i) = obj.Phases(i).ComputeDrhoDp(Status.Properties(['P_', num2str(i)]).Value, obj.Components, dxdp, Status);
+                drhodp(:, i) = obj.Phases(i).ComputeDrhoDp(Status.Properties('P_2').Value, obj.Components, dxdp, Status);
             end
         end
         function drhodz = ComputeDrhoDz(obj, Status, SinglePhase, dxdz)
@@ -374,7 +374,7 @@ classdef Compositional_fluid_model < fluid_model
             % end
             for iph = 1:nph
                 for ic = 1:nc-1
-                    drhodz(:, iph, ic) = obj.Phases(iph).ComputeDrhoDz(Status.Properties(['P_', num2str(iph)]).Value, obj.Components, dxdz, Status, ic);
+                    drhodz(:, iph, ic) = obj.Phases(iph).ComputeDrhoDz(Status.Properties('P_2').Value, obj.Components, dxdz, Status, ic);
                 end
             end
         end
@@ -450,7 +450,7 @@ classdef Compositional_fluid_model < fluid_model
                 mu = obj.Phases(i).mu;
                 if isempty(mu) || all(isnan(mu(:)))
                     mu = Status.Properties(['mu_', num2str(i)]).Value;
-                    dmudp = obj.Phases(i).ComputeDmuDp(Status.Properties(['P_', num2str(i)]).Value, Status.T, Status, obj.Thermo);
+                    dmudp = obj.Phases(i).ComputeDmuDp(Status.Properties('P_2').Value, Status.T, Status, obj.Thermo);
                 else
                     dmudp = 0;
                 end
@@ -533,7 +533,7 @@ classdef Compositional_fluid_model < fluid_model
                 if isempty(mu) || all(isnan(mu(:)))
                     mu = Status.Properties(['mu_', num2str(i)]).Value;
                     for j=1:obj.NofComponents-1
-                        dmudz(:, j) = obj.Phases(i).ComputeDmuDz(Status.Properties(['P_', num2str(i)]).Value, Status.T, Status, obj.Thermo, dxdz, j);
+                        dmudz(:, j) = obj.Phases(i).ComputeDmuDz(Status.Properties('P_2').Value, Status.T, Status, obj.Thermo, dxdz, j);
                     end
                 end
                 % Compute d(Mob)/d(z)

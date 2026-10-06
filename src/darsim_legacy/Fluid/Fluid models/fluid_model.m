@@ -63,7 +63,7 @@ classdef fluid_model < handle
                 mu = obj.Phases(i).mu;
                 if isempty(mu) || all(isnan(mu(:)))
                     mu = Medium.State.Properties(['mu_', num2str(i)]);
-                    mu.Value = obj.Phases(i).ComputeViscosity(Medium.State.Properties(sprintf('P_%d', i)).Value, Medium.State.T, Medium.State, obj.Thermo);
+                    mu.Value = obj.Phases(i).ComputeViscosity(Medium.State.Properties('P_2').Value, Medium.State.T, Medium.State, obj.Thermo);
                     Mob(:,i) = kr(:,i)./mu.Value;
                 else
                     Mob(:,i) = kr(:,i)./mu;
