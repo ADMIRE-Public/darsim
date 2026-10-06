@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DARSim Reservoir Simulator
-%Author: Ryan Haagenson
+%Author: Ryan Haagenson; Artur Castiel
 %TU Delft
 %
 % Calculating the physical properties of EDFM and pEDFM connections between
