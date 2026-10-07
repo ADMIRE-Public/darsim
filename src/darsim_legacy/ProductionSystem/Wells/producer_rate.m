@@ -19,6 +19,7 @@ classdef producer_rate < producer
         function UpdateState(obj, State, K, Mob, FluidModel, Time)
             obj.QPhases = zeros(size(obj.QPhases));
             obj.QComponents = zeros(size(obj.QComponents));
+            obj.Qh = zeros(size(obj.Qh));
             
             % Check if the well is open/close
             isOpen = mod(sum(Time >= obj.Schedule), 2);
