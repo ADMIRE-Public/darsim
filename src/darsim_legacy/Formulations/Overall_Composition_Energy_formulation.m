@@ -376,7 +376,7 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
             rhoT = Medium.State.Properties('rhoT').Value;
 
             % BUILD FIM JACOBIAN BLOCK BY BLOCK
-            Jz = sparse(N, N * (obj.NofComponents-1));
+            Jz_comp = cell(1, obj.NofComponents-1);
             JT = sparse(N, N);
             % 1.a: divergence
             Jp = obj.Tph{2*c-1,1+f}  + obj.Tph{2*c, 1+f};
@@ -404,8 +404,8 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         + (UpwindPermutation1Ph2 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh2) * UpwindPermutation2Ph2')';
                     % 2. Component c composition block
                     for j=1:obj.NofComponents-1
-                        dMupPh1 = obj.UpWind{1,1+f} * ( obj.dMobdz(Index.Start:Index.End, 1, j) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+1, j) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End, (c-1)*2+1) .* obj.drhodz(Index.Start:Index.End, 1));
-                        dMupPh2 = obj.UpWind{2,1+f} * ( obj.dMobdz(Index.Start:Index.End, 2, j) .* obj.x(Index.Start:Index.End,(c-1)*2+2) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+2, j) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.x(Index.Start:Index.End, (c-1)*2+2) .* obj.drhodz(Index.Start:Index.End, 2));
+                        dMupPh1 = obj.UpWind{1,1+f} * ( obj.dMobdz(Index.Start:Index.End, 1, j) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+1, j) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End, (c-1)*2+1) .* obj.drhodz(Index.Start:Index.End, 1, j));
+                        dMupPh2 = obj.UpWind{2,1+f} * ( obj.dMobdz(Index.Start:Index.End, 2, j) .* obj.x(Index.Start:Index.End,(c-1)*2+2) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+2, j) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.x(Index.Start:Index.End, (c-1)*2+2) .* obj.drhodz(Index.Start:Index.End, 2, j));
 
                         FluxDerivativePh1 = dMupPh1 .* abs(obj.U{1,1+f});
                         FluxDerivativePh2 = dMupPh2 .* abs(obj.U{2,1+f});
@@ -414,9 +414,11 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                             acc = - pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
                         elseif c == j
                             acc = pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
+                        else
+                            acc = pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End,j);
                         end
 
-                        Jz(:, 1+N*(j-1):N*j) = sparse(1:N, 1:N, acc)...
+                        Jz_comp{j} = sparse(1:N, 1:N, acc)...
                             + (UpwindPermutation1Ph1 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh1) * UpwindPermutation2Ph1')'...
                             + (UpwindPermutation1Ph2 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh2) * UpwindPermutation2Ph2')';
 
@@ -425,7 +427,7 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         %                             + (UpwindPermutation1Ph2 * spdiags(FluxDerivativePh2, 0, N_Face, N_Face) * UpwindPermutation2Ph2')';
 
                         % Capillarity
-                        Jz(:, 1+N*(j-1):N*j) = Jz(:, 1+N*(j-1):N*j) - obj.Tph{2*c-1,1+f} * sparse(1:N, 1:N, obj.dPc(Index.Start:Index.End));
+                        Jz_comp{j} = Jz_comp{j} - obj.Tph{2*c-1,1+f} * sparse(1:N, 1:N, obj.dPc(Index.Start:Index.End, j));
                         % Jz = Jz - obj.Tph{2*c-1,1+f} * spdiags(obj.dPc(Index.Start:Index.End), 0, N, N);
                     end
 
@@ -495,8 +497,8 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                     dDT_ph2_L = 0.5 * (rho_2(CellNeighbor1Index) + rho_2(CellNeighbor2Index)) .* abs(sum(CellNeighbor1Vec .* Nvec, 2) ./ (sum(CellNeighbor1Vec .* CellNeighbor1Vec, 2) + 1e-30)) .* Half2_ph2.^2 ./ (Half1_ph2 + Half2_ph2 + 1e-30).^2;
                     dDT_ph2_R = 0.5 * (rho_2(CellNeighbor1Index) + rho_2(CellNeighbor2Index)) .* abs(sum(CellNeighbor2Vec .* Nvec, 2) ./ (sum(CellNeighbor2Vec .* CellNeighbor2Vec, 2) + 1e-30)) .* Half1_ph2.^2 ./ (Half1_ph2 + Half2_ph2 + 1e-30).^2;
                     
-                    vecL = obj.U_D{2*c-1,1+f} .* dDT_ph1_L .* dS_rho_D_ph1(CellNeighbor1Index) + obj.U_D{2*c,  1+f} .* dDT_ph2_L .* dS_rho_D_ph2(Neighbor1Index);
-                    vecR = obj.U_D{2*c-1,1+f} .* dDT_ph1_R .* dS_rho_D_ph1(CellNeighbor2Index) + obj.U_D{2*c,  1+f} .* dDT_ph2_R .* dS_rho_D_ph2(Neighbor2Index);
+                    vecL = obj.U_D{2*c-1,1+f} .* dDT_ph1_L .* dS_rho_D_ph1(CellNeighbor1Index) + obj.U_D{2*c,  1+f} .* dDT_ph2_L .* dS_rho_D_ph2(CellNeighbor1Index);
+                    vecR = obj.U_D{2*c-1,1+f} .* dDT_ph1_R .* dS_rho_D_ph1(CellNeighbor2Index) + obj.U_D{2*c,  1+f} .* dDT_ph2_R .* dS_rho_D_ph2(CellNeighbor2Index);
 
                     Jp = Jp + (NeighborPermutation1 * spdiags(vecL, 0, nf, nf) * Grid.ConnectivityMatrix')' ...
                         + (NeighborPermutation2 * spdiags(vecR, 0, nf, nf) * Grid.ConnectivityMatrix')' ...
@@ -511,8 +513,8 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                     
                     % 2. Component c composition block
                     for j=1:obj.NofComponents-1
-                        dMupPh1 = obj.UpWind{1,1+f} * ( obj.dMobdz(Index.Start:Index.End, 1, j) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+1, j) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End, (c-1)*2+1) .* obj.drhodz(Index.Start:Index.End, 1));
-                        dMupPh2 = obj.UpWind{2,1+f} * ( obj.dMobdz(Index.Start:Index.End, 2, j) .* obj.x(Index.Start:Index.End,(c-1)*2+2) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+2, j) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.x(Index.Start:Index.End, (c-1)*2+2) .* obj.drhodz(Index.Start:Index.End, 2));
+                        dMupPh1 = obj.UpWind{1,1+f} * ( obj.dMobdz(Index.Start:Index.End, 1, j) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+1, j) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End, (c-1)*2+1) .* obj.drhodz(Index.Start:Index.End, 1, j));
+                        dMupPh2 = obj.UpWind{2,1+f} * ( obj.dMobdz(Index.Start:Index.End, 2, j) .* obj.x(Index.Start:Index.End,(c-1)*2+2) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+2, j) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.x(Index.Start:Index.End, (c-1)*2+2) .* obj.drhodz(Index.Start:Index.End, 2, j));
 
                         FluxDerivativePh1 = dMupPh1 .* abs(obj.U{1,1+f});
                         FluxDerivativePh2 = dMupPh2 .* abs(obj.U{2,1+f});
@@ -521,9 +523,11 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                             acc = - pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
                         elseif c == j
                             acc = pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
+                        else
+                            acc = pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
                         end
 
-                        Jz(:, 1+N*(j-1):N*j) = sparse(1:N, 1:N, acc)...
+                        Jz_comp{j} = sparse(1:N, 1:N, acc)...
                             + (UpwindPermutation1Ph1 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh1) * UpwindPermutation2Ph1')'...
                             + (UpwindPermutation1Ph2 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh2) * UpwindPermutation2Ph2')';
 
@@ -533,7 +537,7 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         vecL = obj.U_D{2*c-1,1+f} .* dDT_ph1_L .* dS_rho_D_ph1(CellNeighbor1Index) + obj.U_D{2*c,  1+f} .* dDT_ph2_L .* dS_rho_D_ph2(CellNeighbor1Index);
                         vecR = obj.U_D{2*c-1,1+f} .* dDT_ph1_R .* dS_rho_D_ph1(CellNeighbor2Index) + obj.U_D{2*c,  1+f} .* dDT_ph2_R .* dS_rho_D_ph2(CellNeighbor2Index);
 
-                        Jz(:,1+N*(j-1):N*j) = Jz(:,1+N*(j-1):N*j) + (NeighborPermutation1 * sparse(1:nf, 1:nf, vecL, nf, nf) * Grid.ConnectivityMatrix')' ...
+                        Jz_comp{j} = Jz_comp{j} + (NeighborPermutation1 * sparse(1:nf, 1:nf, vecL, nf, nf) * Grid.ConnectivityMatrix')' ...
                             + (NeighborPermutation2 * sparse(1:nf, 1:nf, vecR, nf, nf) * Grid.ConnectivityMatrix')' ...
                             + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdz(Index.Start:Index.End,2*c-1,j), 0, N, N) ...
                             + obj.Dph{2*c,  1+f} * spdiags(obj.dxdz(Index.Start:Index.End,2*c,  j), 0, N, N);
@@ -543,11 +547,11 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         vecL = obj.U_D{2*c-1,1+f} .* (drhodz1(CellNeighbor1Index) / 2) .* Grid.Diff(:,1) + obj.U_D{2*c,  1+f} .* (drhodz2(CellNeighbor1Index) / 2) .* Grid.Diff(:,2);
                         vecR = obj.U_D{2*c-1,1+f} .* (drhodz1(CellNeighbor2Index) / 2) .* Grid.Diff(:,1) + obj.U_D{2*c,  1+f} .* (drhodz2(CellNeighbor2Index) / 2) .* Grid.Diff(:,2);
 
-                        Jz(:,col) = Jz(:,col) + (NeighborPermutation1 * sparse(1:nf, 1:nf, vecL, nf, nf) * Grid.ConnectivityMatrix')' ...
+                        Jz_comp{j} = Jz_comp{j} + (NeighborPermutation1 * sparse(1:nf, 1:nf, vecL, nf, nf) * Grid.ConnectivityMatrix')' ...
                             + (NeighborPermutation2 * sparse(1:nf, 1:nf, vecR, nf, nf) * Grid.ConnectivityMatrix')';
 
                         % Capillarity
-                        Jz(:, 1+N*(j-1):N*j) = Jz(:, 1+N*(j-1):N*j) - obj.Tph{2*c-1,1+f} * sparse(1:N, 1:N, obj.dPc(Index.Start:Index.End, j));
+                        Jz_comp{j} = Jz_comp{j} - obj.Tph{2*c-1,1+f} * sparse(1:N, 1:N, obj.dPc(Index.Start:Index.End, j));
                     end
 
                     % 3. temperature part
@@ -668,14 +672,22 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                     
                     DiagVecs = [-vecZ2, -vecY2, -vecX2, vecZ2 + vecY2 + vecX2 - vecY1 - vecX1 - vecZ1, vecX1, vecY1, vecZ1];
                     DiagIndx = [-Grid.Nx*Grid.Ny, -Grid.Nx, -1, 0, 1, Grid.Nx, Grid.Nx*Grid.Ny];
-                    Jp = Jp + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N) + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdp(:,2*c-1), 0, N, N) + obj.Dph{2*c,1+f} * spdiags(obj.dxdp(:,2*c), 0, N, N);
+                    Jp = Jp + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N) + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdp(Index.Start:Index.End,2*c-1), 0, N, N) + obj.Dph{2*c,1+f} * spdiags(obj.dxdp(Index.Start:Index.End,2*c), 0, N, N);
+
+                    TotTx_ph1 = Grid.Diffx(:,:,:,1) + Grid.DispT{1,1+f}.x;
+                    TotTy_ph1 = Grid.Diffy(:,:,:,1) + Grid.DispT{1,1+f}.y;
+                    TotTz_ph1 = Grid.Diffz(:,:,:,1) + Grid.DispT{1,1+f}.z;
+
+                    TotTx_ph2 = Grid.Diffx(:,:,:,2) + Grid.DispT{2,1+f}.x;
+                    TotTy_ph2 = Grid.Diffy(:,:,:,2) + Grid.DispT{2,1+f}.y;
+                    TotTz_ph2 = Grid.Diffz(:,:,:,2) + Grid.DispT{2,1+f}.z;
                     
-                    vecX1 = reshape(obj.U_D{2*c-1,1+f}.x(1:Nx,:,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffx(1:Nx,:,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.x(1:Nx,:,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffx(1:Nx,:,:,2),N,1);
-                    vecX2 = reshape(obj.U_D{2*c-1,1+f}.x(2:Nx+1,:,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffx(2:Nx+1,:,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.x(2:Nx+1,:,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffx(2:Nx+1,:,:,2),N,1);
-                    vecY1 = reshape(obj.U_D{2*c-1,1+f}.y(:,1:Ny,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2.* reshape(Grid.Diffy(:,1:Ny,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,1:Ny,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffy(:,1:Ny,:,2),N,1);
-                    vecY2 = reshape(obj.U_D{2*c-1,1+f}.y(:,2:Ny+1,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffy(:,2:Ny+1,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,2:Ny+1,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffy(:,2:Ny+1,:,2),N,1);
-                    vecZ1 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffz(:,:,1:Nz,1),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffz(:,:,1:Nz,2),N,1);
-                    vecZ2 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffz(:,:,2:Nz+1,1),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffz(:,:,2:Nz+1,2),N,1);
+                    vecX1 = reshape(obj.U_D{2*c-1,1+f}.x(1:Nx,:,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(TotTx_ph1(1:Nx,:,:),N,1) + reshape(obj.U_D{2*c,1+f}.x(1:Nx,:,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(TotTx_ph2(1:Nx,:,:),N,1);
+                    vecX2 = reshape(obj.U_D{2*c-1,1+f}.x(2:Nx+1,:,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(TotTx_ph1(2:Nx+1,:,:),N,1) + reshape(obj.U_D{2*c,1+f}.x(2:Nx+1,:,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(TotTx_ph2(2:Nx+1,:,:),N,1);
+                    vecY1 = reshape(obj.U_D{2*c-1,1+f}.y(:,1:Ny,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2.* reshape(TotTy_ph1(:,1:Ny,:),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,1:Ny,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(TotTy_ph2(:,1:Ny,:),N,1);
+                    vecY2 = reshape(obj.U_D{2*c-1,1+f}.y(:,2:Ny+1,:),N,1).* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(TotTy_ph1(:,2:Ny+1,:),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,2:Ny+1,:),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(TotTy_ph2(:,2:Ny+1,:),N,1);
+                    vecZ1 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(TotTz_ph1(:,:,1:Nz),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(TotTz_ph2(:,:,1:Nz),N,1);
+                    vecZ2 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodp(Index.Start:Index.End,1) / 2 .* reshape(TotTz_ph1(:,:,2:Nz+1),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodp(Index.Start:Index.End,2) / 2  .* reshape(TotTz_ph2(:,:,2:Nz+1),N,1);
                     
                     DiagVecs = [-vecZ2, -vecY2, -vecX2, vecZ2 + vecY2 + vecX2 - vecY1 - vecX1 - vecZ1, vecX1, vecY1, vecZ1];
                     DiagIndx = [-Grid.Nx*Grid.Ny, -Grid.Nx, -1, 0, 1, Grid.Nx, Grid.Nx*Grid.Ny];
@@ -726,12 +738,12 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         elseif c == j
                             acc = pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
                         else
-                            acc = 0 + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
+                            acc = pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
                         end
 
                         DiagVecs = [-vecZ2, -vecY2, -vecX2, vecZ2+vecY2+vecX2-vecZ1-vecY1-vecX1+acc, vecX1, vecY1, vecZ1];
                         DiagIndx = [-Nx*Ny, -Nx, -1, 0, 1, Nx, Nx*Ny];
-                        Jz(:, 1+N*(j-1):N*j) = spdiags(DiagVecs,DiagIndx, N, N);
+                        Jz_comp{j} = spdiags(DiagVecs,DiagIndx, N, N);
 
                         dS_rho_D_ph1_x = (obj.dSdz(Index.Start:Index.End,1, j) .* Medium.Diff(:,1) .* Grid.Por) .* Grid.Ax / Grid.dx;
                         dS_rho_D_ph1_y = (obj.dSdz(Index.Start:Index.End,1, j) .* Medium.Diff(:,1) .* Grid.Por) .* Grid.Ay / Grid.dy;
@@ -749,22 +761,23 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         
                         DiagVecs = [-vecZ2, -vecY2, -vecX2, vecZ2 + vecY2 + vecX2 - vecY1 - vecX1 - vecZ1, vecX1, vecY1, vecZ1];
                         DiagIndx = [-Grid.Nx*Grid.Ny, -Grid.Nx, -1, 0, 1, Grid.Nx, Grid.Nx*Grid.Ny];
-                        Jz(:, 1+N*(j-1):N*j) = Jz(:, 1+N*(j-1):N*j) + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N) + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdz(:,2*c-1,j), 0, N, N) + obj.Dph{2*c,1+f} * spdiags(obj.dxdz(:,2*c), 0, N, N);
+                        Jz_comp{j} = Jz_comp{j} + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N) + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdz(Index.Start:Index.End,2*c-1,j), 0, N, N) + obj.Dph{2*c,1+f} * spdiags(obj.dxdz(Index.Start:Index.End,2*c), 0, N, N);
+                        
+                        vecX1 = reshape(obj.U_D{2*c-1,1+f}.x(1:Nx,:,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(TotTx_ph1(1:Nx,:,:),N,1) + reshape(obj.U_D{2*c,1+f}.x(1:Nx,:,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(TotTx_ph2(1:Nx,:,:),N,1);
+                        vecX2 = reshape(obj.U_D{2*c-1,1+f}.x(2:Nx+1,:,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(TotTx_ph1(2:Nx+1,:,:),N,1) + reshape(obj.U_D{2*c,1+f}.x(2:Nx+1,:,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(TotTx_ph2(2:Nx+1,:,:),N,1);
+                        vecY1 = reshape(obj.U_D{2*c-1,1+f}.y(:,1:Ny,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2.* reshape(TotTy_ph1(:,1:Ny,:),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,1:Ny,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(TotTy_ph2(:,1:Ny,:),N,1);
+                        vecY2 = reshape(obj.U_D{2*c-1,1+f}.y(:,2:Ny+1,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(TotTy_ph1(:,2:Ny+1,:),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,2:Ny+1,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(TotTy_ph2(:,2:Ny+1,:),N,1);
+                        vecZ1 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(TotTz_ph1(:,:,1:Nz),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(TotTz_ph2(:,:,1:Nz),N,1);
+                        vecZ2 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(TotTz_ph1(:,:,2:Nz+1),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(TotTz_ph2(:,:,2:Nz+1),N,1);
 
-                        vecX1 = reshape(obj.U_D{2*c-1,1+f}.x(1:Nx,:,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(Grid.Diffx(1:Nx,:,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.x(1:Nx,:,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(Grid.Diffx(1:Nx,:,:,2),N,1);
-                        vecX2 = reshape(obj.U_D{2*c-1,1+f}.x(2:Nx+1,:,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(Grid.Diffx(2:Nx+1,:,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.x(2:Nx+1,:,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(Grid.Diffx(2:Nx+1,:,:,2),N,1);
-                        vecY1 = reshape(obj.U_D{2*c-1,1+f}.y(:,1:Ny,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2.* reshape(Grid.Diffy(:,1:Ny,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,1:Ny,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(Grid.Diffy(:,1:Ny,:,2),N,1);
-                        vecY2 = reshape(obj.U_D{2*c-1,1+f}.y(:,2:Ny+1,:),N,1).* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(Grid.Diffy(:,2:Ny+1,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.y(:,2:Ny+1,:),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(Grid.Diffy(:,2:Ny+1,:,2),N,1);
-                        vecZ1 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(Grid.Diffz(:,:,1:Nz,1),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,1:Nz),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(Grid.Diffz(:,:,1:Nz,2),N,1);
-                        vecZ2 = reshape(obj.U_D{2*c-1,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodz(Index.Start:Index.End,1,j) / 2 .* reshape(Grid.Diffz(:,:,2:Nz+1,1),N,1) + reshape(obj.U_D{2*c,1+f}.z(:,:,2:Nz+1),N,1) .* obj.drhodz(Index.Start:Index.End,2,j) / 2  .* reshape(Grid.Diffz(:,:,2:Nz+1,2),N,1);
-
+                       
                         DiagVecs = [-vecZ2, -vecY2, -vecX2, vecZ2 + vecY2 + vecX2 - vecY1 - vecX1 - vecZ1, vecX1, vecY1, vecZ1];
                         DiagIndx = [-Grid.Nx*Grid.Ny, -Grid.Nx, -1, 0, 1, Grid.Nx, Grid.Nx*Grid.Ny];
-                        Jz(:, 1+N*(j-1):N*j) = Jz(:, 1+N*(j-1):N*j) + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N);
+                        Jz_comp{j} = Jz_comp{j} + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N);
 
                         % Capillarity
                         % Jz{i,j} = Jz{i,j} - obj.Tph{i,1} * spdiags(obj.dPc, 0, N, N);
-                        Jz(:, 1+N*(j-1):N*j) = Jz(:, 1+N*(j-1):N*j) - obj.Tph{2*c-1,1+f} * spdiags(obj.dPc(Index.Start:Index.End), 0, N, N);
+                        Jz_comp{j} = Jz_comp{j} - obj.Tph{2*c-1,1+f} * spdiags(obj.dPc(Index.Start:Index.End, j), 0, N, N);
                     end
 
                         % 3. temperature part
@@ -810,7 +823,7 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
 
                         DiagVecs = [-vecZ2, -vecY2, -vecX2, vecZ2 + vecY2 + vecX2 - vecY1 - vecX1 - vecZ1, vecX1, vecY1, vecZ1];
                         DiagIndx = [-Grid.Nx*Grid.Ny, -Grid.Nx, -1, 0, 1, Grid.Nx, Grid.Nx*Grid.Ny];
-                        JT = JT + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N) + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdT(:,2*c-1), 0, N, N) + obj.Dph{2*c,1+f} * spdiags(obj.dxdT(:,2*c), 0, N, N);
+                        JT = JT + spdiags(DiagVecs, DiagIndx, Grid.N, Grid.N) + obj.Dph{2*c-1,1+f} * spdiags(obj.dxdT(Index.Start:Index.End,2*c-1), 0, N, N) + obj.Dph{2*c,1+f} * spdiags(obj.dxdT(Index.Start:Index.End,2*c), 0, N, N);
 
                         vecX1 = reshape(obj.U_D{2*c-1,1+f}.x(1:Nx,:,:),N,1).* obj.drhodT(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffx(1:Nx,:,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.x(1:Nx,:,:),N,1) .* obj.drhodT(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffx(1:Nx,:,:,2),N,1);
                         vecX2 = reshape(obj.U_D{2*c-1,1+f}.x(2:Nx+1,:,:),N,1).* obj.drhodT(Index.Start:Index.End,1) / 2 .* reshape(Grid.Diffx(2:Nx+1,:,:,1),N,1) + reshape(obj.U_D{2*c,1+f}.x(2:Nx+1,:,:),N,1) .* obj.drhodT(Index.Start:Index.End,2) / 2  .* reshape(Grid.Diffx(2:Nx+1,:,:,2),N,1);
@@ -846,8 +859,8 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                         + (UpwindPermutation1Ph2 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh2) * UpwindPermutation2Ph2')';
                     % 2. Component c composition block
                     for j=1:obj.NofComponents-1
-                        dMupPh1 = obj.UpWind{1,1+f} * ( obj.dMobdz(Index.Start:Index.End, 1, j) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+1, j) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End, (c-1)*2+1) .* obj.drhodz(Index.Start:Index.End, 1));
-                        dMupPh2 = obj.UpWind{2,1+f} * ( obj.dMobdz(Index.Start:Index.End, 2, j) .* obj.x(Index.Start:Index.End,(c-1)*2+2) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+2, j) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.x(Index.Start:Index.End, (c-1)*2+2) .* obj.drhodz(Index.Start:Index.End, 2));
+                        dMupPh1 = obj.UpWind{1,1+f} * ( obj.dMobdz(Index.Start:Index.End, 1, j) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+1, j) .* obj.rho(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End, (c-1)*2+1) .* obj.drhodz(Index.Start:Index.End, 1, j));
+                        dMupPh2 = obj.UpWind{2,1+f} * ( obj.dMobdz(Index.Start:Index.End, 2, j) .* obj.x(Index.Start:Index.End,(c-1)*2+2) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.dxdz(Index.Start:Index.End,(c-1)*2+2, j) .* obj.rho(Index.Start:Index.End,2) + obj.Mob(Index.Start:Index.End, 2) .* obj.x(Index.Start:Index.End, (c-1)*2+2) .* obj.drhodz(Index.Start:Index.End, 2, j));
 
                         FluxDerivativePh1 = dMupPh1 .* abs(obj.U{1,1+f});
                         FluxDerivativePh2 = dMupPh2 .* abs(obj.U{2,1+f});
@@ -856,12 +869,14 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                             acc = - pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
                         elseif c == j
                             acc = pv/dt .* rhoT + pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End, j);
+                        else
+                            acc = pv/dt .* obj.z(Index.Start:Index.End,c) .* obj.drhoTdz(Index.Start:Index.End,j);
                         end
-                        Jz = sparse(1:N, 1:N, acc)...
+                        Jz_comp{j} = sparse(1:N, 1:N, acc)...
                             + (UpwindPermutation1Ph1 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh1) * UpwindPermutation2Ph1')'...
                             + (UpwindPermutation1Ph2 * sparse(1:N_Face, 1:N_Face, FluxDerivativePh2) * UpwindPermutation2Ph2')';
                         % Capillarity
-                        Jz = Jz - obj.Tph{2*c-1,1+f} * sparse(1:N, 1:N, obj.dPc(Index.Start:Index.End));
+                        Jz_comp{j} = Jz_comp{j} - obj.Tph{2*c-1,1+f} * sparse(1:N, 1:N, obj.dPc(Index.Start:Index.End, j));
                     end
                     % 3. temperature part
                     dMupPh1 = obj.UpWind{1,1+f} * (obj.Mob(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.drhodT(Index.Start:Index.End,1) + obj.Mob(Index.Start:Index.End, 1) .* obj.dxdT(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1) + obj.dMobdT(Index.Start:Index.End, 1) .* obj.x(Index.Start:Index.End,(c-1)*2+1) .* obj.rho(Index.Start:Index.End,1));
@@ -878,8 +893,13 @@ classdef Overall_Composition_Energy_formulation < Compositional_formulation
                 otherwise
                     error("Discretization not found.")
             end
+            % Assembling Jz
+            Jz = Jz_comp{1};
+            for j=2:obj.NofComponents-1
+                Jz = horzcat(Jz, Jz_comp{j});
+            end
         end
-
+        
         %%
         function [Jp, Jz, JT] = BuildEnergyMediumJacobian(obj, Medium, Grid, dt, Index, f)
 
