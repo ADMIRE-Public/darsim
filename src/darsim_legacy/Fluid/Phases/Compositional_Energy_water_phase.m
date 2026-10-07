@@ -135,7 +135,8 @@ classdef Compositional_Energy_water_phase < phase
 
             x_molar = x / Mw_CO2 ./ (x/Mw_CO2 + (1-x)./Mw_H2O);
 
-            dxm_dx = 1 / (Mw_CO2 * Mw_H2O) ./ (x/Mw_CO2 + (1-x)./Mw_H2O);
+            D = x/Mw_CO2 + (1-x)./Mw_H2O;
+            dxm_dx = 1 / (Mw_CO2 * Mw_H2O) ./ D.^2;
             dxm_dp = dxm_dx .* dxdp(:,2);
 
             mu_b = Thermo.muAq_pT_table(p,T);
@@ -152,7 +153,8 @@ classdef Compositional_Energy_water_phase < phase
             Mw_H2O = 18.0152;      % g/mol
 
             x_molar = x / Mw_CO2 ./ (x/Mw_CO2 + (1-x)./Mw_H2O);
-            dxm_dx = 1 / (Mw_CO2 * Mw_H2O) ./ (x/Mw_CO2 + (1-x)./Mw_H2O);
+            D = x/Mw_CO2 + (1-x)./Mw_H2O;
+            dxm_dx = 1 / (Mw_CO2 * Mw_H2O) ./ D.^2;
             dxm_dT = dxm_dx .* dxdT(:,2);
 
             mu_b = Thermo.muAq_pT_table(p,T);
@@ -168,9 +170,10 @@ classdef Compositional_Energy_water_phase < phase
             Mw_H2O = 18.0152;      % g/mol
 
             x_molar = x / Mw_CO2 ./ (x/Mw_CO2 + (1-x)./Mw_H2O);
-            dxm_dx = 1 / (Mw_CO2 * Mw_H2O) ./ (x/Mw_CO2 + (1-x)./Mw_H2O);
+            D = x/Mw_CO2 + (1-x)./Mw_H2O;
+            dxm_dx = 1 / (Mw_CO2 * Mw_H2O) ./ D.^2;
             dxm_dz = dxm_dx .* dxdz(:,2);
-
+            
             mu_b = Thermo.muAq_pT_table(p,T);
 
             dmu = zeros(size(x));
