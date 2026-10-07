@@ -1,20 +1,46 @@
 WARNING: Fields PERMEABILITY_CONTRAST_MEAN,PERMEABILITY_CONTRAST_ORDER,INCLUDE_ROCK_PROPERTIES not found.
 WARNING: Fields SCHEDULE,COMPOSITION not found.
 WARNING: Fields INITIAL_STATE not found.
-[Warning: No lookup table was provided for relative permeability. The
-default file 'LookupTable.txt' will be used.] 
-[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties>generate_RelPerm', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m', 49)" style="font-weight:bold">build_FluidProperties>generate_RelPerm</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m',49,0)">line 49</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('build_FluidProperties', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m', 23)" style="font-weight:bold">build_FluidProperties</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/fluid-property-factory/build_FluidProperties.m',23,0)">line 23</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory/translate_simulation_input', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m', 78)" style="font-weight:bold">darsim2_settings_factory/translate_simulation_input</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m',78,0)">line 78</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('darsim2_settings_factory', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m', 25)" style="font-weight:bold">darsim2_settings_factory</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/darsim2_settings_factory.m',25,0)">line 25</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_darsim_settings', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/create_darsim_settings.m', 16)" style="font-weight:bold">create_darsim_settings</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/reader/create_darsim_settings.m',16,0)">line 16</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m', 42)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m',42,0)">line 42</a>)] 
-[Warning: Injector 1 will be injecting component 1.] 
-[> In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildProductionSystemWells', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m', 670)" style="font-weight:bold">simulation_factory/BuildProductionSystemWells</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m',670,0)">line 670</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildProductionSystemReservoir', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m', 421)" style="font-weight:bold">simulation_factory/BuildProductionSystemReservoir</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m',421,0)">line 421</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('simulation_factory/BuildSimulation', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m', 31)" style="font-weight:bold">simulation_factory/BuildSimulation</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/factory/simulation_factory.m',31,0)">line 31</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('create_simulator', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/simulation/create_simulator.m', 11)" style="font-weight:bold">create_simulator</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/simulation/create_simulator.m',11,0)">line 11</a>)
-In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('DARSim', '/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m', 43)" style="font-weight:bold">DARSim</a> (<a href="matlab: opentoline('/Users/rhaagenson/Codes/DARSim/DARSim/Dev/src/DARSim.m',43,0)">line 43</a>)] 
+WARNING: Fields BASIS_FUNCTION_MAX_CONTRAST,COARSENING_CRITERION,COARSENING_RATIOS,HYPERBOLIC_INTERPOLATOR,PRESSURE_INTERPOLATOR,TOLERANCE,VARIABLE,pEDFM_MAX_CONTRAST not found.
+---> Reading GRDECL raw data ... Done!
+---> Processing GRDECL raw data ... Adding 200 artificial cells at top/bottom
+
+Processing regular i-faces
+ Found 1320 new regular faces
+Elapsed time is 0.000718 seconds.
+
+Processing i-faces on faults
+ Found 0 faulted stacks
+ Found 0 new faces
+Elapsed time is 0.000477 seconds.
+
+Processing regular j-faces
+ Found 1320 new regular faces
+Elapsed time is 0.000443 seconds.
+
+Processing j-faces on faults
+ Found 0 faulted stacks
+ Found 0 new faces
+Elapsed time is 0.000322 seconds.
+
+Processing regular k-faces
+ Found 1500 new regular faces
+Elapsed time is 0.000411 seconds.
+
+Building grid structure
+removing 200 artificial cells at top/bottom
+removing 0 inactive and pinched cells
+Done!
+Pocessing Formation 1 of the current ECLIPSE data:
+---> Pocessing Nodes ... Done!
+---> Pocessing Cells ... Done!
+---> Pocessing Internal Faces ... Done!
+---> Pocessing External Faces ... Done!
+
+
+
+----- Relative permeability lookup tables:
+LookupTable.txt
 Started simple initialization
 Initial conditions:
 Pressure: 250 bar
@@ -23,7 +49,7 @@ Temperature: 338.15 K
 ---------------------------------------------------------
 
 
-Initialization took 0.0029094 s
+Initialization took 0.0015938 s
 
 
 BEGIN TIME-DEPENDENT SIMULATION
@@ -99,8 +125,8 @@ dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
 Initial Eq. 1 Residual Norm: 3.00764e-03
 Initial Eq. 2 Residual Norm: 3.60276e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.39197e-04       1.72776e-01       5.33106e-03   1.94033e-04   
-Iter 02-->   1.18183e-05       1.27560e-02       3.15130e-03   1.94136e-05   
+Iter 01-->   2.39389e-04       1.71968e-01       5.33106e-03   1.94033e-04   
+Iter 02-->   1.17135e-05       1.29171e-02       3.13729e-03   1.93865e-05   
 ##### A large Delta is detected.
 Max num. of iterations reached or stagnation detected: Time-step was chopped
 
@@ -109,10 +135,9 @@ Restart Newton loop dt = 6912
 Initial Eq. 1 Residual Norm: 3.00764e-03
 Initial Eq. 2 Residual Norm: 3.60276e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   9.71394e-05       1.53546e-01       3.10969e-03   9.70155e-05   
-Iter 02-->   5.79994e-05       5.88529e-03       2.70382e-03   3.17289e-06   
-Iter 03-->   7.44658e-08       3.65299e-04       3.09196e-05   1.50531e-06   
-Iter 04-->   2.27683e-10       9.08125e-07       6.42221e-06   4.59579e-09   
+Iter 01-->   9.72045e-05       1.53125e-01       3.10969e-03   9.70155e-05   
+Iter 02-->   5.78350e-05       5.90040e-03       2.69651e-03   3.17260e-06   
+Iter 03-->   2.29435e-08       1.18737e-05       3.02486e-05   1.50185e-06   
 -----------------------------------------------
 Final time: 0.23 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
 end of time-step 5
@@ -121,11 +146,10 @@ end of time-step 5
 Time-step 6: Initial time: 0.23 days
 dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
 Initial Eq. 1 Residual Norm: 2.82669e-03
-Initial Eq. 2 Residual Norm: 1.44670e-01
+Initial Eq. 2 Residual Norm: 1.44681e-01
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   9.82356e-06       1.83535e-03       3.51904e-03   8.63222e-05   
-Iter 02-->   3.54207e-07       1.00818e-03       6.61596e-06   2.05203e-07   
-Iter 03-->   2.09500e-09       5.93059e-06       1.77182e-05   2.40438e-08   
+Iter 01-->   9.91701e-06       1.17516e-03       3.51896e-03   8.63220e-05   
+Iter 02-->   3.49740e-10       1.58703e-06       1.58607e-05   1.93037e-07   
 -----------------------------------------------
 Final time: 0.31 days, dt= 6912 sec (0 days : 1 hrs : 55 mins : 12 sec)
 end of time-step 6
@@ -134,11 +158,10 @@ end of time-step 6
 Time-step 7: Initial time: 0.31 days
 dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
 Initial Eq. 1 Residual Norm: 2.61405e-03
-Initial Eq. 2 Residual Norm: 1.69915e-01
+Initial Eq. 2 Residual Norm: 1.69916e-01
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   3.45994e-05       9.87415e-04       4.15501e-03   1.50791e-04   
-Iter 02-->   5.72459e-07       1.07057e-03       3.29209e-05   1.68684e-06   
-Iter 03-->   6.71221e-09       1.24621e-05       2.07569e-05   9.70741e-08   
+Iter 01-->   3.40471e-05       9.30898e-04       4.15503e-03   1.50791e-04   
+Iter 02-->   3.16307e-09       5.68523e-05       1.16134e-05   1.79056e-06   
 -----------------------------------------------
 Final time: 0.47 days, dt= 13824 sec (0 days : 3 hrs : 50 mins : 24 sec)
 end of time-step 7
@@ -146,12 +169,11 @@ end of time-step 7
 
 Time-step 8: Initial time: 0.47 days
 dt= 27648 sec (0 days : 7 hrs : 40 mins : 48 sec)
-Initial Eq. 1 Residual Norm: 2.31703e-03
-Initial Eq. 2 Residual Norm: 1.47460e-01
+Initial Eq. 1 Residual Norm: 2.31712e-03
+Initial Eq. 2 Residual Norm: 1.47412e-01
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   5.87602e-05       8.61411e-04       4.43476e-03   2.40495e-04   
-Iter 02-->   9.74626e-07       9.76679e-04       3.98631e-05   5.26307e-06   
-Iter 03-->   2.31063e-08       1.43948e-05       2.06107e-05   2.87227e-07   
+Iter 01-->   5.80213e-05       1.83217e-03       4.43481e-03   2.40501e-04   
+Iter 02-->   3.11025e-07       1.23719e-05       1.91653e-05   5.57082e-06   
 -----------------------------------------------
 Final time: 0.79 days, dt= 27648 sec (0 days : 7 hrs : 40 mins : 48 sec)
 end of time-step 8
@@ -159,12 +181,11 @@ end of time-step 8
 
 Time-step 9: Initial time: 0.79 days
 dt= 18144 sec (0 days : 5 hrs : 2 mins : 24 sec)
-Initial Eq. 1 Residual Norm: 1.95413e-03
-Initial Eq. 2 Residual Norm: 1.15286e-01
+Initial Eq. 1 Residual Norm: 1.95410e-03
+Initial Eq. 2 Residual Norm: 1.15280e-01
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.14544e-05       5.21297e-04       1.84085e-03   1.41124e-04   
-Iter 02-->   6.70670e-07       7.13820e-04       1.55156e-05   1.42321e-06   
-Iter 03-->   1.62990e-08       1.22650e-05       1.35313e-05   1.98158e-07   
+Iter 01-->   2.08185e-05       1.24116e-03       1.84084e-03   1.41119e-04   
+Iter 02-->   4.33295e-08       6.82923e-06       2.46888e-06   1.62796e-06   
 -----------------------------------------------
 Final time: 1 days, dt= 18144 sec (0 days : 5 hrs : 2 mins : 24 sec)
 end of time-step 9
@@ -176,12 +197,11 @@ Printing solution to file at  1 days
 Time-step 10: Initial time: 1 days
 dt= 36288 sec (0 days : 10 hrs : 4 mins : 48 sec)
 Initial Eq. 1 Residual Norm: 1.81742e-03
-Initial Eq. 2 Residual Norm: 9.92724e-02
+Initial Eq. 2 Residual Norm: 9.92602e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   3.08935e-04       6.88529e-02       1.63727e-03   2.21729e-04   
-Iter 02-->   1.58273e-05       1.43820e-03       1.08611e-03   4.87771e-05   
-Iter 03-->   2.44660e-07       2.39768e-04       8.83180e-06   1.91463e-06   
-Iter 04-->   1.25661e-08       2.90712e-06       5.69304e-06   1.62557e-07   
+Iter 01-->   3.08880e-04       6.87739e-02       1.63728e-03   2.21723e-04   
+Iter 02-->   1.57680e-05       1.40920e-03       1.07999e-03   4.87988e-05   
+Iter 03-->   8.76247e-09       1.02961e-05       1.03833e-05   1.92089e-06   
 -----------------------------------------------
 Final time: 1.42 days, dt= 36288 sec (0 days : 10 hrs : 4 mins : 48 sec)
 end of time-step 10
@@ -190,12 +210,11 @@ end of time-step 10
 Time-step 11: Initial time: 1.42 days
 dt= 50112 sec (0 days : 13 hrs : 55 mins : 12 sec)
 Initial Eq. 1 Residual Norm: 1.55659e-03
-Initial Eq. 2 Residual Norm: 9.12274e-02
+Initial Eq. 2 Residual Norm: 9.12202e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.15695e-04       3.48959e-02       9.56684e-04   2.34324e-04   
-Iter 02-->   6.11332e-06       5.58487e-04       5.56783e-04   3.92241e-05   
-Iter 03-->   1.46695e-07       1.12109e-04       2.95839e-06   9.58528e-07   
-Iter 04-->   4.78327e-09       9.99618e-07       3.05363e-06   1.21771e-07   
+Iter 01-->   2.15652e-04       3.48808e-02       9.56732e-04   2.34316e-04   
+Iter 02-->   6.09582e-06       5.52181e-04       5.53440e-04   3.92627e-05   
+Iter 03-->   1.95182e-09       2.02279e-06       3.98180e-06   9.72232e-07   
 -----------------------------------------------
 Final time: 2 days, dt= 50112 sec (0 days : 13 hrs : 55 mins : 12 sec)
 end of time-step 11
@@ -206,12 +225,12 @@ Printing solution to file at  2 days
 
 Time-step 12: Initial time: 2 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 1.32569e-03
-Initial Eq. 2 Residual Norm: 7.73444e-02
+Initial Eq. 1 Residual Norm: 1.32567e-03
+Initial Eq. 2 Residual Norm: 7.73460e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.96734e-04       2.71780e-02       2.32262e-04   2.75752e-04   
-Iter 02-->   5.73216e-06       5.32486e-04       5.19332e-04   5.43641e-05   
-Iter 03-->   1.11587e-07       8.86825e-05       7.08082e-06   1.28485e-06   
+Iter 01-->   2.96740e-04       2.71738e-02       2.32279e-04   2.75742e-04   
+Iter 02-->   5.73907e-06       5.22000e-04       5.19817e-04   5.43602e-05   
+Iter 03-->   4.49474e-09       1.86132e-06       4.23528e-06   1.27588e-06   
 -----------------------------------------------
 Final time: 3 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 12
@@ -222,11 +241,11 @@ Printing solution to file at  3 days
 
 Time-step 13: Initial time: 3 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 1.11629e-03
-Initial Eq. 2 Residual Norm: 5.95352e-02
+Initial Eq. 1 Residual Norm: 1.11650e-03
+Initial Eq. 2 Residual Norm: 5.94734e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.72848e-05       1.76893e-03       3.57382e-04   2.03847e-04   
-Iter 02-->   1.52897e-07       4.02935e-05       7.97714e-06   5.37162e-06   
+Iter 01-->   2.71937e-05       1.76989e-03       3.59167e-04   2.03818e-04   
+Iter 02-->   1.23748e-07       1.86753e-05       8.92643e-06   5.38132e-06   
 -----------------------------------------------
 Final time: 4 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 13
@@ -237,12 +256,12 @@ Printing solution to file at  4 days
 
 Time-step 14: Initial time: 4 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 9.61136e-04
-Initial Eq. 2 Residual Norm: 5.49706e-02
+Initial Eq. 1 Residual Norm: 9.61182e-04
+Initial Eq. 2 Residual Norm: 5.49454e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.76802e-04       2.50434e-02       5.61269e-04   1.79315e-04   
-Iter 02-->   4.09659e-06       4.30700e-04       4.39343e-04   4.36587e-05   
-Iter 03-->   1.55747e-07       9.11059e-05       1.20269e-05   7.16128e-07   
+Iter 01-->   2.76763e-04       2.50427e-02       5.59925e-04   1.79317e-04   
+Iter 02-->   4.08265e-06       3.70158e-04       4.42544e-04   4.36384e-05   
+Iter 03-->   9.95978e-10       8.24855e-07       3.06345e-06   6.92342e-07   
 -----------------------------------------------
 Final time: 5 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 14
@@ -253,11 +272,11 @@ Printing solution to file at  5 days
 
 Time-step 15: Initial time: 5 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 8.68624e-04
-Initial Eq. 2 Residual Norm: 4.61098e-02
+Initial Eq. 1 Residual Norm: 8.68824e-04
+Initial Eq. 2 Residual Norm: 4.60465e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   5.23436e-05       4.92327e-03       1.42098e-04   1.30172e-04   
-Iter 02-->   2.42469e-07       4.88132e-05       6.87185e-05   1.13949e-05   
+Iter 01-->   5.22672e-05       4.91347e-03       1.38291e-04   1.30177e-04   
+Iter 02-->   2.28324e-07       1.91940e-05       6.93034e-05   1.13699e-05   
 -----------------------------------------------
 Final time: 6 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 15
@@ -268,12 +287,12 @@ Printing solution to file at  6 days
 
 Time-step 16: Initial time: 6 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 7.94955e-04
-Initial Eq. 2 Residual Norm: 4.39951e-02
+Initial Eq. 1 Residual Norm: 7.94896e-04
+Initial Eq. 2 Residual Norm: 4.40095e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   1.87136e-04       1.80048e-02       4.10136e-04   1.58562e-04   
-Iter 02-->   2.15631e-06       2.62253e-04       2.76054e-04   3.75589e-05   
-Iter 03-->   9.33423e-08       6.06458e-05       9.41415e-06   5.04772e-07   
+Iter 01-->   1.87116e-04       1.80044e-02       4.10709e-04   1.58568e-04   
+Iter 02-->   2.13622e-06       1.94721e-04       2.79922e-04   3.75505e-05   
+Iter 03-->   4.01354e-10       3.42444e-07       1.36020e-06   4.94393e-07   
 -----------------------------------------------
 Final time: 7 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 16
@@ -284,11 +303,11 @@ Printing solution to file at  7 days
 
 Time-step 17: Initial time: 7 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 7.61402e-04
-Initial Eq. 2 Residual Norm: 3.84355e-02
+Initial Eq. 1 Residual Norm: 7.61478e-04
+Initial Eq. 2 Residual Norm: 3.84040e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   1.79101e-05       1.57447e-03       1.88425e-04   1.05526e-04   
-Iter 02-->   4.13991e-08       1.84845e-05       1.34155e-05   3.25845e-06   
+Iter 01-->   1.76869e-05       1.54929e-03       1.89658e-04   1.05535e-04   
+Iter 02-->   2.31493e-08       7.05088e-06       1.32623e-05   3.19447e-06   
 -----------------------------------------------
 Final time: 8 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 17
@@ -299,12 +318,12 @@ Printing solution to file at  8 days
 
 Time-step 18: Initial time: 8 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 7.13115e-04
-Initial Eq. 2 Residual Norm: 3.86551e-02
+Initial Eq. 1 Residual Norm: 7.13117e-04
+Initial Eq. 2 Residual Norm: 3.86562e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   2.15670e-04       2.09625e-02       2.81003e-04   1.28895e-04   
-Iter 02-->   3.22340e-06       3.23580e-04       3.01871e-04   4.76388e-05   
-Iter 03-->   1.19798e-07       7.03926e-05       9.73068e-06   7.85644e-07   
+Iter 01-->   2.15635e-04       2.09623e-02       2.80904e-04   1.28902e-04   
+Iter 02-->   3.20874e-06       2.84306e-04       3.05053e-04   4.76194e-05   
+Iter 03-->   7.60493e-10       5.79336e-07       1.84489e-06   7.67753e-07   
 -----------------------------------------------
 Final time: 9 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 18
@@ -315,11 +334,11 @@ Printing solution to file at  9 days
 
 Time-step 19: Initial time: 9 days
 dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
-Initial Eq. 1 Residual Norm: 6.84914e-04
-Initial Eq. 2 Residual Norm: 3.57792e-02
+Initial Eq. 1 Residual Norm: 6.85013e-04
+Initial Eq. 2 Residual Norm: 3.57409e-02
            ||Residual Eq1||  ||Residual Eq2||   ||delta p||   ||delta z1||   
-Iter 01-->   3.48799e-05       3.23033e-03       2.11162e-04   1.10074e-04   
-Iter 02-->   1.70412e-07       8.32012e-05       4.52388e-05   5.23638e-06   
+Iter 01-->   3.47046e-05       3.21020e-03       2.08122e-04   1.10070e-04   
+Iter 02-->   5.56042e-08       6.63286e-06       4.77440e-05   5.22329e-06   
 -----------------------------------------------
 Final time: 10 days, dt= 86400 sec (1 days : 0 hrs : 0 mins : 0 sec)
 end of time-step 19
@@ -330,5 +349,5 @@ Printing solution to file at  10 days
 
 
 
-The Total Simulation time is 1.622 [s]
+The Total Simulation time is 1.4956 [s]
 Simulation successfully finished!
