@@ -107,7 +107,7 @@ Please refer to the Documentation directory for full documentation on DARSim, in
 
 ---
 
-### License and Usage Disclaimer
+### Usage Disclaimer
 
 DARSim is provided for **research use only**.
 
