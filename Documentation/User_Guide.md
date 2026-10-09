@@ -38,8 +38,9 @@ This guide describes the mathematical and numerical models implemented in DARSim
 
 1. Clone or download the DARSim repository from GitHub.
 2. Open MATLAB.
-3. Add the `src` directory from the DARSim repository (with all subdirectories) to the MATLAB environment path. This can be done with the "Set Path" button in the MATLAB window.
-4. Change the current working directory to `src` before running any simulations.
+3. Ensure the Curve Fitting and Parallel Computing toolboxes are installed. 
+4. Add the `src` directory from the DARSim repository (with all subdirectories) to the MATLAB environment path. This can be done with the "Set Path" button in the MATLAB window.
+5. Change the current working directory to `src` before running any simulations.
 
 ### 2.2 Running DARSim
 

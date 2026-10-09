@@ -49,8 +49,9 @@ To install DARSim:
 
 1. Clone repository to your local machine.
 2. Open MATLAB.
-3. Add `/src` and all subdirectories to the MATLAB path.
-4. Execute DARSim from within the `/src` directory.
+3. Ensure the Curve Fitting and Parallel Computing toolboxes are installed. 
+4. Add `/src` and all subdirectories to the MATLAB path.
+5. Execute DARSim from within the `/src` directory.
 
 A more detailed installation guide is provided in the User and Developer Guides inside the `Documentation` directory. 
 
