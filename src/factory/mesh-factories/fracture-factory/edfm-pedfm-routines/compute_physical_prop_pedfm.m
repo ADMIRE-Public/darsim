@@ -47,43 +47,6 @@ pedfm = struct();
 % Number of fractures
 nFrac = size(fracmesh,1);
 
-% Calculate intra-fracture connection properties
-InFrac = cell(nFrac,1);
-
-for iFrac = 1:nFrac
-
-    % Initialize physical properties
-    Physical = struct();
-    Physical.frac = iFrac;
-    Physical.K = geometry(iFrac).Permeability;
-
-    % Centroids of fracture cells connected by each internal face
-    P1 = fracmesh(iFrac).elements.centroid( ...
-        fracmesh(iFrac).faces.inner.upstream,:);
-    P2 = fracmesh(iFrac).elements.centroid( ...
-        fracmesh(iFrac).faces.inner.downstream,:);
-
-    % Distance between neighboring fracture cell centroids
-    Physical.d = vecnorm(P2-P1,2,2);
-
-    % Endpoints of internal fracture mesh faces
-    P1 = fracmesh(iFrac).vertex.coords( ...
-        fracmesh(iFrac).faces.inner.vertices(:,1),:);
-    P2 = fracmesh(iFrac).vertex.coords( ...
-        fracmesh(iFrac).faces.inner.vertices(:,2),:);
-
-    % Length of internal fracture mesh faces
-    Physical.face_length = vecnorm(P2-P1,2,2);
-
-    % Intra-fracture connectivity index
-    Physical.CI = Physical.face_length./Physical.d;
-
-    InFrac{iFrac} = Physical;
-
-end
-
-pedfm.infrac = InFrac;
-
 % Calculate fracture-fracture EDFM connection properties
 FracFracTrans = cell(nFrac,nFrac);
 
