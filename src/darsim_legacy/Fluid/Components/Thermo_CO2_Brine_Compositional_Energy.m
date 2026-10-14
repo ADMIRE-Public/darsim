@@ -171,7 +171,7 @@ classdef Thermo_CO2_Brine_Compositional_Energy < matlab.mixin.Heterogeneous & ha
                     mass_brine = 1.0 + m_NaCl * Mw_NaCl * 1e-3;      % kg
                     mass_aq    = mass_brine + mCO2 * Mw_CO2 * 1e-3;  % kg
 
-                    X_CO2(i,j) = mCO2 * Mw_CO2 / mass_aq;                   % mass fraction in aqueous
+                    X_CO2(i,j) = mCO2 * Mw_CO2 * 1e-3 / mass_aq;                   % mass fraction in aqueous
                     X_H2O(i,j) = mass_brine / mass_aq;                      % mass fraction in aqueous
 
                     % densities
