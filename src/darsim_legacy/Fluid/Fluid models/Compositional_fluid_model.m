@@ -21,7 +21,7 @@ classdef Compositional_fluid_model < fluid_model
             nph = length(obj.Phases);
             % Loop over all injectors
             for i=1:length(Inj)
-                N = length(Inj{1}.Cells);
+                N = length(Inj{i}.Cells);
                 c = Inj{i}.Composition;
                 Inj{i}.z = nan(N, nc);
                 Inj{i}.x = zeros(N, nph * nc); 
