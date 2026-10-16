@@ -20,7 +20,7 @@ classdef Compositional_Energy_fluid_model < Compositional_fluid_model
             % nph = length(obj.Phases);
             % Loop over all injectors
             for i=1:length(Inj)
-                N = length(Inj{1}.Cells);
+                N = length(Inj{i}.Cells);
                 c = Inj{i}.Composition;
                 Inj{i}.z = zeros(N, nc);
                 Inj{i}.z(:, c) = 1;
