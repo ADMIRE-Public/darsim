@@ -653,6 +653,12 @@ classdef simulation_factory < handle
                         %rate = rate * TotalPV(1) / (3600 * 24); % convert pv/day to m^3/s
                         rate = rate * sum(GridVolume .* obj.SimulationInput.ReservoirProperties.phi) / (3600 * 24); % convert pv/day to m^3/s
                         Injector = injector_rate(PI, Coordinate, rate, p_init, Temperature, n_phases);
+                    case('MASSRATE')
+                        rate = obj.SimulationInput.WellsInfo.Inj{i}.Constraint.Value;
+                        p_init = obj.SimulationInput.InitialConditions.Pressure;
+                        %rate = rate * TotalPV(1) / (3600 * 24); % convert pv/day to m^3/s
+                        rate = rate * 1000 / (3600 * 24); % convert ton/day to kg/s
+                        Injector = injector_mass_rate(PI, Coordinate, rate, p_init, Temperature, n_phases);
                 end
                 Injector.h = Enthalpy;
                 % Check to see if the well has any schedules
@@ -694,6 +700,12 @@ classdef simulation_factory < handle
                         rate = obj.SimulationInput.WellsInfo.Prod{i}.Constraint.Value;
                         rate = rate * sum(GridVolume .* obj.SimulationInput.ReservoirProperties.phi) / (3600 * 24); % convert pv/day to m^3/s
                         Producer = producer_rate(PI, Coordinate, rate);
+                    case('MASSRATE')
+                        rate = obj.SimulationInput.WellsInfo.Inj{i}.Constraint.Value;
+                        p_init = obj.SimulationInput.InitialConditions.Pressure;
+                        %rate = rate * TotalPV(1) / (3600 * 24); % convert pv/day to m^3/s
+                        rate = rate * 1000 / (3600 * 24); % convert ton/day to kg/s
+                        Producer = producer_mass_rate(PI, Coordinate, rate, p_init, Temperature, n_phases);
                 end
                 % Check to see if the well has any schedules
                 try 
