@@ -591,8 +591,9 @@ DARSim models injection and production wells through source and sink terms in th
 
 Default well controls include:
 
-- Fixed bottom-hole pressure (BHP)
-- Fixed injection or production rate
+- Fixed bottom-hole pressure (BHP), `PRESSURE`
+- Fixed volumetric rate, `RATE`
+- Fixed mass rate, `MASSRATE`
 
 An example of a well definition in the main simulation input file is given below:
 
@@ -604,7 +605,7 @@ WELL_START
 		XYZ_LIST
 		[ <x1> , <y1> , <z1> ]
 		[ <x2> , <y2> , <z2> ]
-	CONSTRAINT ("PRESSURE" or "RATE", Units: Pa or Pore Volumes/Day)
+	CONSTRAINT ("PRESSURE", "RATE" or "MASSRATE", Units: Pa, Pore Volumes/Day or Ton/Day)
 		RATE
 		1e-1
 	FORMULA (Well Index: "WI")
