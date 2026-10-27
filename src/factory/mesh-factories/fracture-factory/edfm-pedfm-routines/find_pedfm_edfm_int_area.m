@@ -35,7 +35,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [edfm, ...
           pedfm ] = ...
-          find_pedfm_edfm_int_area_geometric(fracmesh, ...
+          find_pedfm_edfm_int_area(fracmesh, ...
                                              rockmesh, ...
                                              plane_geo, ...
                                              settings)
@@ -291,12 +291,11 @@ for iFrac = 1:nFrac
     if settings.pedfm
         EDFMconnections = [RockCellEDFM, FracCellEDFM];
         [rock_frac_ind_pdf,int_area_pedfm, rock_face_ind, rock_face_area]= ...
-            find_pdefm_projection_faces_centroid_intersect(EDFMconnections, ...
+            find_pdefm_projection_faces(EDFMconnections, ...
             AreaEDFM, Coplanar, rockmesh, plane_geo(iFrac));
         RockCellPEDFMOutput{iFrac,1} = rock_frac_ind_pdf(:,1); 
         FracCellPEDFMOutput{iFrac,1} = rock_frac_ind_pdf(:,2);
         AreaPEDFMOutput{iFrac,1} = int_area_pedfm;  
-        FacePEDFMOutput{iFrac} = rock_face_ind;
         AlphaFaceOutput{iFrac,1} = rock_face_ind;
         AlphaAreaOutput{iFrac,1} = rock_face_area;
     end 
@@ -317,7 +316,6 @@ if settings.pedfm
     pedfm.vol_ind = RockCellPEDFMOutput;
     pedfm.frac_ind = FracCellPEDFMOutput;
     pedfm.area = AreaPEDFMOutput;
-    pedfm.face_ind = FacePEDFMOutput;
     pedfm.alpha_ind = AlphaFaceOutput;
     pedfm.alpha_area = AlphaAreaOutput;
 end

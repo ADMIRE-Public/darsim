@@ -3,13 +3,9 @@
 %Author: Artur Castiel;
 %TU Delft
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [min_vec, max_vec] = generate_boundbox(adj,coords, useHalf)
+function [min_vec, max_vec] = generate_boundbox(adj,coords)
 min_vec = coords(adj(:,1),:);
 max_vec = coords(adj(:,1),:);
-if useHalf
-    min_vec = half(min_vec);
-    max_vec = half(max_vec);
-end
 size_c = size(adj,2);
 for index = 1:size_c
     ref = adj(:,index)  ~= 0;

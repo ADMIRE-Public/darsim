@@ -9,9 +9,7 @@ function FracturesProperties = build_FracturesProperties(blueprint, ...
         FracturesProperties = struct();
         FracturesProperties.legacy = blueprint.legacy;
         FracturesProperties.isFractured = 1;
-        FracturesProperties.FractureModelType = blueprint.TYPE;
-        FracturesProperties.UnsFracmesh = ...
-            blueprint.UNSTRUCTURED_FRACTURE_MESH;        
+        FracturesProperties.FractureModelType = blueprint.TYPE;     
         discretizationType = blueprint.GRID_DISCRETIZATION;
         if ischar(discretizationType) || isstring(discretizationType)
             FracturesProperties.DiscretizationType = ...

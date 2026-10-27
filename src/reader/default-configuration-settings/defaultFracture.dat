@@ -1,12 +1,6 @@
-FRACTURE_NUM_POINTS        
-500
-         
-FRACTURE_BOUNDING_BOX         
-1
-
-FRACTURE_AVERAGE_DISTANCE_REFINEMENT         
-50
-
-UNSTRUCTURED_FRACTURE_MESH
-false
+TYPE
+	pEDFM
+	 
+CompareAccuracy
+    1e-10
 

@@ -38,8 +38,8 @@ function [pedfm] = ...
                                      fracmeshint, ...
                                      edfm_geo, ...
                                      pedfm_geo, ...
-                                     avg_d_rock, ...
-                                     avg_d_frac)
+                                     avg_d_frac, ...
+                                     avg_d_rock)
 
 % Initialize output structure
 pedfm = struct();
@@ -48,7 +48,7 @@ pedfm = struct();
 nFrac = size(fracmesh,1);
 
 % Calculate fracture-fracture EDFM connection properties
-FracFracTrans = cell(nFrac,nFrac);
+FracFracEDFMTrans = cell(nFrac,nFrac);
 
 for ii = 1:size(fracmeshint,1)
 
@@ -95,7 +95,7 @@ for ii = 1:size(fracmeshint,1)
             CIHarm = 2*(CI1.*CI2)./(CI1+CI2);
             Physical.CI = CIHarm;
 
-            FracFracTrans{ii,jj} = Physical;
+            FracFracEDFMTrans{ii,jj} = Physical;
 
         end
 
@@ -103,7 +103,7 @@ for ii = 1:size(fracmeshint,1)
 
 end
 
-pedfm.fracfrac = FracFracTrans;
+pedfm.fracfrac = FracFracEDFMTrans;
 
 % Calculate fracture-rock EDFM connection properties
 FracRockEDFMTrans = cell(nFrac,1);

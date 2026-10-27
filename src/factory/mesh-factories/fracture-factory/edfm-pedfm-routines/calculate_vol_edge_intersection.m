@@ -89,7 +89,7 @@ function [v1, v2] = find_in_volume_frac_line(p1, p2, coords, volNodes)
 
     % Generate bounding boxes for all fracture cells. The bounding boxes
     % are used to exclude cells that cannot contain the intersection point.
-    [minVec, maxVec] = generate_boundbox(volNodes, coords, false);
+    [minVec, maxVec] = generate_boundbox(volNodes, coords);
 
     % Identify cells whose bounding boxes contain the first intersection
     % point in the projected 2D coordinate system.
