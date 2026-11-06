@@ -288,20 +288,22 @@ OutputPhysProp.FracAlpha = cell(nFrac,1);
 if OutputPhysProp.PEDFM_on
 
     % Frac Mesh Alpha
-    for iFrac = 1:nFrac
-
-        % Number of faces in frac mesh
-        nFaces = FracMesh(iFrac).faces.inner.num + ...
-                 FracMesh(iFrac).faces.bound.num;
-
-        % Setting alpha to 0 (no projection) or 1 (projection)
-        % In this method, we are assuming alpha = 1 for all projection faces in
-        % fracture projection path
-        AlphaGeom = zeros(nFaces,1);
-        AlphaGeom(LFracFracPEDFM.AlphaID{iFrac}) = 1;
-
-        OutputPhysProp.FracAlpha{iFrac} = AlphaGeom;
-
+    if nFrac > 1
+        for iFrac = 1:nFrac
+    
+            % Number of faces in frac mesh
+            nFaces = FracMesh(iFrac).faces.inner.num + ...
+                     FracMesh(iFrac).faces.bound.num;
+    
+            % Setting alpha to 0 (no projection) or 1 (projection)
+            % In this method, we are assuming alpha = 1 for all projection faces in
+            % fracture projection path
+            AlphaGeom = zeros(nFaces,1);
+            AlphaGeom(LFracFracPEDFM.AlphaID{iFrac}) = 1;
+    
+            OutputPhysProp.FracAlpha{iFrac} = AlphaGeom;
+    
+        end
     end
     
     % Rock Mesh Alpha

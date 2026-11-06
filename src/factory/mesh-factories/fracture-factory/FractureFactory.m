@@ -61,6 +61,7 @@ classdef FractureFactory
             % Find fracture-fracture intersections based on geometry 
             % If there are more than one fracture
             LFracFracEDFM = cell(1);
+            LFracFracPEDFM = cell(1);
             DFracFrac = cell(1);
             if obj.NumFrac > 1
                 obj.GeoIntersection = ...

@@ -134,12 +134,14 @@ function [FracturesGrid, CrossConnections] = ...
     TransAlpha = Fractures.FracCore.RockAlpha;
     TransAlpha = TransAlpha(1:Fractures.RockMesh.face.inner.num);
     ReservoirGrid.AddpEDFMCorrections(TransAlpha);
-
-    for iFrac = 1:nFrac
-        TransAlpha = Fractures.FracCore.FracAlpha{iFrac};
-        TransAlpha = ...
-            TransAlpha(1:Fractures.FracMesh(iFrac).faces.inner.num);
-        FracturesGrid.Grids(iFrac).AddpEDFMCorrections(TransAlpha);
+    
+    if nFrac > 1
+        for iFrac = 1:nFrac
+            TransAlpha = Fractures.FracCore.FracAlpha{iFrac};
+            TransAlpha = ...
+                TransAlpha(1:Fractures.FracMesh(iFrac).faces.inner.num);
+            FracturesGrid.Grids(iFrac).AddpEDFMCorrections(TransAlpha);
+        end
     end
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
