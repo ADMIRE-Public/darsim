@@ -262,7 +262,7 @@ classdef Compositional_fluid_model < fluid_model
             dxdz(SinglePhase == 2, 4) = -1; %-1
             dxdz(SinglePhase == 2, 5) = 0;
         end
-        function [dxdp, dxdz] = DxDpDz(obj, Status, SinglePhase)
+        function [dxdp, dxdz] = DxDpDz_backup3(obj, Status, SinglePhase)
             % x = x1v, x1l, x2v, x2l, ..., ni
             % z = p, z1, z2, ...
             N = length(SinglePhase);
@@ -353,6 +353,146 @@ classdef Compositional_fluid_model < fluid_model
             dxdz(SinglePhase == 2, end   , :) = 0;
             end
         end
+        function [dxdp, dxdz] = DxDpDz(obj, Status, SinglePhase)
+        % DXDPDZ Batched version of the DxDpDz_backup3 two-phase derivative method.
+        % Requires MATLAB R2022a or later (pagemldivide).
+        %
+        % Output order: [x1v, x1l, x2v, x2l, ..., V].
+        % dxdz(:,:,c) is the derivative with respect to overall mass fraction z_c,
+        % with z_nc = 1 - sum(z_1,...,z_(nc-1)).
+        %
+        % Preserves the supplied equations, including its nc=3 convention:
+        %   pressure:    uncorrected equilibrium matrix;
+        %   composition: dkdy1 correction to the first vapor-mass-fraction column.
+        
+            nc = obj.NofComponents;
+            if obj.NofPhases ~= 2 || ~ismember(nc, [2, 3])
+                error('DxDpDz:UnsupportedConfiguration', ...
+                      'This method supports two phases and two or three components.');
+            end
+        
+            SinglePhase = SinglePhase(:);
+            N = numel(SinglePhase);
+            nout = 2*nc + 1;
+            nvar = nout + 1;
+            dxdp = zeros(N, nout);
+            dxdz = zeros(N, nout, nc-1);
+        
+            % Single-phase derivatives: all other entries are already zero.
+            isVapor = (SinglePhase == 1);
+            isLiquid = (SinglePhase == 2);
+            for c = 1:nc-1
+                dxdz(isVapor, 2*c-1, c) = 1;
+                dxdz(isVapor, 2*nc-1, c) = -1;
+                dxdz(isLiquid, 2*c, c) = 1;
+                dxdz(isLiquid, 2*nc, c) = -1;
+            end
+        
+            cells = find(SinglePhase == 0);
+            nt = numel(cells);
+            if nt == 0
+                return
+            end
+        
+            % Keep local working arrays only for two-phase cells.
+            V = Status.Properties('ni_1').Value;
+            L = Status.Properties('ni_2').Value;
+            V = V(cells);
+            L = L(cells);
+            x = zeros(nt, 2*nc);
+            for c = 1:nc
+                value = Status.Properties(sprintf('x_%dph1', c)).Value;
+                x(:, 2*c-1) = value(cells);
+                value = Status.Properties(sprintf('x_%dph2', c)).Value;
+                x(:, 2*c) = value(cells);
+            end
+        
+            switch nc
+                case 2
+                    % Keep the existing Status-based APIs intact.
+                    k = obj.ComputeKvalues(Status);
+                    k = k(cells, :);
+                    dkdp = obj.DKvalDp(Status);
+                    dkdp = dkdp(cells, :);
+        
+                case 3
+                    p = Status.Properties('P_2').Value;
+                    p = p(cells);
+                    p = p(:);
+                    Mw = [obj.Thermo.comp{1}.Mw, ...
+                          obj.Thermo.comp{2}.Mw, ...
+                          obj.Thermo.comp{3}.Mw];
+                    molarAmounts = x(:, 1:2:end) ./ Mw;
+                    y1_molar = molarAmounts(:, 1) ./ sum(molarAmounts, 2);
+                    y1_molar(isnan(y1_molar)) = 0;
+        
+                    k = zeros(nt, nc);
+                    dkdp = zeros(nt, nc);
+                    dkdy1 = zeros(nt, nc);
+                    % These functions are assumed to evaluate each (p,y) point
+                    % independently, as thermodynamic interpolants normally do.
+                    for c = 1:nc
+                        k(:, c) = obj.Thermo.comp{c}.K_mass(p, y1_molar);
+                        dkdp(:, c) = obj.Thermo.comp{c}.dKdp(p, y1_molar);
+                        dkdy1(:, c) = obj.Thermo.comp{c}.dKdy1(p, y1_molar);
+                    end
+            end
+        
+            % RHS columns: pressure, z_1, ..., z_(nc-1).
+            B0 = zeros(nvar, nc);
+            for c = 1:nc-1
+                B0(nc+c, c+1) = -1;
+                B0(2*nc, c+1) = 1;
+            end
+        
+            % One small matrix per page, one cell per page. Chunking bounds memory.
+            % For nc=3 and batchSize=10000, A itself occupies about 5.1 MB.
+            batchSize = 10000;
+            for first = 1:batchSize:nt
+                q = first:min(first+batchSize-1, nt);
+                ids = cells(q);
+                nb = numel(q);
+                A = zeros(nvar, nvar, nb);
+                B = repmat(B0, 1, 1, nb);
+                vp = reshape(V(q), 1, 1, nb);
+                lp = reshape(L(q), 1, 1, nb);
+        
+                % Only a 2- or 3-iteration component loop; no cell-by-cell assembly.
+                for c = 1:nc
+                    iv = 2*c-1;
+                    il = 2*c;
+                    A(c, iv, :) = 1;
+                    A(c, il, :) = -reshape(k(q, c), 1, 1, nb);
+                    A(nc+c, iv, :) = -vp;
+                    A(nc+c, il, :) = -lp;
+                    A(nc+c, end-1, :) = -reshape(x(q, iv), 1, 1, nb);
+                    A(nc+c, end, :) = -reshape(x(q, il), 1, 1, nb);
+                    B(c, 1, :) = reshape(dkdp(q, c).*x(q, il), 1, 1, nb);
+                end
+                A(end-1, 1:2:2*nc, :) = 1;
+                A(end, 2:2:2*nc, :) = 1;
+        
+                if nc == 2
+                    % Same A for pressure and z_1: solve both RHS columns together.
+                    S = pagemldivide(A, B);
+                    dxdp(ids, :) = reshape(S(1:nout, 1, :), nout, nb).';
+                    dxdz(ids, :, :) = permute(S(1:nout, 2:end, :), [3, 1, 2]);
+                else
+                    % Match the original: compute pressure before modifying A.
+                    Sp = pagemldivide(A, B(:, 1, :));
+                    dxdp(ids, :) = reshape(Sp(1:nout, 1, :), nout, nb).';
+        
+                    correction = dkdy1(q, :) .* x(q, 2:2:end);
+                    A(1:nc, 1, :) = A(1:nc, 1, :) ...
+                        - reshape(correction.', nc, 1, nb);
+        
+                    % Both independent overall-composition derivatives share A.
+                    Sz = pagemldivide(A, B(:, 2:end, :));
+                    dxdz(ids, :, :) = permute(Sz(1:nout, :, :), [3, 1, 2]);
+                end
+            end
+        end
+
         %% d(rho)/d(p)   &&   d(rho)/d(z)
         function drhodp = ComputeDrhoDp(obj, Status, SinglePhase, dxdp)
             drhodp = zeros(length(SinglePhase), obj.NofPhases);
