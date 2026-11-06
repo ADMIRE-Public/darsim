@@ -22,9 +22,6 @@ SPECGRID (Nx//Ny//Nz; Dummy values for UnstructuredGrid)
 --Fracture Controls
 TYPE (EDFM or pEDFM)
 	pEDFM
-
-EDFM_METHOD (geometric or monte carlo)
-geometric
 	 
 CompareAccuracy (The level of accuracy in comparing two values or in zero comparison)
     1e-10
