@@ -351,24 +351,39 @@ classdef bf_updater < handle
         function Ac = TransformIntoTPFA(obj, Ac, Grid)
             Nx = Grid.Nx;
             Ny = Grid.Ny;
+            Nz = Grid.Nz;
             N = Grid.N;
-            x1 = [0; diag(Ac, 1)];
-            x2 = [diag(Ac, -1); 0];
-            diagy1 = diag(Ac, Nx);
-            diagy2 = diag(Ac, -Nx);
+        
+            % x-direction
+            x1 = zeros(N, 1);
+            x2 = zeros(N, 1);
+            if Nx > 1
+                x1 = [0; diag(Ac, 1)];
+                x2 = [diag(Ac, -1); 0];
+            end
+        
+            % y-direction
             y1 = zeros(N, 1);
             y2 = zeros(N, 1);
-            y1(N - length(diagy1) + 1:end) = diagy1;
-            y2(1:length(diagy1)) = diagy2;
-            diagz1 = diag(Ac, Nx*Ny);
-            diagz2 = diag(Ac, -Nx*Ny);
+            if Ny > 1
+                y1(Nx + 1:end) = diag(Ac, Nx);
+                y2(1:N - Nx) = diag(Ac, -Nx);
+            end
+        
+            % z-direction
             z1 = zeros(N, 1);
             z2 = zeros(N, 1);
-            z1(N - length(diagz1) + 1:end) = diagz1;
-            z2(1:length(diagz1)) = diagz2;
+            if Nz > 1
+                z1(Nx*Ny + 1:end) = diag(Ac, Nx*Ny);
+                z2(1:N - Nx*Ny) = diag(Ac, -Nx*Ny);
+            end
+        
             DiagVecs = [z2, y2, x2, -z2-y2-x2-z1-y1-x1, x1, y1, z1];
             DiagIndx = [-Nx*Ny, -Nx, -1, 0, 1, Nx, Nx*Ny];
-            Ac = spdiags(DiagVecs,DiagIndx,N,N);
+        
+            % Include only directions with more than one cell.
+            Active = [Nz > 1, Ny > 1, Nx > 1, true, Nx > 1, Ny > 1, Nz > 1];
+            Ac = spdiags(DiagVecs(:, Active), DiagIndx(Active), N, N);
         end
     end
 end
