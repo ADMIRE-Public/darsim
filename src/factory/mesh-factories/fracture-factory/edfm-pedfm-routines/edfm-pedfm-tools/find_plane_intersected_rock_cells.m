@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DARSim Reservoir Simulator
-%Author: Ryan Haagenson
+%Author: Ryan Haagenson, Artur Castiel
 %TU Delft
 %
-% Finding matrix cells intersected by a fracture plane.
+% Finding rock cells intersected by a fracture plane.
 %
 % Input:
 %   CellVertIDs:    2D array (N_cells x N_verts_per_cell)
@@ -21,9 +21,10 @@
 %                       Flags that represent which matrix cells are
 %                       intersected by the fracture plane. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function PIRockCellFlags = identify_plane_crossed_volumes(CellVertIDs, ...
-                                                          VertCoords, ...
-                                                          FracPlane)
+function PIRockCellFlags = ...
+    find_plane_intersected_rock_cells(CellVertIDs, ...
+                                      VertCoords, ...
+                                      FracPlane)
 
 tol = 1e-3;
 

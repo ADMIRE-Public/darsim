@@ -70,20 +70,7 @@ classdef unstructured_fracture_grid < grid_darsim
             %obj.ComputeDepth(true);
         end
         function ComputeRockTransmissibilities(obj, K)
-            % Artur's Harmonic average of permeability.
-            % K_left = K(obj.Neighbours(:,1));
-            % K_right = K(obj.Neighbours(:,2));
-            % P1 = obj.fracmesh.vertex.coords(obj.fracmesh.faces.inner.vertices(:,1),:);
-            % P2 = obj.fracmesh.vertex.coords(obj.fracmesh.faces.inner.vertices(:,2),:);
-            % centroid = 0.5*(P1+P2);
-            % area = vecnorm(P1-P2,2,2).*obj.aperture;
-            % H_left = vecnorm(centroid - obj.fracmesh.elements.centroid(obj.Neighbours(:,1),:),2,2);
-            % H_right = vecnorm(centroid - obj.fracmesh.elements.centroid(obj.Neighbours(:,2),:),2,2);
-            % KH = K_left.*K_right./((K_left.*H_right)+(K_right.*H_left));
-            % %warning("Fracture Transmissbility, check the area later")
-            % obj.T = area.*KH;
-            % %obj.T(:) = 10^-12;
-
+            
             L = obj.Neighbours(:,1);
             R = obj.Neighbours(:,2);
 

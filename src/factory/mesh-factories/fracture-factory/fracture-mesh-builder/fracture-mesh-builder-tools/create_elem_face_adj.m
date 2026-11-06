@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DARSim Reservoir Simulator
+%Author: Artur Castiel;
+%TU Delft
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [element_face_adj,element_face_adj_bool] = ...
              create_elem_face_adj(inner_up, inner_down, bound_up, el_size)
 %create_elem_face_adj create the face_element adjacency matrix

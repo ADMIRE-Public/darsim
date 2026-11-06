@@ -55,9 +55,9 @@ function [mesh] = create_frac_mesh(n_xy,geo_coords, normal, geo_vec)
     [coords, elem] = ...
         create_frac_coords_and_elem(n_xy,geo_coords, geo_vec, normal);
     faces = create_faces(elem,coords);
-    [element_face_adj,element_face_adj_bool] = ...
-                                  create_elem_face_adj(faces.inner.upstream,...
-                    faces.inner.downstream,faces.bound.upstream, size(elem,2));
+    [element_face_adj,element_face_adj_bool] = create_elem_face_adj(...
+        faces.inner.upstream, faces.inner.downstream, ...
+        faces.bound.upstream, size(elem,2));
     mesh.vertex.coords = coords;
     mesh.faces = faces;
     mesh.elements.vertices = elem;
@@ -174,6 +174,7 @@ function faces = create_faces(elem, coords)
     P2 = coords(inner.vertices(:,2),:);
     inner.centroid = 0.5*(P1+P2);
     inner.length = vecnorm(P2-P1,2,2);
+    inner.num = numel(inner.length);
     
     [neigh,~]= find(face_elem(ref,:)');
     auxmat = reshape(neigh,2,[])';
@@ -184,6 +185,7 @@ function faces = create_faces(elem, coords)
     P2 = coords(bound.vertices(:,2),:);
     bound.centroid = 0.5*(P1+P2);
     bound.length = vecnorm(P2-P1,2,2);
+    bound.num = numel(bound.length);
     
     [neigh,~]= find(face_elem(~ref,:)');
     bound.upstream = neigh;
