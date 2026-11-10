@@ -626,9 +626,9 @@ classdef simulation_builder < handle
                     FracturesNetwork.Fractures(f).Width = DiscretizationModel.FracturesGrid.dfrac.geometry_blueprint.FracturesProperties(f).Width;
                     FracturesNetwork.Fractures(f).Thickness = DiscretizationModel.FracturesGrid.dfrac.geometry_blueprint.FracturesProperties(f).Aperture;
                     FracturesNetwork.Fractures(f).Temp = obj.SimulationInput.InitialConditions.Temperature;     % Temperature of each fracture
-                    FracturesNetwork.Fractures(f).Cpr = 0;
-                    FracturesNetwork.Fractures(f).Cr  = 0;
-                    FracturesNetwork.Fractures(f).Rho = 0;
+                    FracturesNetwork.Fractures(f).Cpr = RockSpecificHeat;
+                    FracturesNetwork.Fractures(f).Cr  = RockCompressibility;
+                    FracturesNetwork.Fractures(f).Rho = RockDensity;
                     
                     if obj.SimulationInput.InitialConditions.Include
                         FracturesNetwork.Fractures(f).P0 = obj.SimulationInput.InitialConditions.LoadedData(:,1);

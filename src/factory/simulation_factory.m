@@ -497,9 +497,9 @@ classdef simulation_factory < handle
                         FracturesNetwork.Fractures(f).Thickness = ...
                             obj.SimulationInput.FracturesProperties.blueprint.FracturesProperties(f).Aperture;
                         FracturesNetwork.Fractures(f).Temp = obj.SimulationInput.InitialConditions.Temperature;     % Temperature of each fracture
-                        FracturesNetwork.Fractures(f).Cpr = 0;
-                        FracturesNetwork.Fractures(f).Cr  = 0;
-                        FracturesNetwork.Fractures(f).Rho = 0;
+                        FracturesNetwork.Fractures(f).Cpr = Reservoir.Cpr;
+                        FracturesNetwork.Fractures(f).Cr  = Reservoir.Cr;
+                        FracturesNetwork.Fractures(f).Rho = Reservoir.Rho;
                         
                         if obj.SimulationInput.InitialConditions.Include
                             FracturesNetwork.Fractures(f).P0 = obj.SimulationInput.InitialConditions.LoadedData(:,1);
