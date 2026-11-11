@@ -249,44 +249,56 @@ classdef tetragon_DARSim < polygon_DARSim
         end
         %%
         function AvgDistance = Obtain_Average_Distance_Line_From_Tetragon(obj, Line, Refinement)
-            % This functions calculates the average distance between a
-            % tetragon and an line. The line should lie within the
-            % tetragon plane surface.
+
+            % Calculate average perpendicular distance between a
+            % tetragon and an infinite line using midpoint integration.
+            %
+            % Refinement = number of subdivisions in each direction.
+            % Total sampling points = Refinement^2.
+            %
+            % The line is assumed to lie in the tetragon plane.
+        
+            % Parametric coordinates at subdivision midpoints
             
-            % Tetragon's plane equation has 4 sets of values of "a,b,c,d" and follows the equation
-            % pattern "ax+by+cz=d".
-            
-            % "Refinement" is number of devisions in every direction. For example,
-            % if the refinement number is 7, the plane segment is devided into 7^2 = 49 smaller
-            % plane segments to calculate the average distance.
-            
-            Refinement = round(max(Refinement, 2));
+            t = ((1:Refinement) - 0.5) / Refinement;
+        
+            % Coordinates along edges AD and BC
+            AD_Coords = obj.PointA(:).' + ...
+                t(:) * (obj.PointD(:).' - obj.PointA(:).');
+        
+            BC_Coords = obj.PointB(:).' + ...
+                t(:) * (obj.PointC(:).' - obj.PointB(:).');
+        
+            % Generate midpoint sampling locations
             AvgDistance = 0;
- 
-            AD_Coords = [linspace(obj.PointA(1), obj.PointD(1), Refinement+1)
-                         linspace(obj.PointA(2), obj.PointD(2), Refinement+1)
-                         linspace(obj.PointA(3), obj.PointD(3), Refinement+1)]';
-                     
-            BC_Coords = [linspace(obj.PointB(1), obj.PointC(1), Refinement+1)
-                         linspace(obj.PointB(2), obj.PointC(2), Refinement+1)
-                         linspace(obj.PointB(3), obj.PointC(3), Refinement+1)]';
-            
-            GridCoords  = zeros( Refinement+1, Refinement+1, 3 );
-            for i = 1 : Refinement+1
-                GridCoords(:,i,1) = linspace( AD_Coords(i,1) , BC_Coords(i,1) , Refinement+1 );                          
-                GridCoords(:,i,2) = linspace( AD_Coords(i,2) , BC_Coords(i,2) , Refinement+1 );
-                GridCoords(:,i,3) = linspace( AD_Coords(i,3) , BC_Coords(i,3) , Refinement+1 );
+        
+            % Unit direction vector of the line
+            LineDir = Line.unitVec(:).';
+            LineDir = LineDir / norm(LineDir);
+        
+            % Point on the line
+            LinePoint = Line.PointA(:).';
+        
+            for j = 1:Refinement
+        
+                % Midpoints between corresponding AD and BC points
+                Points = AD_Coords(j,:) + ...
+                    t(:) * (BC_Coords(j,:) - AD_Coords(j,:));
+        
+                % Vectors from line point to sample points
+                Vectors = Points - LinePoint;
+        
+                % Perpendicular distances to infinite line
+                Distances = vecnorm(cross(Vectors, ...
+                    repmat(LineDir,Refinement,1),2),2,2);
+        
+                AvgDistance = AvgDistance + sum(Distances);
+        
             end
-            
-            x1 = Line.PointA  - Line.unitVec * 1e3;
-            x2 = Line.PointA  + Line.unitVec * 1e3;
-            for j = 1 : Refinement+1
-                for i = 1 : Refinement+1
-                    x0 = [ GridCoords(i,j,1), GridCoords(i,j,2), GridCoords(i,j,3) ];
-                    AvgDistance = AvgDistance + norm(cross(x2-x1,x1-x0))/norm(x2-x1);
-                end
-            end
-            AvgDistance = AvgDistance / (Refinement+1)^2 ;
+        
+            % Average over all subdivision centroids
+            AvgDistance = AvgDistance / Refinement^2;
+        
         end
     end
 end

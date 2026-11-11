@@ -188,8 +188,10 @@ classdef translate_Fractures_to_CrossConnections
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Loop through fracture-fracture connections
             for iFrac1 = 1:obj.nFrac
-
-                for iFrac2 = 1:obj.nFrac
+                
+                % Don't double count EDFM connections with fractures that
+                % have already been read in with "for iFrac1 = 1:obj.nFrac"
+                for iFrac2 = iFrac1+1:obj.nFrac
 
                     if ~isempty(FracCore.FracFracEDFM{iFrac1,iFrac2})
 
@@ -209,6 +211,11 @@ classdef translate_Fractures_to_CrossConnections
                         CI = PhysProp.CI(FracElRef);
 
                         % Add connections from fracture 1 to fracture 2
+                        % We only need to add the EDFM connections from one
+                        % frac to another once, so from fracture 1 to
+                        % fracture 2 is sufficient. Don't add from fracture
+                        % 2 to fracture 1, as this would double count EDFM
+                        % connections. 
                         for LocalIndex = 1:length(Frac1ID)
                             
                             % Frac IDs in global fracture space
@@ -228,22 +235,60 @@ classdef translate_Fractures_to_CrossConnections
 
                         end
 
-                        % Add connections from fracture 2 to fracture 1
-                        for LocalIndex = 1:length(Frac2ID)
+                    end
+
+                end
+
+            end
+
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            % PEDFM Frac-Frac connections %
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            % Loop through fracture-fracture connections
+            for iFrac1 = 1:obj.nFrac
+                
+                % Don't double count PEDFM connections with fractures that
+                % have already been read in with "for iFrac1 = 1:obj.nFrac"
+                for iFrac2 = iFrac1+1:obj.nFrac
+
+                    if ~isempty(FracCore.FracFracPEDFM{iFrac1,iFrac2})
+
+                        PhysProp = FracCore.FracFracPEDFM{iFrac1,iFrac2};
+
+                        % Convert local frac elem ID to global frac space
+                        Frac1ID = PhysProp.Frac1ID;
+                        Frac1ID = Frac1ID + LocSum(iFrac1);
+
+                        Frac2ID = PhysProp.Frac2ID;
+                        Frac2ID = Frac2ID + LocSum(iFrac2);
+
+                        % Sort fracture-fracture connections
+                        [~,FracElRef] = sortrows([Frac1ID Frac2ID]);
+                        Frac1ID = Frac1ID(FracElRef);
+                        Frac2ID = Frac2ID(FracElRef);
+                        CI = PhysProp.CI(FracElRef);
+
+                        % Add connections from fracture 1 to fracture 2
+                        % We only need to add the pEDFM connections from 
+                        % one frac to another once, so from fracture 1 to
+                        % fracture 2 is sufficient. Don't add from fracture
+                        % 2 to fracture 1, as this would double count pEDFM
+                        % connections. 
+                        for LocalIndex = 1:length(Frac1ID)
                             
                             % Frac IDs in global fracture space
                             FracEl1 = Frac1ID(LocalIndex);
                             FracEl2 = Frac2ID(LocalIndex);
-
+                            
                             % Frac IDs in global space, including rock mesh
-                            FracEl1FullGlobal = FracEl1 + obj.nRockElem;
+                            FracEl2FullGlobal = FracEl2 + obj.nRockElem;
 
-                            CrossConnections(FracEl2).Cells = ...
-                                [CrossConnections(FracEl2).Cells; ...
-                                 FracEl1FullGlobal];
+                            CrossConnections(FracEl1).Cells = ...
+                                [CrossConnections(FracEl1).Cells; ...
+                                 FracEl2FullGlobal];
 
-                            CrossConnections(FracEl2).CI = ...
-                                [CrossConnections(FracEl2).CI; ...
+                            CrossConnections(FracEl1).CI = ...
+                                [CrossConnections(FracEl1).CI; ...
                                  CI(LocalIndex)];
 
                         end

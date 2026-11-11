@@ -212,8 +212,8 @@ if OutputPhysProp.PEDFM_on
                 PhysProp.Frac2ID = LocalFrac2ID;
     
                 % Connectivity index from each frac to intersection line
-                CI1 = 2*LocalLengthPEDFM./LocalFrac1Dist;
-                CI2 = 2*LocalLengthPEDFM./LocalFrac2Dist;
+                CI1 = LocalLengthPEDFM./LocalFrac1Dist;
+                CI2 = LocalLengthPEDFM./LocalFrac2Dist;
     
                 % Harmonic average fracture-fracture connectivity index
                 CIHarm = 2*(CI1.*CI2)./(CI1+CI2);

@@ -114,7 +114,7 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                             % Obtaining the average distance between the matrix cube cell and the fracture plate cell
                             Fracture(f).avgDist_rock_EDFM{If}(Index_matIntersect,2) = 0;
-                            Refinement = 6;
+                            Refinement = 7;
                             Fracture(f).avgDist_rock_EDFM{If}(Index_matIntersect,2) = CubeMatCell.Obtain_Average_Distance_Plane_From_Cube(Fracture(f), Refinement);
                             
                             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,8 +200,8 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                     % Looping over the overlapped matrix cells
                     for m = 1 : length(ImList)
                         Im_This = ImList(m);
-                        [ i_This , j_This , k_This ] = Index_Global_To_Local_3D(Nx, Ny, Nz, Im_This);
-                        CellCenterCoord_This = [ Xcm(i_This) , Ycm(j_This) , Zcm(k_This) ];
+                        [ ig_This , jg_This , k_This ] = Index_Global_To_Local_3D(Nx, Ny, Nz, Im_This);
+                        CellCenterCoord_This = [ Xcm(ig_This) , Ycm(jg_This) , Zcm(k_This) ];
                         
                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                         % Finding if the fracture plate crosses between the matrix cell and any of its neighbors.
@@ -210,8 +210,8 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                         indNeighbors = obj.ReservoirGrid.Neighbours{Im_This};
                         for n = 1 : length(indNeighbors)
                             Im_Other = indNeighbors(n);
-                            [ i_Other , j_Other , k_Other ] = Index_Global_To_Local_3D(Nx, Ny, Nz, Im_Other);
-                            CellCenterCoord_Other = [ Xcm(i_Other) , Ycm(j_Other) , Zcm(k_Other) ];
+                            [ ig_Other , jg_Other , k_Other ] = Index_Global_To_Local_3D(Nx, Ny, Nz, Im_Other);
+                            CellCenterCoord_Other = [ Xcm(ig_Other) , Ycm(jg_Other) , Zcm(k_Other) ];
                             LineSegmentConnectingCellCenters = lineSegment_DARSim( CellCenterCoord_This , CellCenterCoord_Other );
                             LineSegmentConnectingCellCenters.AddEquation(CellCenterCoord_This);
                             
@@ -220,7 +220,7 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                             
                             if Geostatus.haveIntersect == 1 && ~isempty(IntersectPoint)
                                 % [~ , Dimension] = setdiff([i_This,j_This,k_This] , [i_Other,j_Other,k_Other] ); % setdiff is not working properily.
-                                Dimension = find( [i_This,j_This,k_This] ~= [i_Other,j_Other,k_Other] );
+                                Dimension = find( [ig_This,jg_This,k_This] ~= [ig_Other,jg_Other,k_Other] );
                                 if isempty(Dimension) ,  continue;  end
                                 if length(Dimension)>1,  error('Only one of the i,j,k indices can be different.');  end
                                 
@@ -266,8 +266,8 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                                 pEDFM_Af(Index) = pEDFM_Af(Index) + (1-areCoplanar(m,2))*Af_proj;
                                 
                                 % Calculating average distance AvgDist_proj:
-                                PointA = [ Xim(i_Other)   , Yim(j_Other)   , Zim(k_Other)   ];
-                                PointB = [ Xim(i_Other+1) , Yim(j_Other+1) , Zim(k_Other+1) ];
+                                PointA = [ Xim(ig_Other)   , Yim(jg_Other)   , Zim(k_Other)   ];
+                                PointB = [ Xim(ig_Other+1) , Yim(jg_Other+1) , Zim(k_Other+1) ];
                                 CubeMatCell = cube_DARSim(PointA,PointB);
                                 Refinement = 6;
                                 AvgDist_proj = CubeMatCell.Obtain_Average_Distance_Plane_From_Cube(Fracture(f), Refinement);
@@ -281,16 +281,16 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                                 switch Dimension
                                     case(1)
                                         alpha = (Af_proj) / (obj.ReservoirGrid.dy * obj.ReservoirGrid.dz);
-                                        obj.ReservoirGrid.pEDFM_alpha_Tx( max(i_This,i_Other) , j_This , k_This ) =      obj.ReservoirGrid.pEDFM_alpha_Tx( max(i_This,i_Other) , j_This , k_This ) + alpha;
-                                        obj.ReservoirGrid.pEDFM_alpha_Tx( max(i_This,i_Other) , j_This , k_This ) = min( obj.ReservoirGrid.pEDFM_alpha_Tx( max(i_This,i_Other) , j_This , k_This ) , 1 );
+                                        obj.ReservoirGrid.pEDFM_alpha_Tx( max(ig_This,ig_Other) , jg_This , k_This ) =      obj.ReservoirGrid.pEDFM_alpha_Tx( max(ig_This,ig_Other) , jg_This , k_This ) + alpha;
+                                        obj.ReservoirGrid.pEDFM_alpha_Tx( max(ig_This,ig_Other) , jg_This , k_This ) = min( obj.ReservoirGrid.pEDFM_alpha_Tx( max(ig_This,ig_Other) , jg_This , k_This ) , 1 );
                                     case(2)
                                         alpha = (Af_proj) / (obj.ReservoirGrid.dx * obj.ReservoirGrid.dz);
-                                        obj.ReservoirGrid.pEDFM_alpha_Ty( i_This , max(j_This,j_Other) , k_This ) =      obj.ReservoirGrid.pEDFM_alpha_Ty( i_This , max(j_This,j_Other) , k_This ) + alpha;
-                                        obj.ReservoirGrid.pEDFM_alpha_Ty( i_This , max(j_This,j_Other) , k_This ) = min( obj.ReservoirGrid.pEDFM_alpha_Ty( i_This , max(j_This,j_Other) , k_This ) , 1 );
+                                        obj.ReservoirGrid.pEDFM_alpha_Ty( ig_This , max(jg_This,jg_Other) , k_This ) =      obj.ReservoirGrid.pEDFM_alpha_Ty( ig_This , max(jg_This,jg_Other) , k_This ) + alpha;
+                                        obj.ReservoirGrid.pEDFM_alpha_Ty( ig_This , max(jg_This,jg_Other) , k_This ) = min( obj.ReservoirGrid.pEDFM_alpha_Ty( ig_This , max(jg_This,jg_Other) , k_This ) , 1 );
                                     case(3)
                                         alpha = (Af_proj) / (obj.ReservoirGrid.dx * obj.ReservoirGrid.dy);
-                                        obj.ReservoirGrid.pEDFM_alpha_Tz( i_This , j_This , max(k_This,k_Other) ) =      obj.ReservoirGrid.pEDFM_alpha_Tz( i_This , j_This , max(k_This,k_Other) ) + alpha;
-                                        obj.ReservoirGrid.pEDFM_alpha_Tz( i_This , j_This , max(k_This,k_Other) ) = min( obj.ReservoirGrid.pEDFM_alpha_Tz( i_This , j_This , max(k_This,k_Other) ) , 1 );
+                                        obj.ReservoirGrid.pEDFM_alpha_Tz( ig_This , jg_This , max(k_This,k_Other) ) =      obj.ReservoirGrid.pEDFM_alpha_Tz( ig_This , jg_This , max(k_This,k_Other) ) + alpha;
+                                        obj.ReservoirGrid.pEDFM_alpha_Tz( ig_This , jg_This , max(k_This,k_Other) ) = min( obj.ReservoirGrid.pEDFM_alpha_Tz( ig_This , jg_This , max(k_This,k_Other) ) , 1 );
                                 end
                             end
                         end
@@ -310,22 +310,29 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                         for g = 1 : length(Fracture)
                             if g==f,  continue;  end
                             if isempty(Fracture(f).Af_frac_EDFM{g}),  continue;  end
-                            if ~isempty(Fracture(f).Af_frac_EDFM{g}{If})
+                            if ~isempty(Fracture(f).Af_frac_EDFM{g}{If}) 
                                 if isempty(Fracture(f).Af_frac_pEDFM{g})
                                     Fracture(f).     Af_frac_pEDFM{g} = cell(Fracture(f).N_Total,1);
                                     Fracture(f).avgDist_frac_pEDFM{g} = cell(Fracture(f).N_Total,1);
                                     Fracture(f).     CI_frac_pEDFM{g} = cell(Fracture(f).N_Total,1);
+                                elseif length(Fracture(f).Af_frac_pEDFM{g}) < Fracture(f).N_Total
+                                    Fracture(f).     Af_frac_pEDFM{g}(end+1:Fracture(f).N_Total,1) = {[]};
+                                    Fracture(f).avgDist_frac_pEDFM{g}(end+1:Fracture(f).N_Total,1) = {[]};
+                                    Fracture(f).     CI_frac_pEDFM{g}(end+1:Fracture(f).N_Total,1) = {[]};
                                 end
                                 Aff = sortrows(Fracture(f).Af_frac_EDFM{g}{If});
+                                [ if_This , jf_This , ~ ] = Index_Global_To_Local_3D(Fracture(f).N_Length_AB, Fracture(f).N_Width_AD  , 1, If);
                                 Ig_List = Aff(:,1);
                                 counter = 0;
                                 pEDFM_List = [];
-                                pEDFM_Af = [];
-                                pEDFM_AvgDist = [];
+                                pEDFM_Af_g = [];
+                                pEDFM_Af_f = [];
+                                pEDFM_AvgDist_g = [];
+                                pEDFM_AvgDist_f = [];
                                 IntersectLine = lineSegment_DARSim( Fracture(f).intersectCoord_fracturePlate{g}(2,:),Fracture(f).intersectCoord_fracturePlate{g}(1,:) );
                                 for m = 1 : length(Ig_List)
                                     Ig_This = Ig_List(m);
-                                    [ i_This , j_This , ~ ] = Index_Global_To_Local_3D(Fracture(g).N_Length_AB, Fracture(g).N_Width_AD  , 1, Ig_This);
+                                    [ ig_This , jg_This , ~ ] = Index_Global_To_Local_3D(Fracture(g).N_Length_AB, Fracture(g).N_Width_AD  , 1, Ig_This);
                                     CellCenterCoord_This = Fracture(g).CellCenterCoordsV2(Ig_This,:);
                                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                     % Finding if the fracture plate crosses between the matrix cell and any of its neighbors.
@@ -334,7 +341,7 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                                     indNeighbors = Fracture(g).Neighbours{Ig_This};
                                     for n = 1 : length(indNeighbors)
                                         Ig_Other = indNeighbors(n);
-                                        [ i_Other , j_Other , ~ ] = Index_Global_To_Local_3D(Fracture(g).N_Length_AB, Fracture(g).N_Width_AD  , 1, Ig_Other);
+                                        [ ig_Other , jg_Other , ~ ] = Index_Global_To_Local_3D(Fracture(g).N_Length_AB, Fracture(g).N_Width_AD  , 1, Ig_Other);
                                         CellCenterCoord_Other = Fracture(g).CellCenterCoordsV2(Ig_Other,:);
                                         LineSegmentConnectingCellCenters = lineSegment_DARSim( CellCenterCoord_This , CellCenterCoord_Other );
                                         LineSegmentConnectingCellCenters.AddEquation(CellCenterCoord_This);
@@ -343,21 +350,24 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                                         [Geostatus, IntersectPoint] = Fracture(f).Obtain_Polygon_LineSegment_Intersection(LineSegmentConnectingCellCenters, Epsilon);
 
                                         if Geostatus.haveIntersect == 1 && ~isempty(IntersectPoint)
-                                            [~ , Dimension] = setdiff( [i_This,j_This] , [i_Other,j_Other] );
+                                            [~ , Dimension] = setdiff( [ig_This,jg_This] , [ig_Other,jg_Other] );
                                             if isempty(Dimension) ,  continue;  end
                                             if length(Dimension)>1,  error('Only one of the i,j,k indices can be different.');  end
 
                                             % Check if the intersected cell is already on the list or not
                                             if ~ismember(Ig_Other,pEDFM_List)
                                                 pEDFM_List = [pEDFM_List;Ig_Other];
-                                                pEDFM_Af = [pEDFM_Af;0];
-                                                pEDFM_AvgDist = [pEDFM_AvgDist;0];
+                                                pEDFM_Af_g = [pEDFM_Af_g;0];
+                                                pEDFM_Af_f = [pEDFM_Af_f;0];
+                                                pEDFM_AvgDist_g = [pEDFM_AvgDist_g;0];
+                                                pEDFM_AvgDist_f = [pEDFM_AvgDist_f;0];
                                                 counter = counter+1;
                                                 Index = counter;
                                             else
                                                 Index = find(pEDFM_List==Ig_Other);
                                             end
-
+                                            
+                                            % RH: Calculate area and distance from frac g persepctive
                                             % Calculating the projected area fraction Af_proj:
                                             % The Cosine of the projection angle can be calculated as dot product between the
                                             % normal vectors of fracture length and projection line.
@@ -367,26 +377,57 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                                                 case(2)
                                                     Aff_proj = (Aff(m,2) / 2) * abs(dot( Fracture(g).AB_vec/norm(Fracture(g).AB_vec) , IntersectLine.unitVec) );
                                             end
-                                            pEDFM_Af(Index) = pEDFM_Af(Index) + Aff_proj;
+                                            pEDFM_Af_g(Index) = pEDFM_Af_g(Index) + Aff_proj;
 
                                             % Calculating average distance AvgDist_proj:
-                                            PointA = [ Fracture(g).GridCoords( i_Other   , j_Other+1 , 1 )
-                                                       Fracture(g).GridCoords( i_Other   , j_Other+1 , 2 )
-                                                       Fracture(g).GridCoords( i_Other   , j_Other+1 , 3 ) ]';
-                                            PointB = [ Fracture(g).GridCoords( i_Other   , j_Other   , 1 )
-                                                       Fracture(g).GridCoords( i_Other   , j_Other   , 2 )
-                                                       Fracture(g).GridCoords( i_Other   , j_Other   , 3 ) ]';
-                                            PointC = [ Fracture(g).GridCoords( i_Other+1 , j_Other   , 1 )
-                                                       Fracture(g).GridCoords( i_Other+1 , j_Other   , 2 )
-                                                       Fracture(g).GridCoords( i_Other+1 , j_Other   , 3 ) ]';
-                                            PointD = [ Fracture(g).GridCoords( i_Other+1 , j_Other+1 , 1 )
-                                                       Fracture(g).GridCoords( i_Other+1 , j_Other+1 , 2 )
-                                                       Fracture(g).GridCoords( i_Other+1 , j_Other+1 , 3 ) ]';
+                                            PointA = [ Fracture(g).GridCoords( ig_Other   , jg_Other+1 , 1 )
+                                                       Fracture(g).GridCoords( ig_Other   , jg_Other+1 , 2 )
+                                                       Fracture(g).GridCoords( ig_Other   , jg_Other+1 , 3 ) ]';
+                                            PointB = [ Fracture(g).GridCoords( ig_Other   , jg_Other   , 1 )
+                                                       Fracture(g).GridCoords( ig_Other   , jg_Other   , 2 )
+                                                       Fracture(g).GridCoords( ig_Other   , jg_Other   , 3 ) ]';
+                                            PointC = [ Fracture(g).GridCoords( ig_Other+1 , jg_Other   , 1 )
+                                                       Fracture(g).GridCoords( ig_Other+1 , jg_Other   , 2 )
+                                                       Fracture(g).GridCoords( ig_Other+1 , jg_Other   , 3 ) ]';
+                                            PointD = [ Fracture(g).GridCoords( ig_Other+1 , jg_Other+1 , 1 )
+                                                       Fracture(g).GridCoords( ig_Other+1 , jg_Other+1 , 2 )
+                                                       Fracture(g).GridCoords( ig_Other+1 , jg_Other+1 , 3 ) ]';
 
                                             NeighborCell = tetragon_DARSim(PointA,PointB,PointC,PointD);
-                                            Refinement = 6;
+                                            Refinement = 7;
                                             AvgDist_proj = NeighborCell.Obtain_Average_Distance_Line_From_Tetragon(IntersectLine, Refinement);      
-                                            pEDFM_AvgDist(Index) = AvgDist_proj;
+                                            pEDFM_AvgDist_g(Index) = AvgDist_proj;
+
+                                            % RH: Calculate area and distance from frac f persepctive
+                                            % Calculating the projected area fraction Af_proj:
+                                            % The Cosine of the projection angle can be calculated as dot product between the
+                                            % normal vectors of fracture length and projection line.
+                                            switch Dimension
+                                                case(1)
+                                                    Aff_proj = (Aff(m,2) / 2) * abs(dot( Fracture(f).AD_vec/norm(Fracture(f).AD_vec) , IntersectLine.unitVec) );
+                                                case(2)
+                                                    Aff_proj = (Aff(m,2) / 2) * abs(dot( Fracture(f).AB_vec/norm(Fracture(f).AB_vec) , IntersectLine.unitVec) );
+                                            end
+                                            pEDFM_Af_f(Index) = pEDFM_Af_f(Index) + Aff_proj;
+
+                                            % Calculating average distance AvgDist_proj:
+                                            PointA = [ Fracture(f).GridCoords( if_This   , jf_This+1 , 1 )
+                                                       Fracture(f).GridCoords( if_This   , jf_This+1 , 2 )
+                                                       Fracture(f).GridCoords( if_This   , jf_This+1 , 3 ) ]';
+                                            PointB = [ Fracture(f).GridCoords( if_This   , jf_This   , 1 )
+                                                       Fracture(f).GridCoords( if_This   , jf_This   , 2 )
+                                                       Fracture(f).GridCoords( if_This   , jf_This   , 3 ) ]';
+                                            PointC = [ Fracture(f).GridCoords( if_This+1 , jf_This   , 1 )
+                                                       Fracture(f).GridCoords( if_This+1 , jf_This   , 2 )
+                                                       Fracture(f).GridCoords( if_This+1 , jf_This   , 3 ) ]';
+                                            PointD = [ Fracture(f).GridCoords( if_This+1 , jf_This+1 , 1 )
+                                                       Fracture(f).GridCoords( if_This+1 , jf_This+1 , 2 )
+                                                       Fracture(f).GridCoords( if_This+1 , jf_This+1 , 3 ) ]';
+
+                                            NeighborCell = tetragon_DARSim(PointA,PointB,PointC,PointD);
+                                            Refinement = 7;
+                                            AvgDist_proj = NeighborCell.Obtain_Average_Distance_Line_From_Tetragon(IntersectLine, Refinement);      
+                                            pEDFM_AvgDist_f(Index) = AvgDist_proj;
 
                                             % Measuring the alpha:
                                             % alpha is a the fraction of blockage (from 0 to 1) between the
@@ -396,25 +437,36 @@ classdef geometry_CartesianGrid_FracGen < geometry_FracGen
                                             switch Dimension
                                                 case(1)
                                                     alpha = (Aff_proj) / Fracture(g).D_Width_AD;
-                                                    Fracture(g).alpha_Tx( max(i_This,i_Other) , j_This ) =      Fracture(g).alpha_Tx( max(i_This,i_Other) , j_This ) + alpha;
-                                                    Fracture(g).alpha_Tx( max(i_This,i_Other) , j_This ) = min( Fracture(g).alpha_Tx( max(i_This,i_Other) , j_This ) , 1 );
+                                                    Fracture(g).alpha_Tx( max(ig_This,ig_Other) , jg_This ) =      Fracture(g).alpha_Tx( max(ig_This,ig_Other) , jg_This ) + alpha;
+                                                    Fracture(g).alpha_Tx( max(ig_This,ig_Other) , jg_This ) = min( Fracture(g).alpha_Tx( max(ig_This,ig_Other) , jg_This ) , 1 );
                                                 case(2)
                                                     alpha = (Aff_proj) / Fracture(g).D_Length_AB;
-                                                    Fracture(g).alpha_Ty( i_This , max(j_This,j_Other) ) =      Fracture(g).alpha_Ty( i_This , max(j_This,j_Other) ) + alpha;
-                                                    Fracture(g).alpha_Ty( i_This , max(j_This,j_Other) ) = min( Fracture(g).alpha_Ty( i_This , max(j_This,j_Other) ) , 1 );
+                                                    Fracture(g).alpha_Ty( ig_This , max(jg_This,jg_Other) ) =      Fracture(g).alpha_Ty( ig_This , max(jg_This,jg_Other) ) + alpha;
+                                                    Fracture(g).alpha_Ty( ig_This , max(jg_This,jg_Other) ) = min( Fracture(g).alpha_Ty( ig_This , max(jg_This,jg_Other) ) , 1 );
                                             end
                                         end
                                     end
                                 end
 
                                 % Adding the pEDFM information to the fracture
-                                pEDFM_Temp = [pEDFM_List,pEDFM_Af,pEDFM_AvgDist,pEDFM_Af./pEDFM_AvgDist];
-                                if ~isempty(pEDFM_Temp)
-                                    pEDFM_Temp = sortrows(pEDFM_Temp,1);
-                                    Fracture(f).Af_frac_pEDFM{g}{If}      = pEDFM_Temp(:,[1,2]);
-                                    Fracture(f).avgDist_frac_pEDFM{g}{If} = pEDFM_Temp(:,[1,3]);
-                                    Fracture(f).CI_frac_pEDFM{g}{If}      = pEDFM_Temp(:,[1,4]);
-                                    Fracture(f).NumOf_fracConn_pEDFM(If)  = Fracture(f).NumOf_fracConn_pEDFM(If) + size(pEDFM_Temp,1);
+                                pEDFM_Temp_g = [pEDFM_List,pEDFM_Af_g,pEDFM_AvgDist_g,pEDFM_Af_g./pEDFM_AvgDist_g];
+                                pEDFM_Temp_f = [pEDFM_List,pEDFM_Af_f,pEDFM_AvgDist_f,pEDFM_Af_f./pEDFM_AvgDist_f];
+                                if ~isempty(pEDFM_Temp_g)
+                                    pEDFM_Temp_g = sortrows(pEDFM_Temp_g,1);
+                                    Fracture(f).Af_frac_pEDFM{g}{If}      = pEDFM_Temp_g(:,[1,2]);
+                                    Fracture(f).avgDist_frac_pEDFM{g}{If} = pEDFM_Temp_g(:,[1,3]);
+                                    Fracture(f).CI_frac_pEDFM{g}{If}      = pEDFM_Temp_g(:,[1,4]);
+                                    Fracture(f).NumOf_fracConn_pEDFM(If)  = Fracture(f).NumOf_fracConn_pEDFM(If) + size(pEDFM_Temp_g,1);
+                                end
+                                if ~isempty(pEDFM_Temp_f)
+                                    for i_pEDFM_List = 1:length(pEDFM_List)
+                                        pEDFM_Temp_f = sortrows(pEDFM_Temp_f,1);
+                                        Ig_This = pEDFM_List(i_pEDFM_List);
+                                        Fracture(g).Af_frac_pEDFM{f}{Ig_This,1}      = [If, pEDFM_Temp_f(i_pEDFM_List,2)];
+                                        Fracture(g).avgDist_frac_pEDFM{f}{Ig_This,1} = [If, pEDFM_Temp_f(i_pEDFM_List,3)];
+                                        Fracture(g).CI_frac_pEDFM{f}{Ig_This,1}      = [If, pEDFM_Temp_f(i_pEDFM_List,4)];
+                                        Fracture(g).NumOf_fracConn_pEDFM(Ig_This)    = Fracture(g).NumOf_fracConn_pEDFM(Ig_This) + 1;
+                                    end
                                 end
                             end
                         end
