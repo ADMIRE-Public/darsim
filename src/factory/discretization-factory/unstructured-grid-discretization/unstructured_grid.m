@@ -116,10 +116,6 @@ classdef unstructured_grid < grid_darsim
         end
         function CorrectTransmissibilitiesForpEDFM(obj)
             obj.T = obj.T .* (1 - obj.pEDFM_alpha_T);
-
-            %             obj.condTrans_x(2:obj.Nx,:,:) = obj.condTrans_x(2:obj.Nx,:,:) .* ( 1 - obj.pEDFM_alpha_Tx(2:obj.Nx,:,:) );
-            %             obj.condTrans_y(:,2:obj.Ny,:) = obj.condTrans_y(:,2:obj.Ny,:) .* ( 1 - obj.pEDFM_alpha_Ty(:,2:obj.Ny,:) );
-            %             obj.condTrans_z(:,:,2:obj.Nz) = obj.condTrans_z(:,:,2:obj.Nz) .* ( 1 - obj.pEDFM_alpha_Tz(:,:,2:obj.Nz) );
         end
         function ComputeHeatConductivitiyTransmissibilities(obj, CondEff)
             % Harmonic average of effective heat conductivity.

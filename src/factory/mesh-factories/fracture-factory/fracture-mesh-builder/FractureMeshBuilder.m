@@ -13,9 +13,7 @@ classdef FractureMeshBuilder
     end
 
     methods
-        function obj = FractureMeshBuilder(frac_geometry, mesh_type,...
-                rockmesh)
-            obj.mesh_type = mesh_type;
+        function obj = FractureMeshBuilder(frac_geometry, rockmesh)
             obj.dV = mean(rockmesh.element.volume);
             obj.num_frac = max(size(frac_geometry));
             n_xy= obj.define_num_mesh_elemements(frac_geometry);
@@ -30,8 +28,7 @@ classdef FractureMeshBuilder
             for index = 1:obj.num_frac
              frac(index) = ...
                 create_frac_mesh(n_xy(index,:), frac_geo(index).coords, ...
-               frac_geo(index).normal,frac_geo(index).vec_quad_edges,...
-                                                        obj.mesh_type);            
+               frac_geo(index).normal,frac_geo(index).vec_quad_edges);            
             end
         end
         function n_xy = define_num_mesh_elemements(obj, fracs)
@@ -53,15 +50,14 @@ classdef FractureMeshBuilder
     end
 end
 
-function [mesh] = create_frac_mesh(n_xy,geo_coords, normal, geo_vec, ...
-    meshtype)
+function [mesh] = create_frac_mesh(n_xy,geo_coords, normal, geo_vec)
     mesh = struct();
     [coords, elem] = ...
-        create_frac_coords_and_elem(n_xy,geo_coords, geo_vec, normal,meshtype);
+        create_frac_coords_and_elem(n_xy,geo_coords, geo_vec, normal);
     faces = create_faces(elem,coords);
-    [element_face_adj,element_face_adj_bool] = ...
-                                  create_elem_face_adj(faces.inner.upstream,...
-                    faces.inner.downstream,faces.bound.upstream, size(elem,2));
+    [element_face_adj,element_face_adj_bool] = create_elem_face_adj(...
+        faces.inner.upstream, faces.inner.downstream, ...
+        faces.bound.upstream, size(elem,2));
     mesh.vertex.coords = coords;
     mesh.faces = faces;
     mesh.elements.vertices = elem;
@@ -85,19 +81,9 @@ function [centroid] = centroid_calc(coords,adj)
 end
 
 function [coords, elem] = ...
-   create_frac_coords_and_elem(n_xy,geo_coords, geo_vec, normal, mesh_type)
-% mesh_type -> discretization type of the mesh
-% 1-structured grid 2-unstructured grid based on delaunay triangulation.
-switch mesh_type
-    case 0
+   create_frac_coords_and_elem(n_xy,geo_coords, geo_vec, normal)
         [coords,elem] = create_structured_2d_mesh(n_xy, geo_coords, ...
             geo_vec);
-    case 1
-        [coords,elem] = create_unstructured_2d_mesh_density(n_xy, ...
-                                            geo_coords, geo_vec,normal);
-    otherwise
-        error("ERROR: Discretization type %d not available", mesh_type)
-end
 end
 
 
@@ -188,6 +174,7 @@ function faces = create_faces(elem, coords)
     P2 = coords(inner.vertices(:,2),:);
     inner.centroid = 0.5*(P1+P2);
     inner.length = vecnorm(P2-P1,2,2);
+    inner.num = numel(inner.length);
     
     [neigh,~]= find(face_elem(ref,:)');
     auxmat = reshape(neigh,2,[])';
@@ -198,6 +185,7 @@ function faces = create_faces(elem, coords)
     P2 = coords(bound.vertices(:,2),:);
     bound.centroid = 0.5*(P1+P2);
     bound.length = vecnorm(P2-P1,2,2);
+    bound.num = numel(bound.length);
     
     [neigh,~]= find(face_elem(~ref,:)');
     bound.upstream = neigh;

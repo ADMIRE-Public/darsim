@@ -155,6 +155,9 @@ for f = 1 : NumOfFrac
             ig = str2double( fracConnInfo{3} ) + 1;
             Ig = sum( Nf(1:g-1) )+ ig;
             CI = str2double( fracConnInfo{4} );
+            % RH: If Frac g has already been read in using the "for f = 1 :
+            % NumOfFrac" loop, then don't double count these connections
+            % between fracture cells. 
             if Ig > IfGlobal
                 Counter = Counter + 1;
                 CrossConnections( IfGlobal , 1 ).Cells( Counter ,1 ) = Nm+Ig;
@@ -172,6 +175,9 @@ for f = 1 : NumOfFrac
                 ig = str2double( fracConnInfo{3} ) + 1;
                 Ig = sum( Nf(1:g-1) )+ ig;
                 CI = str2double( fracConnInfo{4} );
+                % RH: If Frac g has already been read in using the "for f = 1 :
+                % NumOfFrac" loop, then don't double count these connections
+                % between fracture cells. 
                 if Ig > IfGlobal
                     if ismember( Nm+Ig, CrossConnections( IfGlobal , 1 ).Cells )
                         ind = find(CrossConnections( IfGlobal , 1 ).Cells == Nm+Ig);

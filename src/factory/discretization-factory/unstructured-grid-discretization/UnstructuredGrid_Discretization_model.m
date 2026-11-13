@@ -19,7 +19,7 @@ classdef UnstructuredGrid_Discretization_model < FS_Discretization_model
                 %----------------------------------------------------------
                 %coords = obj.FracturesGrid.Grids.GridCoords(f1);
                 % v1 = coords(2,:) - coords(1,:); v2 = coords(end,:) - coords(1,:);
-                n = obj.FracturesGrid.dfrac.geometry(f1).normal;
+                n = obj.FracturesGrid.dfrac.FracGeometry(f1).normal;
                 %----------------------------------------------------------
                 thetax = Reservoir.KRotAngle(1); thetay = Reservoir.KRotAngle(2); thetaz = Reservoir.KRotAngle(3);
                 Rx = [1 0 0; 0 cos(thetax) -sin(thetax); 0 sin(thetax) cos(thetax)];

@@ -260,7 +260,7 @@ classdef geometry_FracGen < handle
             end
             
             %% Obtaining aveDist of the plane segment from the line segment
-            AvgDist  = Plane.Obtain_Average_Distance_Line_From_Tetragon(Line, 6);
+            AvgDist  = Plane.Obtain_Average_Distance_Line_From_Tetragon(Line, 7);
         end
         function PrintInfo(obj)
             disp( ['************* ', num2str(obj.NumOfDimensions), 'D-', obj.FractureModelType, ' FractureGenerator for ', obj.DiscretizationType, ' Discretization **************']);

@@ -1,8 +1,4 @@
---DARSim2FraGen: INPUT file
-
---Type of Generator(either "EDFM" or "pEDFM")
-TYPE
-	pEDFM
+--DARSim3 Fracture INPUT file
 
 --Dimension of Domain (either "2D" or "3D")
 DOMAIN
@@ -10,46 +6,25 @@ DOMAIN
 
 --Size of the reservoir in m (Length, Width, Thickness)
 DIMENS
- 	100
-	100
-	100
+ 	1
+	1
+	1
 	
---Grid Discretization ("CartesianGrid" or "CornerPointGrid")
---To include the CornerPointGrid input data, add the name of the input file in the line below the "CornerPointGrid" keyword.
---To include the CornerPointGrid permeability/porosity input data, add the name of the input corresponding file in the line under the previous.
 GRID_DISCRETIZATION
-	CartesianGrid
+	UnstructuredGrid
+	unstructured_mesh.m
 
 --GRID Nx//Ny//Nz
 SPECGRID
-	2
-	2
-	2
-	
---ADM Status for Reservoir: Activation(0,1), Level(1,2,etc.), Coarsening Ratio along x,y,z
-ADM_RESERVOIR
-	0
-	2
-	[3,3,1]
+	1
+	1
+	1
 
-UNSTRUCTURED_FRACTURE_MESH
-false
-
---Method for calculating intersection areas (to be used for EDFM and pEDFM): monte_carlo or geometric
-EDFM_METHOD
-	geometric
-
-FRACTURE_NUM_POINTS
-200
-
-FRACTURE_AVERAGE_DISTANCE_REFINEMENT         
-50	
-	
-FRACTURE_BOUNDING_BOX         
-1	
-	
---Comparison Accuracy (The level of accuracy in comparing two values or in zero comparison)
-CompareAccuracy
+--Fracture Controls
+TYPE (EDFM or pEDFM)
+	pEDFM
+	 
+CompareAccuracy (The level of accuracy in comparing two values or in zero comparison)
     1e-10
 
 --Fractures Properties

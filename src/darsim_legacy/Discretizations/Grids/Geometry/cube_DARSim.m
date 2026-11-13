@@ -50,24 +50,38 @@ classdef cube_DARSim < hexahedron_DARSim
             % if the refinement number is 7, the cube is devided into 7^3 = 343 smaller
             % cubes to calculate the average distance.
             
-            AvgDistance = 0;
-            Refinement = round(max(Refinement, 2));
-            
-            XimCube = linspace( obj.PointA(1), obj.PointB(1), Refinement+1 );
-            YimCube = linspace( obj.PointA(2), obj.PointB(2), Refinement+1 );
-            ZimCube = linspace( obj.PointA(3), obj.PointB(3), Refinement+1 );
-            
+            % Number of subdivisions per coordinate direction
+            n = round(max(Refinement, 2));
+        
+            % Cube bounds
+            MinPoint = min(obj.PointA, obj.PointB);
+            MaxPoint = max(obj.PointA, obj.PointB);
+        
+            % Midpoint coordinates of each subdivision
+            x = MinPoint(1) + ((1:n)-0.5) * ...
+                (MaxPoint(1)-MinPoint(1))/n;
+        
+            y = MinPoint(2) + ((1:n)-0.5) * ...
+                (MaxPoint(2)-MinPoint(2))/n;
+        
+            z = MinPoint(3) + ((1:n)-0.5) * ...
+                (MaxPoint(3)-MinPoint(3))/n;
+        
+            % Generate voxel centroids
+            [X,Y,Z] = ndgrid(x,y,z);
+        
+            % Plane coefficients
             a = Plane.Eq.a;
             b = Plane.Eq.b;
             c = Plane.Eq.c;
             d = Plane.Eq.d;
-            for k = 1 : Refinement+1
-                for j = 1 : Refinement+1
-                    AvgDistance = AvgDistance + sum ( abs( a * XimCube + b * YimCube(j) + c * ZimCube(k) - d ) );
-                end
-            end
-            
-            AvgDistance = AvgDistance / sqrt( a^2 + b^2 + c^2 ) / (Refinement+1)^3 ;
+        
+            % Perpendicular distance to plane
+            Distances = abs(a*X + b*Y + c*Z - d) / ...
+                        sqrt(a^2 + b^2 + c^2);
+        
+            % Average over all voxel centroids
+            AvgDistance = mean(Distances(:));
         end
         %%
         function [intersectCoordFinal, areCoplanar] = Obtain_Cube_Tetragon_Intersection(obj, Tetragon, Epsilon)
