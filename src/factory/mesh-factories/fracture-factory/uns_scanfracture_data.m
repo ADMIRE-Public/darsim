@@ -52,6 +52,9 @@ function [FracturesGrid, CrossConnections] = ...
         FlagEDFM, ...
         "pedfm", ...
         FlagPEDFM);
+    RockFracIntBlueprint = add_monte_carlo_settings(RockFracIntBlueprint, ...
+        obj.SimulationInput.FracturesProperties.all_settings, ...
+        obj.SimulatorSettings);
 
     % Unstructure rock mesh properties
     UnstructureData = ...
@@ -64,6 +67,9 @@ function [FracturesGrid, CrossConnections] = ...
     % MATLAB file to save FractureFactory output
     [fPath, ~, ~] = fileparts(FractureFile);
     ProcFile = fullfile(fPath, "fracture_process.mat");
+    if is_monte_carlo_method(RockFracIntBlueprint)
+        ProcFile = fullfile(fPath, "fracture_process_monte_carlo.mat");
+    end
 
     nFrac = obj.SimulationInput.FracturesProperties.NumOfFrac;
     fprintf('Extracting data from %02d fractures ...\n', nFrac);
@@ -75,14 +81,14 @@ function [FracturesGrid, CrossConnections] = ...
     % Read in saved FractureFactory output if available
     if isfile(ProcFile)
         disp("Fractures and Intersections reloaded.");
-        load(fullfile(fPath,"fracture_process.mat"),"Fractures")
+        load(ProcFile,"Fractures")
     % Else call FractureFacotry and save output
     else
         Fractures = FractureFactory( ...
             obj.SimulationInput.FracturesProperties, ...
             UnstructureData, ...
             RockFracIntBlueprint);
-        save(fullfile(fPath,"fracture_process.mat"),"Fractures")
+        save(ProcFile,"Fractures")
     end
     
     % RH: Artur created the Fractures object, but this isn't actually used
