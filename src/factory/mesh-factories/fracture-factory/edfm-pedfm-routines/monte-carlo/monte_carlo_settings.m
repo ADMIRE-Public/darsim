@@ -14,6 +14,8 @@
 %   useHalf           (HALF_PRECISION) half-precision test points
 %   seed              (FRACTURE_RANDOM_SEED) seed of the sampling, the
 %                     caller's random state is restored afterwards
+%   batch_size        points (or point-cell pairs) processed at once;
+%                     bounds the peak memory of the sampling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Settings = monte_carlo_settings(Settings)
 
@@ -21,7 +23,8 @@ Defaults = struct("num_area_points", 100, ...
                   "num_frac_boundbox", 1, ...
                   "d_avg_refinement", 20, ...
                   "useHalf", false, ...
-                  "seed", 0);
+                  "seed", 0, ...
+                  "batch_size", 2.5e5);
 
 for Name = string(fieldnames(Defaults))'
     if ~isfield(Settings, Name) || isempty(Settings.(Name))

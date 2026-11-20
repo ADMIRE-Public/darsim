@@ -18,15 +18,19 @@
 %   MinVec, MaxVec: (N_rock x 3) rock volume bounding boxes
 %   Tol:            bounding box tolerance
 %   RockMesh, RockNormals, RockFaceCent: rock faces for is_in_vol3d
+%   MaxPairs:       (optional) point-volume pairs tested per batch
 %
 % Output:
 %   IsIn:           (N_hits x 2) [rock volume ID, point ID]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function IsIn = find_points_in_volumes(TestPoints, PointIDs, FracEl, ...
                                        VolumeIDs, MinVec, MaxVec, Tol, ...
-                                       RockMesh, RockNormals, RockFaceCent)
+                                       RockMesh, RockNormals, RockFaceCent, ...
+                                       MaxPairs)
 
-MaxPairs = 4e6;
+if nargin < 11
+    MaxPairs = 1e6;
+end
 MaxOverlap = 5e7;
 
 PointIDs = PointIDs(:);

@@ -21,7 +21,7 @@ function [RockFracID, IntArea] = streamed_int_area_edfm(FracMesh, ...
             PlaneGeo, TestVolumes, MinVec, MaxVec, Tol, RockMesh, ...
             RockNormals, RockFaceCent, Settings)
 
-MaxPoints = 2e6;
+MaxPoints = Settings.batch_size;
 n = Settings.num_area_points;
 nEl = size(FracMesh.elements.vertices, 1);
 BatchSize = max(1, floor(MaxPoints / n^2));
@@ -37,7 +37,7 @@ for First = 1:BatchSize:nEl
     PointCount = PointCount + accumarray(double(PointEl), 1, [nEl 1]);
     IsIn = find_points_in_volumes(Points, uint32(1:size(Points, 1))', ...
         PointEl, VolumeIDs, MinVec, MaxVec, Tol, RockMesh, ...
-        RockNormals, RockFaceCent);
+        RockNormals, RockFaceCent, Settings.batch_size);
     if isempty(IsIn)
         continue
     end
