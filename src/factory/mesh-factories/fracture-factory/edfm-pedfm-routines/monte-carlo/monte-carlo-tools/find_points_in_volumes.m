@@ -45,7 +45,8 @@ end
 PointIDs = PointIDs(Order);
 [~, GroupFirst] = unique(Group, 'first');
 GroupCount = diff([GroupFirst; numel(Group) + 1]);
-GroupID = repelem((1:numel(GroupFirst))', GroupCount);
+% (repelem of a scalar returns a row; keep every index a column)
+GroupID = reshape(repelem((1:numel(GroupFirst))', GroupCount), [], 1);
 
 % Bounding box of the points of each group
 Coords = double(TestPoints(PointIDs, :));
@@ -98,9 +99,11 @@ for iBatch = 1:max(Batch)
     BCount = GroupCount(BGroup);
 
     % Expand every (volume, group) into (volume, point) pairs
-    ii = repelem(BVol, BCount);
-    Offset = (1:sum(BCount))' - repelem(cumsum([0; BCount(1:end-1)]), BCount);
-    jj = PointIDs(repelem(GroupFirst(BGroup), BCount) + Offset - 1);
+    ii = reshape(repelem(BVol, BCount), [], 1);
+    Start = reshape(repelem(GroupFirst(BGroup), BCount), [], 1);
+    Offset = (1:sum(BCount))' - ...
+        reshape(repelem(cumsum([0; BCount(1:end-1)]), BCount), [], 1);
+    jj = PointIDs(Start + Offset - 1);
 
     % Point inside the volume bounding box
     Points = TestPoints(jj, :);
