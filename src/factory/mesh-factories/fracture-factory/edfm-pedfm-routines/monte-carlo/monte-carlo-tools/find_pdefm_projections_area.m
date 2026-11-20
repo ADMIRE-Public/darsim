@@ -123,7 +123,8 @@ for index = faces_list
     ref_frac_group = frac_proj_int_group ==  index;
     local_faces = unique(projected_faces(ref_frac_group,3));
     num_points = sum(ref_points);
-    list_points = repmat(test_points(ref_points,:), ...
+    % ref_points masks rows of is_in; is_in(:,2) holds the point indices
+    list_points = repmat(test_points(is_in(ref_points,2),:), ...
                                                 size(local_faces,1),1) ;
     local_normals = repelem(all_normals(local_faces,:),num_points,1);
     local_frac_groups = repelem([1:size(local_faces,1)]',num_points,1);
