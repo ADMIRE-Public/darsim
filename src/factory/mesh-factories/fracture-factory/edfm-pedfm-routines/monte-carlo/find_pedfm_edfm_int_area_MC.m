@@ -3,9 +3,8 @@
 %Author: Artur Castiel;
 %TU Delft
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [edfm, pedfm, frac_int_avg_d ] = ...
-    find_pedfm_edfm_int_area_MC(fracmesh,rockmesh, ...
-                                 frac_int, plane_geo, plane_int, settings)
+function [edfm, pedfm] = ...
+    find_pedfm_edfm_int_area_MC(fracmesh, rockmesh, plane_geo, settings)
 %% this routine populates the fracmesh cells with a set of points and these
 % points are used to approximate the intersection area between the
 % rockmatrix mesh and fracture mesh. if pedfm flag is on these nodes are 
@@ -47,16 +46,17 @@ frac_ind_int_area_pedfm = cell(nfrac,1);
 area_pedfm = cell(nfrac,1);
 alpha_ind = cell(nfrac,1);
 alpha_area = cell(nfrac,1);
-[frac_avg_d_ind] = create_avg_d_frac_structure(frac_int);
-frac_int_avg_d = cell(size(frac_int));
 
 rock_normals =  [rockmesh.face.inner.normal;...
     rockmesh.face.bound.normal];
 rock_face_cent =  [rockmesh.face.inner.centroid;...
     rockmesh.face.bound.centroid];
 [min_vec, max_vec ] = ...
-    generate_boundbox(rockmesh.element.vertices, ...
-    rockmesh.vertex.coord, settings.useHalf);
+    generate_boundbox(rockmesh.element.vertices, rockmesh.vertex.coord);
+if settings.useHalf
+    min_vec = half(min_vec);
+    max_vec = half(max_vec);
+end
 for index = 1:nfrac
     [test_points, frac_el] =...
         generate_testpoint_parameters(fracmesh(index), ...
@@ -66,13 +66,6 @@ for index = 1:nfrac
     [test_volumes] = identify_plane_crossed_volumes(...
         rockmesh.element.vertices,...
         rockmesh.vertex.coord, plane_geo(index).eq);
-    % preferably it would be idea to have the following function being
-    % computed outside here. however the generation of points is the most
-    % complex part. therefore adding it here can save a lot of time.
-    if ~all(all(cellfun(@isempty,frac_int)))
-      frac_int_avg_d = calculate_avg_frac_d(frac_int_avg_d, test_points,...
-        frac_el, frac_avg_d_ind, frac_int, plane_int,index);
-    end
     local_min_vec = min_vec(test_volumes,:);
     local_max_vec = max_vec(test_volumes,:);
 
@@ -153,20 +146,9 @@ for index = 1:nfrac
     frac_ind_int_area{index,1} = rock_frac_ind(:,2);
     area{index,1} = int_area;
     if settings.pedfm
-        % RH: This is Artur's method for projection face selection,
-        % replaced with Centroid-Connecor method. 
-        % [rock_frac_ind_pdf,int_area_pedfm, rock_face_ind, rock_face_area]= ...
-        %     find_pdefm_projections_area(rock_frac_ind, int_area, ...
-        %     is_in,frac_el, test_points, rockmesh, plane_geo(index).eq);
-        % To-Do: Bug here. This function needs Coplanar, which isn't
-        % created yet in this function. Switch to geometric pEDFM method
-        % for working version.
-        error("ERROR: There is a known bug with the Monte Carlo pEDFM method. " + ...
-                    " Fractures that are coplanar with rock mesh interfaces are not handled properly." + ...
-                    " Please switch to geometric pEDFM method for working version.")
         [rock_frac_ind_pdf,int_area_pedfm, rock_face_ind, rock_face_area]= ...
-            find_pdefm_projection_faces_centroid_intersect(rock_frac_ind, ...
-            int_area, rockmesh, plane_geo(index).eq);
+            find_pdefm_projections_area(rock_frac_ind, int_area, ...
+            is_in,frac_el, test_points, rockmesh, plane_geo(index).eq);
         rock_ind_int_area_pedfm{index,1} = rock_frac_ind_pdf(:,1); 
         frac_ind_int_area_pedfm{index,1} = rock_frac_ind_pdf(:,2);
         rock_faces_ind_int_area_pedfm{index} = rock_face_ind;

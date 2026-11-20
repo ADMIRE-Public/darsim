@@ -15,7 +15,11 @@ coords = fracmesh.vertex.coords;
 [xy_coords] = proj_coplanar_coords_on_xy(coords(adj(1,1),:), ...
                                                 plane_normal,coords,1);    
 zmean = mean(xy_coords(:,3));
-[min_vec, max_vec] = generate_boundbox(adj,xy_coords, useHalf);
+[min_vec, max_vec] = generate_boundbox(adj,xy_coords);
+if useHalf
+    min_vec = half(min_vec);
+    max_vec = half(max_vec);
+end
 
 frac_ind = uint32(repelem([1:size(adj,1)]',n*n,1));
 
