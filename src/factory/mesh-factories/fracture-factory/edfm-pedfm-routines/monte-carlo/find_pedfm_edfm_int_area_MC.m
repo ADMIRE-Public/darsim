@@ -112,26 +112,12 @@ for index = 1:nfrac
 
         local_bound_point_ind = find_uint(local_bound_points_ref);
         local_test_volumes_ind = find_uint(local_test_volumes);
-        ii = ...
-            repmat(local_test_volumes_ind,size(local_bound_point_ind,1),1);
-        jj = ...
-            repelem(local_bound_point_ind,size(local_test_volumes_ind,1),1);
-        %% apply bound box for better performance
-        analyzed_points = test_points(jj,:);
-        x_min = min_vec(ii,:) - tol;
-        x_max = max_vec(ii,:) + tol;
-        ref = all((analyzed_points - x_min) >= 0,2) & ...
-            all((x_max - analyzed_points) >= 0,2);
-        ii = ii(ref);
-        jj = jj(ref);
-        in_ref = is_in_vol3d(test_points(jj,:), ...
-            rockmesh.element.faces(ii,:), ...
-            rock_normals,rock_face_cent, ...
-            rockmesh.element.centroid(ii,:));
-        %% II -> RockCell Volume ID
-        %% JJ -> Index to to the referred test_point
-        %% to obtain frac_cell associated with point look for frac_el(JJ)
-        is_in{bound_index} = [ii(in_ref) jj(in_ref)];
+        %% [RockCell Volume ID, test_point ID]; the frac cell of a point
+        % is frac_el(test_point ID). Pairs are pruned per fracture cell
+        % and tested in batches to bound memory.
+        is_in{bound_index} = find_points_in_volumes(test_points, ...
+            local_bound_point_ind, frac_el, local_test_volumes_ind, ...
+            min_vec, max_vec, tol, rockmesh, rock_normals, rock_face_cent);
     end
     is_in = cell2mat(is_in);
     if isempty(is_in)
