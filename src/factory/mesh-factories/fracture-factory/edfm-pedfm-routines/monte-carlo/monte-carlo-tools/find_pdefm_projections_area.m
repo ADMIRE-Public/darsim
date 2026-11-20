@@ -123,8 +123,7 @@ projected_faces = projected_faces(ref,:);
 %% EDFM connections lying on a face of their rock cell (coplanar): the
 % fracture already connects to both cells sharing that face, so their
 % projections carry no area (same as (1 - Coplanar) in find_pdefm_frac_rock)
-coplanar = coplanar_connections(rock_frac_ind(:,1), rockmesh, ...
-                                all_normals, all_fcenter, eq);
+coplanar = coplanar_rock_cells(rock_frac_ind(:,1), rockmesh, eq);
 
 faces_list = unique(frac_proj_int_group)';
 array = cell(length(faces_list),1);
@@ -454,21 +453,6 @@ end
 %     transf_matrix = sparse(ind,oind,value,max_value,1);
 %     filter = full(transf_matrix(input));
 % end
-
-function coplanar = coplanar_connections(rock_ind, rockmesh, normals, ...
-                                         fcenter, eq)
-% true for rock cells having a face that lies on the fracture plane
-faces = rockmesh.element.faces(rock_ind,:);
-valid = faces ~= 0;
-faces(~valid) = 1;
-n = [eq.A eq.B eq.C];
-D = eq.D / norm(n);
-n = n / norm(n);
-parallel = reshape(abs(normals(faces,:) * n'), size(faces)) > 1 - 1e-8;
-offset = reshape(abs(fcenter(faces,:) * n' + D), size(faces));
-tol = 1e-6 * rockmesh.element.volume(rock_ind).^(1/3);
-coplanar = any(valid & parallel & offset <= tol, 2);
-end
 
 function [projected_point] = ...
             project_point_on_face(normals, plane_points, points)    
