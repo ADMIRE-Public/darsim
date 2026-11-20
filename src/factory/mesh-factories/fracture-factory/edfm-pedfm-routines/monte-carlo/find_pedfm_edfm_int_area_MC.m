@@ -143,18 +143,15 @@ for index = 1:nfrac
         alpha_area{index,1} = rock_face_area;
     end 
 end
-%% erro provavel aqui
-
-alpha_area = cell2mat(alpha_area);
-alpha_ind = cell2mat(rock_faces_ind_int_area_pedfm);
-[alpha_ind,~,alpha_group] = unique(alpha_ind);
-alpha_area = accumarray(alpha_group, alpha_area);
-
-
 edfm.vol_ind = rock_ind_int_area;
 edfm.frac_ind = frac_ind_int_area;
 edfm.area = area;
 if settings.pedfm
+    % alpha faces only exist with pEDFM (EDFM-only runs failed here)
+    alpha_area = cell2mat(alpha_area);
+    alpha_ind = cell2mat(rock_faces_ind_int_area_pedfm);
+    [alpha_ind,~,alpha_group] = unique(alpha_ind);
+    alpha_area = accumarray(alpha_group, alpha_area, [numel(alpha_ind) 1]);
     pedfm.vol_ind = rock_ind_int_area_pedfm;
     pedfm.frac_ind = frac_ind_int_area_pedfm;
     pedfm.face_ind = rock_faces_ind_int_area_pedfm;
