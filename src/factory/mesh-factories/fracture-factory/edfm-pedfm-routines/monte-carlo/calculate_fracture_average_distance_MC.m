@@ -6,81 +6,109 @@
 
 function [d] = calculate_fracture_average_distance_MC(edfm, pedfm, ...
                                     rockmesh, frac_geo, settings)
+%% Average distance between every connected rock cell and the plane of
+% its fracture.
+% - Cells not crossed by the (infinite) fracture plane: the distance is a
+%   linear function of position inside the cell, so its average is exactly
+%   the distance of the cell centroid; no sampling needed.
+% - Cells crossed by the plane: stratified Monte Carlo, one random point
+%   in each of the n x n x n sub-boxes of the cell bounding box
+%   (n = FRACTURE_AVERAGE_DISTANCE_REFINEMENT), keeping the points inside
+%   the cell. Cells are processed in batches to bound memory.
     n = settings.d_avg_refinement;
-    tol = 10^-13;
-    [vol_list, vol_list_by_frac] = ...
+    max_points = 2e6;
+    [~, vol_list_by_frac] = ...
                     union_pedfm_edfm_new(edfm, pedfm, settings.pedfm);
-    crossed_rock_elem = vol_list;
-    [cross_rock_elem_ind] = [1:size(crossed_rock_elem,1)]';
     rock_normals =  [rockmesh.face.inner.normal;...
         rockmesh.face.bound.normal];
     rock_face_cent =  [rockmesh.face.inner.centroid;...
         rockmesh.face.bound.centroid];
-    [min_vec, max_vec ] = ...
-        generate_boundbox(rockmesh.element.vertices(crossed_rock_elem,:), ...
-        rockmesh.vertex.coord);
-    %% generating n x n x n  nodes inside each boundary box of the rock cells
-    rock_ind = uint32(repelem(cross_rock_elem_ind,n*n*n,1));
-    test_points = zeros(size(rock_ind,1),3);
-    test_points(:,1) = min_vec(rock_ind,1) + ...
-                        (max_vec(rock_ind,1) - ...
-                        min_vec(rock_ind,1)).* ...
-                        rand(size(rock_ind,1),1);
-    test_points(:,2) = min_vec(rock_ind,2) + ...
-                        (max_vec(rock_ind,2) - ...
-                        min_vec(rock_ind,2)).* ...
-                        rand(size(rock_ind,1),1);
-    test_points(:,3) = min_vec(rock_ind,3) + ...
-                        (max_vec(rock_ind,3) - ...
-                        min_vec(rock_ind,3)).* ...
-                        rand(size(rock_ind,1),1);
-    rock_cell_id = crossed_rock_elem(rock_ind);
-    
-    %% filtering nodes outside the elements
-    faces_matrix = rockmesh.element.faces(rock_cell_id,:);
-    is_in_bool = false(size(test_points,1),size(faces_matrix,2));
-    el_center = rockmesh.element.centroid(crossed_rock_elem(rock_ind),:);
-    for index = 1:size(faces_matrix,2)
-        ref = faces_matrix(:,index) ~= 0;
-        is_in_bool(~ref,index) = 1;
-        fadj = faces_matrix(ref,index);
-        value = semi_plane_value(test_points(ref,:), rock_normals(fadj,:), ...
-            rock_face_cent(fadj,:) );
-        value_center = semi_plane_value(el_center(ref,:), ...
-            rock_normals(fadj,:), rock_face_cent(fadj,:) );    
-        is_in_bool(ref,index) = compare_signs(value, value_center, tol);
-    end
-    
-    fref = all(is_in_bool,2);
-    points_in_elements_ind = rock_cell_id(fref);
-    test_points = test_points(fref,:);
-    d = cell(size(frac_geo,1),2);
-    for index = 1:size(frac_geo,1)
-        local_ind = vol_list_by_frac{index};
-        local_ind = unique(local_ind(:,1));
-        [ref_points,~] = ismember(points_in_elements_ind,local_ind(:,1));
-        local_points = test_points(ref_points,:);
-        local_volume_ind = points_in_elements_ind(ref_points);   
-        dist = distance_points_plane(local_points,frac_geo(index).normal, ...
-                                           frac_geo(index).coords(1,:));
-        % accumulate per entry of local_ind so that d{index,1} and
-        % d{index,2} stay aligned even if a cell received no sample
-        [~,group_ref] = ismember(local_volume_ind, local_ind);
-        num_points = accumarray(group_ref,1,[numel(local_ind) 1]);
-        dist_group = accumarray(group_ref,dist,[numel(local_ind) 1]);
-        avg_dist = dist_group./num_points;
-        empty = num_points == 0;
-        if any(empty)
-            warning("DARSim:MonteCarlo:EmptyCell", ...
-                "%d rock cell(s) received no sample point for fracture " + ...
-                "%d; using the centroid distance. Increase " + ...
-                "FRACTURE_AVERAGE_DISTANCE_REFINEMENT.", sum(empty), index);
-            avg_dist(empty) = distance_points_plane( ...
-                rockmesh.element.centroid(local_ind(empty),:), ...
-                frac_geo(index).normal, frac_geo(index).coords(1,:));
+    d = cell(numel(frac_geo),2);
+    for index = 1:numel(frac_geo)
+        local_ind = unique(vol_list_by_frac{index});
+        local_ind = local_ind(:);
+        normal = frac_geo(index).normal;
+        plane_point = frac_geo(index).coords(1,:);
+        avg_dist = distance_points_plane( ...
+            rockmesh.element.centroid(local_ind,:), normal, plane_point);
+        crossed = is_crossed_by_plane(rockmesh, local_ind, normal, ...
+                                      plane_point);
+        if any(crossed)
+            [sampled, empty] = sampled_average_distance(rockmesh, ...
+                local_ind(crossed), normal, plane_point, n, max_points, ...
+                rock_normals, rock_face_cent);
+            if any(empty)
+                warning("DARSim:MonteCarlo:EmptyCell", ...
+                    "%d rock cell(s) received no sample point for " + ...
+                    "fracture %d; using the centroid distance. Increase " + ...
+                    "FRACTURE_AVERAGE_DISTANCE_REFINEMENT.", ...
+                    sum(empty), index);
+                crossed_ind = find(crossed);
+                sampled(empty) = avg_dist(crossed_ind(empty));
+            end
+            avg_dist(crossed) = sampled;
         end
         d{index,1} = local_ind;
         d{index,2} = avg_dist;
+    end
+end
+
+function crossed = is_crossed_by_plane(rockmesh, cells, normal, plane_point)
+% true when the cell has vertices strictly on both sides of the plane
+    vert = rockmesh.element.vertices(cells,:);
+    valid = vert ~= 0;
+    vert(~valid) = 1;
+    side = reshape((rockmesh.vertex.coord(vert,:) - plane_point) * ...
+                   (normal(:) / norm(normal)), size(vert));
+    side(~valid) = NaN;
+    tol = 1e-10 * max(abs(side), [], 2, 'omitnan');
+    crossed = max(side, [], 2, 'omitnan') > tol & ...
+              min(side, [], 2, 'omitnan') < -tol;
+end
+
+function [avg_dist, empty] = sampled_average_distance(rockmesh, cells, ...
+            normal, plane_point, n, max_points, rock_normals, rock_face_cent)
+    tol = 10^-13;
+    ncell = numel(cells);
+    [min_vec, max_vec] = generate_boundbox( ...
+        rockmesh.element.vertices(cells,:), rockmesh.vertex.coord);
+    [gi, gj, gk] = ndgrid(0:n-1);
+    strata = [gi(:) gj(:) gk(:)];
+    dist_sum = zeros(ncell,1);
+    num_points = zeros(ncell,1);
+    chunk = max(1, floor(max_points / n^3));
+    for first = 1:chunk:ncell
+        local = (first:min(ncell, first + chunk - 1))';
+        cell_ind = repelem(local, n^3, 1);
+        test_points = min_vec(cell_ind,:) + ...
+            (repmat(strata, numel(local), 1) + rand(numel(cell_ind),3)) ...
+            / n .* (max_vec(cell_ind,:) - min_vec(cell_ind,:));
+        inside = points_in_cells(test_points, cells(cell_ind), ...
+                                 rockmesh, rock_normals, rock_face_cent, tol);
+        dist = distance_points_plane(test_points(inside,:), normal, ...
+                                     plane_point);
+        dist_sum = dist_sum + ...
+            accumarray(cell_ind(inside), dist, [ncell 1]);
+        num_points = num_points + ...
+            accumarray(cell_ind(inside), 1, [ncell 1]);
+    end
+    empty = num_points == 0;
+    avg_dist = dist_sum ./ num_points;
+end
+
+function inside = points_in_cells(test_points, cell_id, rockmesh, ...
+                                  rock_normals, rock_face_cent, tol)
+    faces_matrix = rockmesh.element.faces(cell_id,:);
+    el_center = rockmesh.element.centroid(cell_id,:);
+    inside = true(size(test_points,1),1);
+    for index = 1:size(faces_matrix,2)
+        ref = faces_matrix(:,index) ~= 0;
+        fadj = faces_matrix(ref,index);
+        value = semi_plane_value(test_points(ref,:), ...
+            rock_normals(fadj,:), rock_face_cent(fadj,:));
+        value_center = semi_plane_value(el_center(ref,:), ...
+            rock_normals(fadj,:), rock_face_cent(fadj,:));
+        inside(ref) = inside(ref) & compare_signs(value, value_center, tol);
     end
 end
 
