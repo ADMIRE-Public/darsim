@@ -23,12 +23,16 @@ end
 
 frac_ind = uint32(repelem([1:size(adj,1)]',n*n,1));
 
+%% stratified sampling: one random point in each of the n x n sub-boxes
+% of the element bounding box (lower variance than plain sampling)
+[strata_x, strata_y] = ndgrid(0:n-1);
+strata = repmat([strata_x(:) strata_y(:)], size(adj,1), 1);
 xy_points(:,1) = min_vec(frac_ind,1) + ...
                     (max_vec(frac_ind,1) - min_vec(frac_ind,1)).* ...
-                    rand(size(frac_ind,1),1);
+                    (strata(:,1) + rand(size(frac_ind,1),1)) / n;
 xy_points(:,2) = min_vec(frac_ind,2) + ...
                     (max_vec(frac_ind,2) - min_vec(frac_ind,2)).* ...
-                    rand(size(frac_ind,1),1);
+                    (strata(:,2) + rand(size(frac_ind,1),1)) / n;
 %% if available, use half precision
 if useHalf
     xy_points = half(xy_points);
