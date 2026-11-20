@@ -63,11 +63,24 @@ function [d] = calculate_fracture_average_distance_MC(edfm, pedfm, ...
         local_volume_ind = points_in_elements_ind(ref_points);   
         dist = distance_points_plane(local_points,frac_geo(index).normal, ...
                                            frac_geo(index).coords(1,:));
-        [~,~,group_ref] = unique(local_volume_ind);
-        num_points = accumarray(group_ref,1);
-        dist_group = accumarray(group_ref,dist);
+        % accumulate per entry of local_ind so that d{index,1} and
+        % d{index,2} stay aligned even if a cell received no sample
+        [~,group_ref] = ismember(local_volume_ind, local_ind);
+        num_points = accumarray(group_ref,1,[numel(local_ind) 1]);
+        dist_group = accumarray(group_ref,dist,[numel(local_ind) 1]);
+        avg_dist = dist_group./num_points;
+        empty = num_points == 0;
+        if any(empty)
+            warning("DARSim:MonteCarlo:EmptyCell", ...
+                "%d rock cell(s) received no sample point for fracture " + ...
+                "%d; using the centroid distance. Increase " + ...
+                "FRACTURE_AVERAGE_DISTANCE_REFINEMENT.", sum(empty), index);
+            avg_dist(empty) = distance_points_plane( ...
+                rockmesh.element.centroid(local_ind(empty),:), ...
+                frac_geo(index).normal, frac_geo(index).coords(1,:));
+        end
         d{index,1} = local_ind;
-        d{index,2} = dist_group./num_points;   
+        d{index,2} = avg_dist;
     end
 end
 
