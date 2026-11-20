@@ -58,14 +58,29 @@ if settings.useHalf
     max_vec = half(max_vec);
 end
 for index = 1:nfrac
-    [test_points, frac_el] =...
-        generate_testpoint_parameters(fracmesh(index), ...
-        plane_geo(index).normal,settings.num_area_points, ...
-        settings.useHalf);
     % this test volume contain all the volumes cross by the fracture plane
     [test_volumes] = identify_plane_crossed_volumes(...
         rockmesh.element.vertices,...
         rockmesh.vertex.coord, plane_geo(index).eq);
+    if ~settings.pedfm
+        %% EDFM areas only: test points are streamed in batches of
+        % fracture cells and reduced to hit weights (bounded memory)
+        [rock_frac_ind, int_area] = streamed_int_area_edfm( ...
+            fracmesh(index), plane_geo(index), test_volumes, min_vec, ...
+            max_vec, tol, rockmesh, rock_normals, rock_face_cent, settings);
+        if isempty(rock_frac_ind)
+            warning('Fracture %d and rockmatrix do not intersect!\n', index);
+            continue
+        end
+        rock_ind_int_area{index,1} = rock_frac_ind(:,1);
+        frac_ind_int_area{index,1} = rock_frac_ind(:,2);
+        area{index,1} = int_area;
+        continue
+    end
+    [test_points, frac_el] =...
+        generate_testpoint_parameters(fracmesh(index), ...
+        plane_geo(index).normal,settings.num_area_points, ...
+        settings.useHalf);
     local_min_vec = min_vec(test_volumes,:);
     local_max_vec = max_vec(test_volumes,:);
 

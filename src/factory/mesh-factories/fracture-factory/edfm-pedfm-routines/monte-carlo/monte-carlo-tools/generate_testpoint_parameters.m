@@ -4,15 +4,21 @@
 %TU Delft
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [xyz_testpoints, frac_ind] = ...
-           generate_testpoint_parameters(fracmesh,plane_normal, n, useHalf)
+           generate_testpoint_parameters(fracmesh,plane_normal, n, useHalf, ...
+                                         elements)
 %% creates the elements described by the adj and coords and populates it 
 % with n x n equally spaced points around the bounding box of each element.
 % frac_ind indicates to which frac element the points in xyz_testpoints
 % belong.  bound_box_area contains the area of the bound_box of each
-% element.
-adj = fracmesh.elements.vertices;
+% element. elements (optional) restricts the generation to a subset of
+% fracture elements; frac_ind always refers to the full fracture mesh.
+if nargin < 5
+    elements = (1:size(fracmesh.elements.vertices,1))';
+end
+ref_vertex = fracmesh.elements.vertices(1,1);
+adj = fracmesh.elements.vertices(elements,:);
 coords = fracmesh.vertex.coords;
-[xy_coords] = proj_coplanar_coords_on_xy(coords(adj(1,1),:), ...
+[xy_coords] = proj_coplanar_coords_on_xy(coords(ref_vertex,:), ...
                                                 plane_normal,coords,1);    
 zmean = mean(xy_coords(:,3));
 [min_vec, max_vec] = generate_boundbox(adj,xy_coords);
@@ -40,14 +46,15 @@ end
 
 %% check points inside
 [ref] = vectorize_inpolygon(xy_points, frac_ind,xy_coords,...
-  fracmesh.elements.faces, adj, [fracmesh.faces.inner.vertices; ...
-                                        fracmesh.faces.bound.vertices]);
+  fracmesh.elements.faces(elements,:), adj, ...
+  [fracmesh.faces.inner.vertices; fracmesh.faces.bound.vertices]);
 %% removing points not contained on the fracture mesh element
 xy_points = xy_points(ref,:);
 frac_ind = frac_ind(ref,:);
 xy_testpoints = [xy_points zmean*ones(size(xy_points,1),1)];
-[xyz_testpoints] = proj_coplanar_coords_on_xy(coords(adj(1,1),:), ...
+[xyz_testpoints] = proj_coplanar_coords_on_xy(coords(ref_vertex,:), ...
                                              plane_normal,xy_testpoints,0);
+frac_ind = uint32(elements(frac_ind));
 
 
 end
