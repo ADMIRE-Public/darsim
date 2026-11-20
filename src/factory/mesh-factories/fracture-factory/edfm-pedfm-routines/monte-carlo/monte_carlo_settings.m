@@ -12,13 +12,16 @@
 %   d_avg_refinement  (FRACTURE_AVERAGE_DISTANCE_REFINEMENT) n -> n^3
 %                     points per rock cell for the average distance
 %   useHalf           (HALF_PRECISION) half-precision test points
+%   seed              (FRACTURE_RANDOM_SEED) seed of the sampling, the
+%                     caller's random state is restored afterwards
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Settings = monte_carlo_settings(Settings)
 
 Defaults = struct("num_area_points", 100, ...
                   "num_frac_boundbox", 1, ...
                   "d_avg_refinement", 35, ...
-                  "useHalf", false);
+                  "useHalf", false, ...
+                  "seed", 0);
 
 for Name = string(fieldnames(Defaults))'
     if ~isfield(Settings, Name) || isempty(Settings.(Name))

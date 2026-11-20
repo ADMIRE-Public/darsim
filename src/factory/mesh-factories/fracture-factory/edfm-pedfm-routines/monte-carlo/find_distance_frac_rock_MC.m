@@ -18,6 +18,9 @@ function [DistOutput] = find_distance_frac_rock_MC(AFracRockEDFM, ...
                                                    Settings)
 
 Settings = monte_carlo_settings(Settings);
+PrevRng = rng;
+RestoreRng = onCleanup(@() rng(PrevRng));
+rng(Settings.seed + 1, "twister");
 
 edfm = struct('vol_ind', {AFracRockEDFM.RockID});
 pedfm = struct();

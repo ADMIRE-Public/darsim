@@ -25,6 +25,9 @@ function [EDFMFracRock, ...
                                  Settings)
 
 Settings = monte_carlo_settings(Settings);
+PrevRng = rng;
+RestoreRng = onCleanup(@() rng(PrevRng));
+rng(Settings.seed, "twister");
 
 [edfm, pedfm] = find_pedfm_edfm_int_area_MC(FracMesh, RockMesh, ...
                                             FracGeometry, Settings);
