@@ -31,7 +31,10 @@ rock_cell_ind =  is_in(:,1);
 test_node_ind = is_in(:,2);
 frac_cell_ind = frac_el(test_node_ind);
 
-[~,~,rock_frac_group] = unique([rock_cell_ind frac_cell_ind],"rows");
+% group index = row of rock_frac_ind (EDFM connection), so that int_area
+% and rock_frac_ind can be addressed with the same index below
+[~,rock_frac_group] = ismember(double([rock_cell_ind frac_cell_ind]), ...
+                               double(rock_frac_ind), "rows");
 
 %% finding center area of  edfm GROUP
 num_node_entries = accumarray(rock_frac_group,1);
@@ -114,7 +117,14 @@ projected_faces = [double(rock_frac_ind(ref1,:)) face_xy(ref1) int_area(ref1) ; 
 
 [~,ref] = sortrows(projected_faces(:,1:3));
 projected_faces = projected_faces(ref,:);
-[~,~,frac_proj_int_group] = unique(projected_faces(:,1:2),"rows");
+[~,frac_proj_int_group] = ismember(projected_faces(:,1:2), ...
+                                   double(rock_frac_ind), "rows");
+
+%% EDFM connections lying on a face of their rock cell (coplanar): the
+% fracture already connects to both cells sharing that face, so their
+% projections carry no area (same as (1 - Coplanar) in find_pdefm_frac_rock)
+coplanar = coplanar_connections(rock_frac_ind(:,1), rockmesh, ...
+                                all_normals, all_fcenter, eq);
 
 faces_list = unique(frac_proj_int_group)';
 array = cell(length(faces_list),1);
@@ -141,7 +151,8 @@ for index = faces_list
             repmat(fracture_plane_normal, size(local_faces,1),1),...
                                         all_normals(local_faces,:),2));
     local_pedfm_area = point_count_percentage .* ...
-                                        local_projected_areas_full;
+                                        local_projected_areas_full .* ...
+                                        (1 - coplanar(index));
 
     d = find_dist_point_plane_speed(projected_points, ...
                                 fracture_plane_normal, list_points);
@@ -157,8 +168,9 @@ for index = faces_list
     local_pedfm_vol =  sum(~(local_neigh == local_rock_vol) .* ...
                                             local_neigh,2);
     
-    %% removing pedfm influence on boundary faces
-    ref_boundary = local_pedfm_vol == 0;
+    %% removing pedfm influence on boundary faces and on faces that
+    % received no projected point
+    ref_boundary = local_pedfm_vol == 0 | point_count_percentage == 0;
     % array{index} = [double(local_pedfm_vol), double(local_frac_vol), ... 
     %                 double(local_rock_vol), local_pedfm_area,  ...
     %                 local_d_avg, local_faces];
@@ -170,6 +182,13 @@ for index = faces_list
                     local_faces(~ref_boundary,:)];
 end
 array = vertcat(array{:});
+if isempty(array)
+    int_rock_frac = zeros(0,2);
+    pedfm_area = zeros(0,1);
+    alpha_ind = zeros(0,1);
+    alpha_area = zeros(0,1);
+    return
+end
 %% merging pdfm
 [rock_frac_ind,ref_bb,pedfm_group] = unique(array(:,1:2),"rows");
 pedfm_area = accumarray(pedfm_group,array(:,4) );
@@ -435,6 +454,21 @@ end
 %     transf_matrix = sparse(ind,oind,value,max_value,1);
 %     filter = full(transf_matrix(input));
 % end
+
+function coplanar = coplanar_connections(rock_ind, rockmesh, normals, ...
+                                         fcenter, eq)
+% true for rock cells having a face that lies on the fracture plane
+faces = rockmesh.element.faces(rock_ind,:);
+valid = faces ~= 0;
+faces(~valid) = 1;
+n = [eq.A eq.B eq.C];
+D = eq.D / norm(n);
+n = n / norm(n);
+parallel = reshape(abs(normals(faces,:) * n'), size(faces)) > 1 - 1e-8;
+offset = reshape(abs(fcenter(faces,:) * n' + D), size(faces));
+tol = 1e-6 * rockmesh.element.volume(rock_ind).^(1/3);
+coplanar = any(valid & parallel & offset <= tol, 2);
+end
 
 function [projected_point] = ...
             project_point_on_face(normals, plane_points, points)    
