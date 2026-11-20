@@ -127,7 +127,7 @@ Current and previous members of the DARSim development team include (but is not 
 - Amin Masaghi Bonabi
 - Ryan Haagenson
 - Yuhang Wang
-- Artur Castiel de Souza
+- Artur Castiel
 - Mousa HosseiniMehr
 - Janio Piguave
 - Matei Ţene
