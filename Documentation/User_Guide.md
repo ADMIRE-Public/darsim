@@ -17,8 +17,9 @@
 - [Wells](#10-wells)
 - [Fractured Reservoirs](#11-fractures)
 - [ADM](#12-algebraic-dynamic-multilevel-adm)
-- [Output Controls](#13-output-controls)
-- [Visualization](#14-visualization)
+- [Linear Solver](#13-linear-solver)
+- [Output Controls](#14-output-controls)
+- [Visualization](#15-visualization)
 
 ---
 
@@ -737,7 +738,9 @@ HYPERBOLIC_INTERPOLATOR
 
 ---
 
-## 13. Output Controls
+## 13. Linear Solver
+
+## 14. Output Controls
 
 Simulation output is controlled through the simulation settings file, which is always names `SimulatorSettings.txt`. Most commonly, the output is defined to be binary VTK format.
 
@@ -758,7 +761,7 @@ The time step reported with the VTK file is the report number. Therefore, to con
 
 ---
 
-## 14. Visualization
+## 15. Visualization
 
 DARSim produces VTK output files that can be visualized using ParaView.
 
