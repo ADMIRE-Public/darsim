@@ -66,6 +66,7 @@ classdef darsim2_settings_factory < handle
             SimulationSettings.WriterSettings = build_WriterSettings( ...
                 SimulationSettings.DiscretizationModel,...
                 SimulationSettings.LTS);
+            SimulationSettings.RelaxationFactor = blueprint.RELAXATION_FACTOR;
         end
 
 
