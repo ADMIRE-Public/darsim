@@ -19,6 +19,7 @@ properties
     TimerInner
     Delta
     InitialTime=true;
+    RelaxationFactor
 end
 properties (Access = private)
     RHS
@@ -68,7 +69,7 @@ methods
             start2 = tic;
             obj.SolveLinearSystem();            
             obj.TimerSolve(obj.itCount) = toc(start2);
-            obj.Delta = obj.SolutionChopper.Chop(obj.Delta);
+            obj.Delta = obj.SolutionChopper.Chop(obj.Delta, obj.RelaxationFactor);
 
             % 3. Update Solution
             start3 = tic;

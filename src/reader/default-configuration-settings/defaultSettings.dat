@@ -48,3 +48,6 @@ false
 
 PARALLEL
 false
+
+RELAXATION_FACTOR
+1.0
