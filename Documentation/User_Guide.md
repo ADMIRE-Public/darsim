@@ -740,6 +740,16 @@ HYPERBOLIC_INTERPOLATOR
 
 ## 13. Linear Solver
 
+The linear solver can be specified in `SimulatorSettings.txt` using the keyword `LINEARSOLVER`. The available options are `direct`, `gmres`, and `bicg`. The default linear solver is `direct`.
+
+For the Fully Implicit Method (`FIM`), a relaxation factor can be specified using the keyword `RELAXATION_FACTOR`. This factor scales the Newton–Raphson update by a relaxation parameter $\omega$ as follows:
+
+$$
+x_{n+1} = x_n + \omega \Delta x
+$$
+
+The default value of the relaxation factor is 1.0, corresponding to the standard Newton–Raphson method without relaxation. 
+
 ## 14. Output Controls
 
 Simulation output is controlled through the simulation settings file, which is always names `SimulatorSettings.txt`. Most commonly, the output is defined to be binary VTK format.
