@@ -1166,6 +1166,7 @@ classdef simulation_factory < handle
                     end
                     NLSolver.SystemBuilder.NumberOfEq = obj.NofEq;
                     NLSolver.MaxIter = obj.SimulatorSettings.MaxIterations;
+                    NLSolver.RelaxationFactor = obj.SimulatorSettings.RelaxationFactor;
                     ConvergenceChecker.NumberOfEq  = obj.NofEq;
                     if length(obj.SimulatorSettings.ResidualTolerances) < obj.NofEq
                         obj.SimulatorSettings.ResidualTolerances = obj.SimulatorSettings.ResidualTolerances(1) * ones(1, obj.NofEq);
